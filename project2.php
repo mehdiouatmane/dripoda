@@ -62,7 +62,7 @@ html , body {direction: rtl; }
 
 <?php
 if( isset($_POST['ajax']) && isset( $_POST['id']) ){
- $query = mysqli_query(   mysqli_connect("localhost", "root","root" , "fedex")   ,    "SELECT * FROM tablee where id=".$_POST['id'].""    );
+ $query = mysqli_query(   mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst")   ,    "SELECT * FROM tableee where id=".$_POST['id'].""    );
 	foreach($query as $row)
 	{
 	$output = 
@@ -377,7 +377,7 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
 
     <div class="singlecontent">		
 		<?php  
-		   $result = mysqli_query(    mysqli_connect("localhost","root","root","fedex")            ,        " select * from tablee "      );
+		   $result = mysqli_query(    mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst")            ,        " select * from tableee "      );
            foreach($result as $row)  
 		   {      	  
 					?> 	 
@@ -537,7 +537,7 @@ $(".preview-box").hover(function(){
 	<div class="row4" >
 	     
         <?php  		 
-           $result = mysqli_query(    mysqli_connect("localhost","root","root","fedex")            ,        " select * from tablee "      );
+           $result = mysqli_query(    mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane" , "mehdi2014@A" , "freedbtech_wordpresst")            ,        " select * from tableee "      );
            while($row=mysqli_fetch_assoc($result)) 	 {   $id=$row['id'];     $filter=$row['filter'];    $img=$row['img'];	$imgsrira=$row['imgsrira'];  $title=$row['title']; 	  $subtitles=$row['subtitles']; 	  $description=$row['description'];	  $prix=$row['prix'];	  $tag=$row['tag'];	  $tags=$row['tags']; 	  $category=$row['category']; 	  $author=$row['author'];    	  
         ?> 		
         <div class="item <?php echo $filter ?>  " >  		
