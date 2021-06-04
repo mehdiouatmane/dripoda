@@ -10,7 +10,7 @@ if( isset($_POST['ajax']) && isset( $_POST['id']) ){
 	"    
 	<style>
 		   .preview-box .iconclose{ color: #007bff; font-style: 22px; cursor: pointer;  display:flex; justify-content:flex-start;  text-align:left;  }
-		   .preview-box .imgkbira {width:500px;  height:auto;  display:block; }  
+		   .preview-box .imgkbira {width:500px;  height:auto;   }  
 		   .preview-box .title{color:black; font:800 17px 'cairo',sans-serif;        display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
 		   .preview-box .costauthorcategory{width:100%; display:flex; }
 		   .preview-box .authorcategory{ width:50%; display:grid; }
@@ -335,8 +335,7 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
 
        .shadow{  background: rgba(0,0,0,0.4); width:100%; height:100%;                z-index:1050; visibility:hidden; opacity:0;              display:none;             position: fixed;  left:0;  top:0;  }            
 	     .showshadow{   visibility:visible; opacity: 1;       display:block;          }
-       .preview-box{ background:#fff; width:auto; height:auto; padding: 10px; border-radius: 6px;   box-shadow: 0px 0px 15px rgba(0,0,0,0.2);             cursor:pointer;  z-index: 100000;                   visibility:hidden; opacity: 0;              display:none;             position:fixed; top:50%;  left:50%; transform:translate(-50%, -50%) scale(1);             }       
-	     .showpreview-box{   visibility:visible; opacity:1;       display:block;        }
+       .preview-box{ background:#fff; width:auto; height:auto; padding: 10px; border-radius: 6px;   box-shadow: 0px 0px 15px rgba(0,0,0,0.2);             cursor:pointer;  z-index: 100000;                   visibility:visible; opacity:1;              display:block;             position:fixed; top:50%;  left:50%; transform:translate(-50%, -50%) scale(1);             }       
 
 
 @media (max-width: 1150px){	   .container3 .row4 .item{width:16.66666666666667%;   }      }
@@ -434,9 +433,7 @@ $(".clickimgsrira").click(function(){
 		data: {ajax: 1,   id:$(this).data('id') },   
 	    success:  function(data){   
 	       $('.preview-box').html(data); 
-           $('.shadow').addClass('showshadow');
-	       $('.preview-box').addClass('showpreview-box');
-	       $('.imgkbira').addClass('showimgkbira');			   
+           $('.shadow').addClass('showshadow');	   
 	      }    
 	  });	 
 })	
@@ -451,10 +448,7 @@ $(".preview-box").hover(function(){
 		   data: {ajax: 1,   id:$(this).data('id') },   
 	       success:  function(data){   
 		      $('.preview-box').empty();
-	       	  $('.shadow').removeClass('showshadow');
-              $('.preview-box').removeClass('showpreview-box');  
-	          $('.imgkbira').removeClass('showimgkbira');	
-              $('.kk').removeClass('showkk');			  
+	       	  $('.shadow').removeClass('showshadow');			  
 	        }    
 	    });	      
 	});	
