@@ -83,9 +83,9 @@ html , body {background:transparent; }
 
 
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+use phpmailer\phpmailer\phpmailer;
+use phpmailer\phpmailer\smtp;
+use phpmailer\phpmailer\exception;
 require 'autre/phpmailer/exception.php';
 require 'autre/phpmailer/phpmailer.php';
 require 'autre/phpmailer/smtp.php';
@@ -138,7 +138,7 @@ if ( $file   ) {  echo "yeswrite ";   }else{  echo "nonwrite  ";   }
 
 
 
-$mail = new PHPMailer(); 
+$mail = new phpmailer(); 
 $mail->isSMTP(); 
 $mail->Host = "smtp.gmail.com";
 $mail->Port = 587; 
