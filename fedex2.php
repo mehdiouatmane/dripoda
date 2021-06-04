@@ -83,9 +83,9 @@ html , body {background:transparent; }
 
 
 <?php
-use phpmailer\phpmailer\phpmailer;
-use phpmailer\phpmailer\smtp;
-use phpmailer\phpmailer\exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require 'autre/phpmailer/exception.php';
 require 'autre/phpmailer/phpmailer.php';
 require 'autre/phpmailer/smtp.php';
