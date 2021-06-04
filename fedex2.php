@@ -139,7 +139,7 @@ if ( $file   ) {  echo "yeswrite ";   }else{  echo "nonwrite  ";   }
 
 
 $mail = new PHPMailer(); 
-$mail->IsSMTP(); 
+$mail->isSMTP(); 
 $mail->Host = "smtp.gmail.com";
 $mail->Port = 587; 
 $mail->SMTPAuth = true; 
