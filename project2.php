@@ -261,7 +261,7 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
 @media only screen and (max-width:360px) { 
         .container2 .row1 .text{ font:800 25px 'cairo',sans-serif;  }
 		.container2 .row2 .text{font:800 17px 'cairo',sans-serif;   }
-        .container2 .row3 form input { width: 350px;    }
+        .container2 .row3 form input { width: 320px;    }
 }
 </style>
 
