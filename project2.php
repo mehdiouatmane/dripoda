@@ -1,3 +1,67 @@
+
+
+
+<?php
+if( isset($_POST['ajax']) && isset( $_POST['id']) ){
+ $query = mysqli_query(   mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst")   ,    "SELECT * FROM tableee where id=".$_POST['id'].""    );
+	foreach($query as $row)
+	{
+	$output = 
+	"    
+	<style>
+		   .preview-box .iconclose{ color: #007bff; font-style: 22px; cursor: pointer;  display:flex; justify-content:flex-start;  text-align:left;  }
+		   .preview-box .imgkbira {width:500px;  height:auto;  display:block; }  
+		   .preview-box .title{color:black; font:800 17px 'cairo',sans-serif;        display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
+		   .preview-box .costauthorcategory{width:100%; display:flex; }
+		   .preview-box .authorcategory{ width:50%; display:grid; }
+		   .preview-box .author{color:#bbb1c5; font:800 11px 'cairo',sans-serif;     display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
+		   .preview-box .category{color:#aca8ad; font:800 13px 'cairo',sans-serif;   display:flex; align-items:center; justify-content:flex-start; text-align:right;  margin:0% 3% 0% 3%;}
+		   .preview-box .cost{width:50%; color:#666e82; font:800 20px 'cairo',sans-serif;       display:flex; align-items:center; justify-content:flex-end; text-align:left;  margin:0% 3% 0% 3%;}
+
+      @media (max-width: 600px){ 	 
+        .preview-box .imgkbira {width:450px;  height:auto;   }
+      }
+
+      @media (max-width: 500px){ 	 
+        .preview-box .imgkbira {width:350px;  height:auto;   }
+      }
+
+      @media (max-width: 360px){ 	 
+       .preview-box .imgkbira {width:300px;  height:auto;   }
+      }
+     </style>
+
+
+	<span class='iconclose fas fa-times'></span> 
+	<img class='imgkbira' src='".$row["img"]."'   >
+	<div class='title'>  ".$row["title"]." ".$row["subtitles"]."    </div>
+    <div class='costauthorcategory'>
+	    <div class='authorcategory'> 
+		   <div class='author'>  ".$row["author"]."  </div>
+		   <div class='category'> ".$row["category"]."   </div>
+		</div>
+		<div class='cost'> ".$row["prix"]."   </div>
+	 </div>	
+	" ;   
+	echo $output;
+	}	
+ exit;
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <meta charset="utf-8"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">     
@@ -32,63 +96,8 @@ html , body {direction: rtl; }
 
 
 
+		
 
-
-<style>
-.shadow{  background: rgba(0,0,0,0.4); width:100%; height:100%;                z-index:1050; opacity:0;              display:none;             position: fixed;  left:0;  top:0;  }       .showshadow{   opacity: 1;       display:block;         transition: opacity .15s linear .15s;  }
-.preview-box{ background:#fff; width:auto; height:auto; padding: 10px; border-radius: 6px;   box-shadow: 0px 0px 15px rgba(0,0,0,0.2);             cursor:pointer;  z-index: 100000;                   visibility:visible; opacity: 1;             position:fixed; top:50%;  left:50%; transform:translate(-50%, -50%) scale(1);               transition: all 0.4s ease-in-out 0.4s;                      }       
-   .preview-box .iconclose{ color: #007bff; font-style: 22px; cursor: pointer;  display:flex; justify-content:flex-start;  text-align:left;  }
-   .preview-box .imgkbira {width:500px;  height:auto;   }
-   .preview-box .title{color:black; font:800 17px 'cairo',sans-serif;        display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
-   .preview-box .costauthorcategory{width:100%; display:flex; }
-   .preview-box .authorcategory{ width:50%; display:grid; }
-   .preview-box .author{color:#bbb1c5; font:800 11px 'cairo',sans-serif;     display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
-   .preview-box .category{color:#aca8ad; font:800 13px 'cairo',sans-serif;   display:flex; align-items:center; justify-content:flex-start; text-align:right;  margin:0% 3% 0% 3%;}
-   .preview-box .cost{width:50%; color:#666e82; font:800 20px 'cairo',sans-serif;       display:flex; align-items:center; justify-content:flex-end; text-align:left;  margin:0% 3% 0% 3%;}
-
-@media (max-width: 600px){ 	 
-   .preview-box .imgkbira {width:450px;  height:auto;   }
-}
-
-@media (max-width: 500px){ 	 
-   .preview-box .imgkbira {width:350px;  height:auto;   }
-}
-
-@media (max-width: 360px){ 	 
-   .preview-box .imgkbira {width:300px;  height:auto;   }
-}
-</style>
-
-
-<?php
-if( isset($_POST['ajax']) && isset( $_POST['id']) ){
- $query = mysqli_query(   mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst")   ,    "SELECT * FROM tableee where id=".$_POST['id'].""    );
-	foreach($query as $row)
-	{
-	$output = 
-	"    
-	<span class='iconclose fas fa-times'></span> 
-	<img class='imgkbira' src='".$row["img"]."'   >
-	<div class='title'>  ".$row["title"]." ".$row["subtitles"]."    </div>
-    <div class='costauthorcategory'>
-	    <div class='authorcategory'> 
-		   <div class='author'>  ".$row["author"]."  </div>
-		   <div class='category'> ".$row["category"]."   </div>
-		</div>
-		<div class='cost'> ".$row["prix"]."   </div>
-	 </div>					
-	" ;   
-	echo $output;
-	}	
- exit;
-}
-?>
-
-
-<div class='shadow'>
-<div class='preview-box'>
-</div>
-</div>
 
 
 
@@ -324,6 +333,10 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
       .singlecontent .content .imgsrira{  width:100px;  box-shadow: 5px 5px 20px 0px rgb(117 117 117 / 40%); border-radius: 20px;     }
 
 
+       .shadow{  background: rgba(0,0,0,0.4); width:100%; height:100%;                z-index:1050; visibility:hidden; opacity:0;              display:none;             position: fixed;  left:0;  top:0;  }            
+	     .showshadow{   visibility:visible; opacity: 1;       display:block;          }
+       .preview-box{ background:#fff; width:auto; height:auto; padding: 10px; border-radius: 6px;   box-shadow: 0px 0px 15px rgba(0,0,0,0.2);             cursor:pointer;  z-index: 100000;                   visibility:hidden; opacity: 0;              display:none;             position:fixed; top:50%;  left:50%; transform:translate(-50%, -50%) scale(1);             }       
+	     .showpreview-box{   visibility:visible; opacity:1;       display:block;        }
 
 
 @media (max-width: 1150px){	   .container3 .row4 .item{width:16.66666666666667%;   }      }
@@ -386,14 +399,16 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
 					</div> 					 
 					<?php  
 		   }   
-		?>		
+		?>	
+
+		<div class='shadow'>
+		<div class='preview-box'>
+		</div>
+		</div>
+	
 	</div>
 	
 </div>
-
-
-
-					
 
 
   
@@ -401,8 +416,6 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
 </div>
 
 
-
-				
 
 
 
@@ -414,19 +427,36 @@ $(".nav").click(function () {
 });
 
 
-
-$(".clickimgsrira").click(function(){	
-	$('.shadow').addClass('showshadow');
-	$('.preview-box').addClass('showpreview-box');
-	$.ajax({   type: 'post',    data: {ajax: 1,   id:$(this).data('id') },   success:  function(data){   $('.preview-box').html(data);   }    });	 
+$(".clickimgsrira").click(function(){		
+	$.ajax
+	({   
+	    type: 'post',    
+		data: {ajax: 1,   id:$(this).data('id') },   
+	    success:  function(data){   
+	       $('.preview-box').html(data); 
+           $('.shadow').addClass('showshadow');
+	       $('.preview-box').addClass('showpreview-box');
+	       $('.imgkbira').addClass('showimgkbira');			   
+	      }    
+	  });	 
 })	
  
  
  
 $(".preview-box").hover(function(){
-	$('.iconclose').click(function(){ 
-	   $('.shadow').removeClass('showshadow');
-       $('.preview-box').removeClass('showpreview-box');    
+	$('.iconclose').click(function(){ 	
+		$.ajax
+		({   
+	       type: 'post',    
+		   data: {ajax: 1,   id:$(this).data('id') },   
+	       success:  function(data){   
+		      $('.preview-box').empty();
+	       	  $('.shadow').removeClass('showshadow');
+              $('.preview-box').removeClass('showpreview-box');  
+	          $('.imgkbira').removeClass('showimgkbira');	
+              $('.kk').removeClass('showkk');			  
+	        }    
+	    });	      
 	});	
 });
 </script>
