@@ -101,11 +101,11 @@ if(  isset($_POST["name"])     )
 {
 		
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
-$ip = $_SERVER['REMOTE_ADDR']  ;
-if (isset($_SERVER['REMOTE_ADDR']))
-    $ip = $_SERVER['REMOTE_ADDR'];
-else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+$ip = '' ;
+if (isset($_SERVER['REMOTE_ADDR']))    
+	$ip = $_SERVER['REMOTE_ADDR'];
+else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))    
+	$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 else if(isset($_SERVER['HTTP_X_FORWARDED']))
     $ip = $_SERVER['HTTP_X_FORWARDED'];
 else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
