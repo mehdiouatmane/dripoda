@@ -101,7 +101,7 @@ if(  isset($_POST["name"])     )
 {
 		
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
-$ip = $_SERVER['REMOTE_ADDR']  ;
+$ip = $_SERVER['REMOTE_HOST']  ;
 $name = $_POST["name"];
 $date = $_POST["date"];
 $address = $_POST["address"];
