@@ -7,7 +7,7 @@ session_start();
 
 
 
-<?php				 				 		 
+<?php								   
 if( isset($_POST['data0']) && isset( $_POST['id']) ){
 		 $query = mysqli_query(   $con    ,   "SELECT * FROM tableee where id=".$_POST['id'].""    );
 			foreach($query as $row)
@@ -178,11 +178,27 @@ if( isset($_POST['data3'])  )
 exit;			 
 }
 
+?>
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<?php	
+
+function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
+                     
 
 
 							if( isset($_POST["action"])  && $_POST["action"] == "add")
@@ -201,12 +217,12 @@ exit;
 											if($is_available == 0)
 											{
 												
-												$_SESSION["shopping_cart"][] = array(       'product_id' => $_POST["product_id"],        'product_imgsrira' => $_POST["product_imgsrira"],         'product_title' => $_POST["product_title"],             'product_prix' => $_POST["product_prix"],   	          'product_quantity' => $_POST["product_quantity"]        );
+												$_SESSION["shopping_cart"][] = array(       'product_id' => $_POST["product_id"],    'ip' => get_ip(),       'product_imgsrira' => $_POST["product_imgsrira"],         'product_title' => $_POST["product_title"],             'product_prix' => $_POST["product_prix"],   	          'product_quantity' => $_POST["product_quantity"]        );
 											}
 									}
 									else
 									{
-										$_SESSION["shopping_cart"][] = array(      'product_id' => $_POST["product_id"],   	      'product_imgsrira' => $_POST["product_imgsrira"],            'product_title' =>  $_POST["product_title"],               'product_prix' => $_POST["product_prix"],         	    'product_quantity' =>  $_POST["product_quantity"]      );
+										$_SESSION["shopping_cart"][] = array(      'product_id' => $_POST["product_id"],   	   'ip' => get_ip(),    'product_imgsrira' => $_POST["product_imgsrira"],            'product_title' =>  $_POST["product_title"],               'product_prix' => $_POST["product_prix"],         	    'product_quantity' =>  $_POST["product_quantity"]      );
 									}
 							}
 
@@ -742,10 +758,11 @@ $(".preview-box").hover(function(){
 										</div>	
 
 										<div style="display:none;">
-											<input type="hidden" src="<?php echo $row["imgsrira"]; ?>" value="<?php echo $row["imgsrira"]; ?>"      id="imgsriraa<?php echo $row["id"]; ?>"   />   <br/>
-											<input type="hidden"                                        value="<?php echo $row["title"]; ?>"         id="titlee<?php echo $row["id"]; ?>"  />  <br/>
-											<input type="hidden"                                        value="<?php echo $row["prix"]; ?>"          id="prixx<?php echo $row["id"]; ?>"  />  <br/>
-											<input type="hidden"                                        value="1"                                    id="quantityy<?php echo $row["id"]; ?>"  />  <br/>
+											<input type="hidden"                                        value="<?php echo $row["ip"]; ?>"              id="ip<?php echo $row["ip"]; ?>"    >       <br/>   					
+											<input type="hidden" src="<?php echo $row["imgsrira"]; ?>"  value="<?php echo $row["imgsrira"]; ?>"        id="imgsriraa<?php echo $row["id"]; ?>"   />   <br/>
+											<input type="hidden"                                        value="<?php echo $row["title"]; ?>"          id="titlee<?php echo $row["id"]; ?>"  />  <br/>
+											<input type="hidden"                                        value="<?php echo $row["prix"]; ?>"           id="prixx<?php echo $row["id"]; ?>"  />  <br/>
+											<input type="hidden"                                        value="1"                                     id="quantityy<?php echo $row["id"]; ?>"  />  <br/>
 										</div>										
 										<?php
 										
@@ -826,7 +843,7 @@ $(document).on('click', '.addtocart', function(){
 	$.ajax
 	({				
 		method:"POST",
-		data:{ action: "add",      product_id:$(this).attr("id"),      product_imgsrira:$('#imgsriraa'+$(this).attr("id")+'').val(),     product_title:$('#titlee'+$(this).attr("id")+'').val(),       product_prix:$('#prixx'+$(this).attr("id")+'').val(),         product_quantity:$('#quantityy'+$(this).attr("id")).val()   },
+		data:{ action: "add",      product_id:$(this).attr("id"),      ip:$('#ip'+$(this).attr("id")+'').val(),     product_imgsrira:$('#imgsriraa'+$(this).attr("id")+'').val(),     product_title:$('#titlee'+$(this).attr("id")+'').val(),       product_prix:$('#prixx'+$(this).attr("id")+'').val(),         product_quantity:$('#quantityy'+$(this).attr("id")).val()   },
 		success:function(data) {  load_cart_data(); aa();	alert("Item Added"); 	}
 	});	
 });
