@@ -197,6 +197,7 @@ exit;
 
 <?php	
                    
+$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] ;
 
 
 							if( isset($_POST["action"])  && $_POST["action"] == "add")
@@ -218,7 +219,7 @@ exit;
 												$_SESSION["shopping_cart"][] = array
 												(       
 												   'product_id' => $_POST["product_id"],    
-												   'ip' =>  isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] ,       
+												   'ip' => $ip,       
 												   'product_imgsrira' => $_POST["product_imgsrira"],         
 												   'product_title' => $_POST["product_title"],             
 												   'product_prix' => $_POST["product_prix"],   	          
@@ -231,7 +232,7 @@ exit;
 										$_SESSION["shopping_cart"][] = array
 										(      
 											'product_id' => $_POST["product_id"],   	   
-											'ip' =>  isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] ,    
+											'ip' => $ip,    
 											'product_imgsrira' => $_POST["product_imgsrira"],            
 											'product_title' =>  $_POST["product_title"],               
 											'product_prix' => $_POST["product_prix"],         	    
