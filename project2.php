@@ -199,6 +199,7 @@ exit;
 
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
                      
+$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] ;
 
 
 							if( isset($_POST["action"])  && $_POST["action"] == "add")
@@ -217,12 +218,12 @@ function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVE
 											if($is_available == 0)
 											{
 												
-												$_SESSION["shopping_cart"][] = array(       'product_id' => $_POST["product_id"],    'ip' => get_ip(),       'product_imgsrira' => $_POST["product_imgsrira"],         'product_title' => $_POST["product_title"],             'product_prix' => $_POST["product_prix"],   	          'product_quantity' => $_POST["product_quantity"]        );
+												$_SESSION["shopping_cart"][] = array(       'product_id' => $_POST["product_id"],    'ip' => $ip,       'product_imgsrira' => $_POST["product_imgsrira"],         'product_title' => $_POST["product_title"],             'product_prix' => $_POST["product_prix"],   	          'product_quantity' => $_POST["product_quantity"]        );
 											}
 									}
 									else
 									{
-										$_SESSION["shopping_cart"][] = array(      'product_id' => $_POST["product_id"],   	   'ip' => get_ip(),    'product_imgsrira' => $_POST["product_imgsrira"],            'product_title' =>  $_POST["product_title"],               'product_prix' => $_POST["product_prix"],         	    'product_quantity' =>  $_POST["product_quantity"]      );
+										$_SESSION["shopping_cart"][] = array(      'product_id' => $_POST["product_id"],   	   'ip' => $ip,    'product_imgsrira' => $_POST["product_imgsrira"],            'product_title' =>  $_POST["product_title"],               'product_prix' => $_POST["product_prix"],         	    'product_quantity' =>  $_POST["product_quantity"]      );
 									}
 							}
 
