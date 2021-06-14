@@ -1,57 +1,235 @@
-
-
-
 <?php
-if( isset($_POST['ajax']) && isset( $_POST['id']) ){
- $query = mysqli_query(   mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst")   ,    "SELECT * FROM tableee where id=".$_POST['id'].""    );
-	foreach($query as $row)
-	{
-	$output = 
-	"    
-	<style>
-		   .preview-box .iconclose{ color: #007bff; font-style: 22px; cursor: pointer;  display:flex; justify-content:flex-start;  text-align:left;  }
-		   .preview-box .imgkbira {width:500px;  height:auto;   }  
-		   .preview-box .title{color:black; font:800 17px 'cairo',sans-serif;        display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
-		   .preview-box .costauthorcategory{width:100%; display:flex; }
-		   .preview-box .authorcategory{ width:50%; display:grid; }
-		   .preview-box .author{color:#bbb1c5; font:800 11px 'cairo',sans-serif;     display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
-		   .preview-box .category{color:#aca8ad; font:800 13px 'cairo',sans-serif;   display:flex; align-items:center; justify-content:flex-start; text-align:right;  margin:0% 3% 0% 3%;}
-		   .preview-box .cost{width:50%; color:#666e82; font:800 20px 'cairo',sans-serif;       display:flex; align-items:center; justify-content:flex-end; text-align:left;  margin:0% 3% 0% 3%;}
-
-      @media (max-width: 600px){ 	 
-        .preview-box .imgkbira {width:450px;  height:auto;   }
-      }
-
-      @media (max-width: 500px){ 	 
-        .preview-box .imgkbira {width:350px;  height:auto;   }
-      }
-
-      @media (max-width: 360px){ 	 
-       .preview-box .imgkbira {width:300px;  height:auto;   }
-      }
-     </style>
-
-
-	<span class='iconclose fas fa-times'></span> 
-	<img class='imgkbira' src='".$row["img"]."'   >
-	<div class='title'>  ".$row["title"]." ".$row["subtitles"]."    </div>
-    <div class='costauthorcategory'>
-	    <div class='authorcategory'> 
-		   <div class='author'>  ".$row["author"]."  </div>
-		   <div class='category'> ".$row["category"]."   </div>
-		</div>
-		<div class='cost'> ".$row["prix"]."   </div>
-	 </div>	
-	" ;   
-	echo $output;
-	}	
- exit;
-}
+$con=  mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst");
+mysqli_query($con,"SET CHARACTER SET 'utf8'");
+session_start();
 ?>
 
 
 
 
+<?php				 				 		 
+if( isset($_POST['data0']) && isset( $_POST['id']) ){
+		 $query = mysqli_query(   $con    ,   "SELECT * FROM tableee where id=".$_POST['id'].""    );
+			foreach($query as $row)
+			{
+			$output = 
+			"    
+			<style>
+				   .preview-box .iconclose{ color: #007bff; font-style: 22px; cursor: pointer;  display:flex; justify-content:flex-start;  text-align:left;  }
+				   .preview-box .imgkbira {width:500px;  height:auto;   }  
+				   .preview-box .title{color:black; font:800 17px 'cairo',sans-serif;        display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
+				   .preview-box .costauthorcategory{width:100%; display:flex; }
+				   .preview-box .authorcategory{ width:50%; display:grid; }
+				   .preview-box .author{color:#bbb1c5; font:800 11px 'cairo',sans-serif;     display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
+				   .preview-box .category{color:#aca8ad; font:800 13px 'cairo',sans-serif;   display:flex; align-items:center; justify-content:flex-start; text-align:right;  margin:0% 3% 0% 3%;}
+				   .preview-box .cost{width:50%; color:#666e82; font:800 20px 'cairo',sans-serif;       display:flex; align-items:center; justify-content:flex-end; text-align:left;  margin:0% 3% 0% 3%;}
+
+			  @media (max-width: 600px){ 	 
+				.preview-box .imgkbira {width:450px;  height:auto;   }
+			  }
+
+			  @media (max-width: 500px){ 	 
+				.preview-box .imgkbira {width:350px;  height:auto;   }
+			  }
+
+			  @media (max-width: 360px){ 	 
+			   .preview-box .imgkbira {width:300px;  height:auto;   }
+			  }
+			 </style>
+
+
+			<span class='iconclose fas fa-times'></span> 
+			<img class='imgkbira' src='".$row["img"]."'   >
+			<div class='title'>  ".$row["title"]." ".$row["subtitles"]."    </div>
+			<div class='costauthorcategory'>
+				<div class='authorcategory'> 
+				   <div class='author'>  ".$row["author"]."  </div>
+				   <div class='category'> ".$row["category"]."   </div>
+				</div>
+				<div class='cost'> ".$row["prix"]."   </div>
+			 </div>	
+			" ;   
+			echo $output;
+			}	
+exit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if( isset($_POST['data2'])  )
+{
+	                $output = '';
+                    $total_price = 0;
+	                $total_item = 0;
+					if(!empty($_SESSION["shopping_cart"]))
+					{
+							foreach($_SESSION["shopping_cart"] as $keys => $values)
+							{
+									$product_id =  $values["product_id"];
+									$product_imgsrira =  $values["product_imgsrira"];
+									$product_title =  $values["product_title"];
+									$product_prix = (int)$values["product_prix"]; 	
+									$product_quantity =  $values["product_quantity"];
+									$product_subtotal = number_format(  $product_quantity * $product_prix  , 2 ) ; 
+									$total_price= number_format( $total_price + ($product_quantity * $product_prix ) , 2 ) ;
+									$total_item = $total_item + 1;		
+
+									$output .= 
+									'
+									<style>
+									.rowmenucart{direction:ltr; background-color:transparent; padding:4%; margin:0%;  border-bottom: 1px solid #ccc;       display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; }
+										.rowmenucart .poscol1menucart{background-color:transparent;  width:30%;}      .rowmenucart .poscol1menucart .col1menucart  {background-color:transparent; margin:5px;}  .rowmenucart .poscol1menucart .col1menucart  img {width:60px; max-width:100%; height:auto;  border-radius:10px;}
+										.rowmenucart .poscol2menucart{background-color:transparent;  width:50%;}      .rowmenucart .poscol2menucart .col2menucart  {background-color:transparent; margin:5px;}  .rowmenucart .poscol2menucart .col2menucart  .title{color:black; font:600 15px sans-serif;}   .rowmenucart .poscol2menucart .col2menucart .prix{color:black; font:500 13px sans-serif;}
+										.rowmenucart .poscol3menucart{background-color:transparent;  width:20%; }     .rowmenucart .poscol3menucart .col3menucart  {background-color:transparent; margin:5px;}  .rowmenucart .poscol3menucart .col3menucart a i{color:blue; font-size:20px;}
+									</style>
+									<div class="rowmenucart">
+											<div class="poscol1menucart"> <div class="col1menucart"> 
+												 <img  src=" '.$product_imgsrira.' "  /> 
+											</div></div>
+											<div class="poscol2menucart">  <div class="col2menucart"> 
+													<div class="title"> '.$product_title.'  </div>  
+													<div class="prix"> ($'.$product_prix.' ) x ('.$product_quantity.') =  $'.$product_subtotal.' </div>
+											</div></div> 
+											<div class="poscol3menucart"> <div class="col3menucart"> 
+											       <a  id="'.$product_id.'" class="delete" style="cursor:pointer"> <i class="far fa-times-circle"></i> </a>  	
+											</div></div>
+									</div>
+									';
+								
+
+							 }
+						 
+							  $output .= 
+							  '
+							  <style>
+							  </style>							  
+							  <div style="background-color:transparent; padding:20px;">
+							  <div><span style="color:black; font:600 20px sans-serif;"> الإجمالي : </span> <span style="color:#2e3d62; font:600 17px sans-serif;" > $'.$total_price.'</span> </div>
+							  <div><span style="color:black; font:600 20px sans-serif;"> كمية المنتوجات : </span>   <span style="color:#2e3d62; font:600 17px sans-serif;" > '.$total_item.' </span> </div></br>
+							  <button class="clear" style="background-color:blue; width:140px; height:40px; border-radius:20px;     color:white; font:800 20px sans-serif; cursor:pointer" >حذف الكل</button> </br></br>
+							  <button class="buy" style="background-color:blue; width:140px; height:40px; border-radius:20px;     color:white; font:800 20px sans-serif; cursor:pointer" >إكمال الدفع</button> </br>
+							  </div>
+							  ';	
+								
+
+														
+						
+					}
+					else
+					{
+						$output .= 'ليس لديك أي شيء بالسلة ';
+					}
+
+
+echo json_encode(      array(  'cart_details'=>	$output  	  )         );
+				
+	 
+exit;			 
+}
+
+
+
+
+
+
+
+if( isset($_POST['data3'])  )
+{	               
+	   	  $output = '';
+          $total_price = 0;
+	      $total_item = 0;
+		  if(!empty($_SESSION["shopping_cart"]))
+		  {
+			 foreach($_SESSION["shopping_cart"] as $keys => $values)
+			 {
+					$product_id =  $values["product_id"];
+					$product_imgsrira =  $values["product_imgsrira"];
+					$product_title =  $values["product_title"];
+					$product_prix = (int)$values["product_prix"]; 	
+					$product_quantity =  $values["product_quantity"];
+					$product_subtotal = number_format(  $product_quantity * $product_prix  , 2 ) ; 
+					$total_price= number_format( $total_price + ($product_quantity * $product_prix ) , 2 ) ;
+					$total_item = $total_item + 1;		
+			 }
+			 	
+		  }
+		  
+		  $output .= 
+		  '
+			 '.$total_item.'
+		  ';	
+         echo json_encode(    array(  'aa'=>	$output       )         );			 
+
+exit;			 
+}
+
+
+
+
+
+
+
+
+							if( isset($_POST["action"])  && $_POST["action"] == "add")
+							{
+									if(isset($_SESSION["shopping_cart"]))
+									{
+											$is_available = 0;
+											foreach($_SESSION["shopping_cart"] as $keys => $values)
+											{
+												if($_SESSION["shopping_cart"][$keys]['product_id'] == $_POST["product_id"])
+												{
+													$is_available++;
+													$_SESSION["shopping_cart"][$keys]['product_quantity'] = $_SESSION["shopping_cart"][$keys]['product_quantity'] + $_POST["product_quantity"];
+												}
+											}
+											if($is_available == 0)
+											{
+												
+												$_SESSION["shopping_cart"][] = array(       'product_id' => $_POST["product_id"],        'product_imgsrira' => $_POST["product_imgsrira"],         'product_title' => $_POST["product_title"],             'product_prix' => $_POST["product_prix"],   	          'product_quantity' => $_POST["product_quantity"]        );
+											}
+									}
+									else
+									{
+										$_SESSION["shopping_cart"][] = array(      'product_id' => $_POST["product_id"],   	      'product_imgsrira' => $_POST["product_imgsrira"],            'product_title' =>  $_POST["product_title"],               'product_prix' => $_POST["product_prix"],         	    'product_quantity' =>  $_POST["product_quantity"]      );
+									}
+							}
+
+
+							if( isset($_POST["action"]) && $_POST["action"] == 'remove')
+							{
+								foreach($_SESSION["shopping_cart"] as $keys => $values)
+								{
+									 if($values["product_id"] == $_POST["product_id"])
+									 {
+										unset($_SESSION["shopping_cart"][$keys]);
+									 }
+								}
+							}
+
+
+							if(  isset($_POST["action"]) &&  $_POST["action"] == 'empty')
+							{
+							  unset($_SESSION["shopping_cart"]);
+							}				  
+
+
+?>
 
 
 
@@ -92,10 +270,6 @@ html , body {direction: rtl; }
 
 
 
-
-
-
-
 		
 
 
@@ -129,20 +303,20 @@ html , body {direction: rtl; }
 
 
 <style>
-.container1 {background-color:transparent; width:100%; height:80px; display:flex; align-items:center; justify-content:center; text-align:center; }
+.container1 {background-color:white; width:100%; height:80px; display:flex; align-items:center; justify-content:center; text-align:center; }
    .container1 .row1{ background-color:white; width:100%; height:80px; display:flex; align-items:center; justify-content:center; text-align:center;  flex-wrap:wrap; grid-row-gap:0rem;  grid-column-gap:0rem;  margin:0% 6%; }
    
-		.container1 .row1 .col1 { width:50%; display:none; align-items:center; justify-content:flex-start; text-align:center; }
+		.container1 .row1 .col1 { width:50%; display:none; align-items:center; justify-content:flex-start; text-align:center;  }
 		   .container1 .row1 .col1  .iconeopen{ cursor:pointer; }
 		   .container1 .row1 .col1  .iconeopen i{ font-size:40px; }	
                 .container1 .row1 .col1 .menumobilebackground {   background-color: black;	width:100%;  height:100%;                z-index: 9999;  visibility:hidden;  opacity:0;              position: fixed;     left:0%;      top:0%;     transition:visibility 1s linear 1s , opacity 1s linear 1s;        }       
                  .container1 .row1 .col1 .menumobilebackgroundhover{ visibility:visible; opacity:1; transition:visibility 0.5s linear 0.5s , opacity 0.5s linear 0.5s }
-			    .container1 .row1 .col1 .menumobileunavbar {background-color: white;  width:300px; max-width: 100%; height:100vh;  position:fixed; top:0;  right:-300px;   transition:right 0.5s linear 0.5s;   } 
+			    .container1 .row1 .col1 .menumobileunavbar {overflow:scroll;  background-color: white;  width:300px; max-width: 100%; height:100vh;  position:fixed; top:0;  right:-300px;   transition:right 0.5s linear 0.5s;   } 
                  .container1 .row1 .col1 .menumobileunavbarhover{right:0px;  transition:right 1s linear 1s;  }
                     .container1 .row1 .col1 .menumobileunavbar .iconeclose{color:black; font-size:25px; cursor:pointer;  position:absolute; top:0; right:3%; }
 					.container1 .row1 .col1 .menumobileunavbar .text1  {color:blue; font:800 30px 'Stingray'; padding:7% 0%;}
-				    .container1 .row1 .col1 .menumobileunavbar ul { margin-bottom:5%; border-top: 1px solid rgba(0, 0, 0, 0.10);  display:grid; align-items:center; justify-content:center; text-align:center;  flex-wrap:wrap; grid-row-gap:0rem; grid-column-gap:0rem;  }
-					.container1 .row1 .col1 .menumobileunavbar ul li {width:300px; padding:5% 4%; color:black; font:800 14px 'cairo',sans-serif;  border-bottom:solid 2px rgba(0, 0, 0, 0.10);    display:flex; align-items:center; justify-content:flex-end; text-align:center; }
+				    .container1 .row1 .col1 .menumobileunavbar ul {  margin-bottom:5%; border-top: 1px solid rgba(0, 0, 0, 0.10);  display:grid; align-items:center; justify-content:center; text-align:center;  flex-wrap:wrap; grid-row-gap:0rem; grid-column-gap:0rem;  }
+					.container1 .row1 .col1 .menumobileunavbar ul li {width:300px; padding:5% 8%; color:black; font:800 14px 'cairo',sans-serif;  border-bottom:solid 2px rgba(0, 0, 0, 0.10);    display:flex; align-items:center; justify-content:flex-end; text-align:center; }
 					.container1 .row1 .col1 .menumobileunavbar ul li:hover {color:blue; }
                     .container1 .row1 .col1 .menumobileunavbar .addtocart{color:black; font-size:15px;  background-color:transparent; padding:8px 40px;   border:solid 1px transparent; border-radius:50px;  }
 					.container1 .row1 .col1 .menumobileunavbar .addtocart:hover{ color:white; font-size:15px; background-color:blue; padding:8px 40px; border:solid 1px blue;  border-radius:50px; }
@@ -161,9 +335,10 @@ html , body {direction: rtl; }
 		   .container1 .row1 .col4  a{ cursor:pointer; background-color:transparent; padding:3px 15px;   border:solid 1px transparent; border-radius:50px;  }
 		   .container1 .row1 .col4  a:hover{ background-color:blue; padding:3px 15px; border:solid 1px blue;  border-radius:50px; }
 		   .container1 .row1 .col4  a i{ font-size:20px; }		   
-		       .container1 .row1 .col4 .menucart {   background: #fff;	width: 300px;padding: 10px 0;  box-shadow: 5px 5px 20px 0px rgb(117 117 117 / 40%);   border-radius:6px;              z-index: 9999;  visibility: hidden;  opacity: 0;              position: absolute;   top:0px;	left:0;    transform: translateY(90px);         }
-               .container1 .row1 .col4 .menucarthover { visibility: visible;  opacity: 1;             transform: translateY(70px);   transition: opacity .4s, transform .5s;	}
-	
+		       .container1 .row1 .col4 .cart_details  {   background-color:#fff; width:300px;  padding:10px 0;  box-shadow: 5px 5px 20px 0px rgb(117 117 117 / 40%);   border-radius:6px;              opacity: 0;              position: absolute; top:0; left:0;    transform: translateY(80px);     transition:all ease-in-out .3s     }
+               .container1 .row1 .col4 .cart_detailshover {  opacity:1;                transition:opacity .4s;	}
+
+
 
 @media only screen and (max-width:1170px) { 
 		.container1 .row1 .col1 { width:50%; display:flex; justify-content:flex-start;  }
@@ -184,7 +359,8 @@ html , body {direction: rtl; }
 			    <i class="iconeclose fas fa-times"></i> 
                 <div class="text1"> Dripoda </div> 
                 <ul> <li>الرئيسة</li>  <li>معلومات عنا</li>  <li>المدونة</li>  <li>أسئلة وأجوبة</li>  <li>اتصل بنا</li>  <li>تسجيل الدخول</li> </ul>
-				<a class="addtocart"> <i class="fa fa-cart-plus"></i>  0 </a>	
+				<a class="addtocart"> <i class="fa fa-cart-plus"></i>  <span class="aa"> </span> </a>	
+				<div class="cart_details"></div>
             </div>				 
 		    </div>	
         </div>
@@ -198,12 +374,10 @@ html , body {direction: rtl; }
 	       <ul> <li>الرئيسة</li>  <li>معلومات عنا</li>  <li>المدونة</li>  <li>أسئلة وأجوبة</li>  <li>اتصل بنا</li>  <li>تسجيل الدخول</li> </ul>
         </div>
 		
+
 	    <div class="col4">
-	        <a> <i class="fa fa-cart-plus"></i>  0 </a>	
-             	<div class="menucart">
-		        	<i class="fa fa-shopping-cart"></i> 	
-		        	<h5>ليس لديك أي شيء بالسلة.</h5> 		    
-		        </div>	
+	        <a> <i class="fa fa-cart-plus"></i>  <span class="aa">  </span>	    </a>	  	
+			<div class="cart_details"></div>		    
         </div>
 	
   </div>
@@ -212,7 +386,7 @@ html , body {direction: rtl; }
 
 
 <script>
-$(".container1 .row1 .col4  a").hover(    function(){ $(".container1 .row1 .col4 .menucart ").toggleClass("menucarthover"); }    );
+$(".container1 .row1 .col4 ").hover (function(){      $(".container1 .row1 .col4 .cart_details ").toggleClass("cart_detailshover");         } );
 $(".container1 .row1 .col1 .iconeopen").click(function(){    $(".container1 .row1 .col1 .menumobilebackground").addClass("menumobilebackgroundhover");    $(".container1 .row1 .col1 .menumobileunavbar").addClass("menumobileunavbarhover");        });
 $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   $(".container1 .row1 .col1 .menumobilebackground").removeClass("menumobilebackgroundhover");     $(".container1 .row1 .col1 .menumobileunavbar").removeClass("menumobileunavbarhover");   });
 </script>
@@ -249,48 +423,56 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
        .container2 .row1 .text{ color:white; font:800 30px 'cairo',sans-serif;  }
     .container2 .row2 {width:100%; height:auto;  display:flex; align-items:center; justify-content:center; text-align:center; }
        .container2 .row2 .text{color:white; font:800 20px 'cairo',sans-serif;   }
-    .container2 .row3 {width:100%; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }
-       .container2 .row3 form  {position: relative; }
-           .container2 .row3 form input { background-color:transparent;   width: 650px;  height:60px;    border:solid 1px #ccc;  border-radius:50px;       color:#d9d9d9; font:400 20px 'cairo',sans-serif; text-indent: 9px;        }
-              .container2 .row3 form input:focus{ outline: none !important;  border:solid 1px #a2a0a0; box-shadow: none; }   
-              .container2 .row3 form input::placeholder {color:#d9d9d9; font:400 20px 'cairo',sans-serif; text-indent: 9px;  } 
-           .container2 .row3 form .search {  color:white; font-size: 22px;  height: 60px; width: 54px;        position: absolute; top: 20px; left: 0; }
-    .container2 .row4 {width:100%; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; grid-row-gap:0rem; grid-column-gap:2rem;}
-        .container2 .row4 .btn1 {background-color:white; padding:3px 20px; border-radius:20px;   color:black; font:800 20px 'cairo',sans-serif;  cursor:pointer;                 }
-           .container2 .row4 .btn1:hover { transform:scale(1.1); }
-        .container2 .row4 .btn2 {background-color:transparent; padding:3px 20px; border: dotted 2px white; border-radius:20px;      color:white; font:800 20px 'cairo',sans-serif; cursor:pointer;   }
-           .container2 .row4 .btn2:hover { transform:scale(1.1); }
 
+    .container2 .row3 {background-color:transparent; padding:0%;  margin:0% 8%;  display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; }
+	     .container2 .row3 .rowinput{  background-color:transparent;  padding:2% 0%;  margin:0% 0%;  display: flex;  align-items:center; justify-content: center; text-align:center;  flex-wrap:wrap;}
+	          .container2 .row3   .poscol1input1{ position: relative; background-color:transparent;   padding:0; margin:8px;       cursor: pointer;   }          .container2 .row3 form .col1input1 { background-color:transparent;   width: 650px;  height:60px;    border:solid 1px #ccc;  border-radius:50px;       color:#d9d9d9; font:400 20px 'cairo',sans-serif; text-indent: 9px;        }  .col1input1:focus{ outline: none !important;  border:solid 1px #a2a0a0; box-shadow: none; }     .col1input1::placeholder {color:#d9d9d9; font:400 20px 'cairo',sans-serif; text-indent: 9px;  }                        .container2 .row3 form .search {  color:white; font-size: 22px;  height: 60px; width: 54px;        position: absolute; top: 20px; left: 0; }
+		 .container2 .row3 .rowbtn {background-color:transparent;  padding:2% 0%;  margin:0% 0%;   display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; }				
+				.container2 .row3  .rowbtn .poscol1btn1{ background-color:transparent;   padding:0; margin:8px;       cursor: pointer;   }       .container2 .row3 form .rowbtn .poscol1btn1 .colbtn1 {background-color:white; width:150px; height:50px;    border-radius:20px;   color:black; font:800 20px 'cairo',sans-serif;  cursor:pointer;                 }    .container2 .row3 form .rowbtn .poscol1btn1 .colbtn1:hover { transform:scale(1.1); }				
+				.container2 .row3  .rowbtn .poscol2btn2{ background-color:transparent;   padding:0; margin:8px;       cursor: pointer;   }   	   				  .container2 .row3 form .rowbtn .poscol2btn2 .colbtn2 {background-color:transparent; width:150px; height:50px;   border:dotted 2px white; border-radius:20px;    display:flex; align-items:center; justify-content:center; text-align:center;  cursor:pointer;   }       .container2 .row3 form .rowbtn .poscol2btn2 .colbtn2:hover { transform:scale(1.1); }   .container2 .row3 form .rowbtn .poscol2btn2 .colbtn2 a{color:white; font:800 20px 'cairo',sans-serif; text-decoration:none;}
+
+
+
+  		
 
 
 @media only screen and (max-width:720px) { 
-        .container2 .row3 form input { width: 400px;     }
+        .container2 .row3 form .col1input1 { width: 400px;     }
 }
 
 @media only screen and (max-width:360px) { 
         .container2 .row1 .text{ font:800 25px 'cairo',sans-serif;  }
 		.container2 .row2 .text{font:800 17px 'cairo',sans-serif;   }
-        .container2 .row3 form input { width: 320px;    }
+        .container2 .row3 form .col1input1 { width: 320px;    }
 }
 </style>
 
 <div class="container2">
+
+
   <div class="row1">
       <div class="text">  كل ما تحتاجه لإطلاق مشروعك  </div> 
   </div>
+  
   <div class="row2">
      <div class="text">   صفحات هبوط، قوالب ووردبريس، سكريبتات... </div> 
   </div>
-  <div class="row3">
-     <form method="GET" action="#">     
-	    <input type="text"  placeholder="ابحث..." value="" />                
-         <i class="search fas fa-search"></i> 
-	 </form>
+  
+  
+  <div class="row3">	  
+  <form  method="GET" action="project2search.php"  >     
+	 <div class="rowinput"> 
+		   <div class="poscol1input1">  <input type="text"  placeholder="ابحث..." value=""  name="a" class="col1input1" />  <i class="search fas fa-search"></i>  </div>
+	 </div>
+	 <div class="rowbtn">
+		 <div class="poscol1btn1"> <button type="submit"  placeholder=""     value="1"         name="b" class="colbtn1"  />منتجاتنا</button>  </div>
+		 <div class="poscol2btn2"> <div class="colbtn2"  > <a href="google.com" >أعرف أكثر</a> </div> </div>
+	 </div>
+  </form>
   </div>
-  <div class="row4">
-     <div class="btn1"> منتجاتنا </div>
-	 <div class="btn2"> أعرف أكثر </div>
-  </div>
+  
+  
+
 </div>
 
 
@@ -313,52 +495,26 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
 
 
 <style>
-.container3{background-color:white; width:100%; height:auto;  }
-  .container3 .row1{width:100%;  height:auto; padding:5% 5% 1% 5%; display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem;}
+.container3{background-color:white; width:100%; height:auto; padding:5% 0%;  margin:0%; }
+  .container3 .row1{width:100%;  height:auto; padding:0% 5% 1% 5%; display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem;}
      .container3 .row1 .text{color:#2e3d62; font:800 30px 'cairo',sans-serif; }
-  .container3 .row2{width:100%;  height:auto; padding:0% 5% 4% 5%;  display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem;}
+  .container3 .row2{width:100%;  height:auto; padding:0% 5% 1% 5%;  display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem;}
      .container3 .row2 .text{color:#666e82; font:600 1.1rem 'cairo',sans-serif; }
 
 
-.row3{  background-color:transparent; max-width:1100px;  padding:10px;  margin: 30px auto;  }
-   
-   .singlenav{  background-color:transparent; display: flex; align-items:center; justify-content: center; text-align:center; flex-wrap: wrap; }
-      .singlenav .nav{  padding:0px 10px; margin:8px 8px;  border:dashed 1px #382068; border-radius:15px;     color:rgb(13, 32, 104); font:600 16px 'cairo',sans-serif;   cursor: pointer;    transition: all 0.3s ease;}
-      .singlenav .nav.active  ,  .singlenav .nav:hover{ background-color:blue; color:white;  }
+	.container3 .row3{  background-color:transparent; padding:0px;  margin:0%; }   
+	   .container3 .singlenav{  background-color:transparent; display: flex; align-items:center; justify-content: center; text-align:center; flex-wrap: wrap; }
+		  .container3 .singlenav .nav{  padding:0px 10px; margin:8px 8px;  border:dashed 1px #382068; border-radius:15px;     color:rgb(13, 32, 104); font:600 16px 'cairo',sans-serif;   cursor: pointer;    transition: all 0.3s ease;}
+		  .container3 .singlenav .nav.active  ,  .singlenav .nav:hover{ background-color:blue; color:white;  }
+	   .container3 .singlecontent{ background-color:transparent; padding:0; margin:0% 8%;  display: flex;  align-items:center; justify-content: center; text-align:center; flex-wrap: wrap; }
+			.container3 .singlecontent .content{  background-color:transparent; padding:0; margin:8px;            cursor: pointer;    transition: all 0.3s ease;   animation: animate 0.4s ease;}    @keyframes animate { 0%{   transform: scale(0.5); } 100%{   transform: scale(1); }}
+			.container3 .singlecontent .content.hide{  display: none; animation: animate 0.4s ease;}   @keyframes animate { 0%{   transform: scale(0.5); } 100%{   transform: scale(1); }}
+				  .container3 .singlecontent .content .imgsrira{  width:100px;  box-shadow: 5px 5px 20px 0px rgb(117 117 117 / 40%); border-radius: 20px;     }
+				  .container3 .shadow{  background: rgba(0,0,0,0.4); width:100%; height:100%;                z-index:1050; visibility:hidden; opacity:0;              display:none;             position: fixed;  left:0;  top:0;  }            
+					 .container3 .showshadow{   visibility:visible; opacity: 1;       display:block;          }
+				  .container3 .preview-box{ background:#fff; width:auto; height:auto; padding: 10px; border-radius: 6px;   box-shadow: 0px 0px 15px rgba(0,0,0,0.2);             cursor:pointer;  z-index: 100000;                   visibility:visible; opacity:1;              display:block;             position:fixed; top:50%;  left:50%; transform:translate(-50%, -50%) scale(1);             }       
 
 
-   .singlecontent{ background-color:transparent; display: flex;  align-items:center; justify-content: center; text-align:center; flex-wrap: wrap; }
-	.singlecontent .content{  background-color:transparent; padding:0; margin:8px;            cursor: pointer;    transition: all 0.3s ease;   animation: animate 0.4s ease;}    @keyframes animate { 0%{   transform: scale(0.5); } 100%{   transform: scale(1); }}
-    .singlecontent .content.hide{  display: none; animation: animate 0.4s ease;}   @keyframes animate { 0%{   transform: scale(0.5); } 100%{   transform: scale(1); }}
-      .singlecontent .content .imgsrira{  width:100px;  box-shadow: 5px 5px 20px 0px rgb(117 117 117 / 40%); border-radius: 20px;     }
-
-
-       .shadow{  background: rgba(0,0,0,0.4); width:100%; height:100%;                z-index:1050; visibility:hidden; opacity:0;              display:none;             position: fixed;  left:0;  top:0;  }            
-	     .showshadow{   visibility:visible; opacity: 1;       display:block;          }
-       .preview-box{ background:#fff; width:auto; height:auto; padding: 10px; border-radius: 6px;   box-shadow: 0px 0px 15px rgba(0,0,0,0.2);             cursor:pointer;  z-index: 100000;                   visibility:visible; opacity:1;              display:block;             position:fixed; top:50%;  left:50%; transform:translate(-50%, -50%) scale(1);             }       
-
-
-@media (max-width: 1150px){	   .container3 .row4 .item{width:16.66666666666667%;   }      }
-	
-@media (max-width: 768px){	 .container3 .row4 .item{width:20%;   }    }
-
-@media (max-width: 548px){	 .container3 .row4 .item{width:25%;   }      }
-
-@media (max-width: 600px){	 
-	.container3 .row4 .item .itemfront{  width: 420px; height:auto; }
-	.container3 .row4 .item .itemfront img {width:400px;  height:200px;   }
-	.container3 .row4 .item .itemfront .titer{font:800 14px 'cairo',sans-serif; margin:0% 1% 0% 1%;  }
-	.container3 .row4 .item .itemfront .cost{ font:800 17px 'cairo',sans-serif;     }   
-}
-
-@media (max-width: 360px){ 	 
-  .container3 .row4{  padding:2% 0% 5% 0%;  }
-  .container3 .row4 .item{width:33.33333333333333%;  } 
-  .container3 .row4 .item .itemfront{  width: 290px; height:auto; }
-  .container3 .row4 .item .itemfront img {width:270px;  height:150px;   }
-  .container3 .row4 .item .itemfront .titer{font:800 12px 'cairo',sans-serif; margin:0% 1% 0% 1%;  }
-  .container3 .row4 .item .itemfront .cost{ font:800 16px 'cairo',sans-serif;     }    
-}
 </style>
 
 
@@ -373,41 +529,36 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
       <div class="text">    ستجد هنا كل ما تريده لإنجاز أعمالك في أقل وقت ممكن وبأسعار تبدأ من 2$    </div>  
     </div>
 
+	<div class="row3">
+	   <div class="singlenav">
+		   <div class="nav active" data-filter="all">الكل</div>
+		   <div class="nav" data-filter="html">HTML</div>
+		   <div class="nav" data-filter="landingpage">LANDING PAGE</div>
+		   <div class="nav" data-filter="psd">PSD</div>
+		   <div class="nav" data-filter="scripts">SCRIPTS</div>
+		   <div class="nav" data-filter="wordpress">WORDPRESS</div>
+		</div> 
+	  
+		<div class="singlecontent">		
+				<?php 
+				
+				   $result = mysqli_query(    $con            ,        " select * from tableee "      );
+				   foreach($result as $row)  
+				   {      	  
+							?> 	 
+							<div class=" content <?php echo $row['filter'] ?> ">             			
+								<a  class="clickimgsrira"       data-id='<?php echo $row["id"] ?>'   >  <img class="imgsrira" src="<?php echo $row["imgsrira"] ?>"   />  	   </a>					
+							</div> 					 
+							<?php  
+				   }   
+				?>	
 
-
-<div class="row3">
-
-   <div class="singlenav">
-       <div class="nav active" data-filter="all">الكل</div>
-       <div class="nav" data-filter="html">HTML</div>
-       <div class="nav" data-filter="landingpage">LANDING PAGE</div>
-       <div class="nav" data-filter="psd">PSD</div>
-       <div class="nav" data-filter="scripts">SCRIPTS</div>
-       <div class="nav" data-filter="wordpress">WORDPRESS</div>
-    </div> 
-  
-
-    <div class="singlecontent">		
-		<?php  
-		   $result = mysqli_query(    mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst")            ,        " select * from tableee "      );
-           foreach($result as $row)  
-		   {      	  
-					?> 	 
-					<div class=" content <?php echo $row['filter'] ?> ">             			
-						<a  class="clickimgsrira"       data-id='<?php echo $row["id"] ?>'   >  <img class="imgsrira" src="<?php echo $row["imgsrira"] ?>"   />  	   </a>					
-					</div> 					 
-					<?php  
-		   }   
-		?>	
-
-		<div class='shadow'>
-		<div class='preview-box'>
-		</div>
-		</div>
-	
+				<div class='shadow'>
+				<div class='preview-box'>
+				</div>
+				</div>
+		</div>	
 	</div>
-	
-</div>
 
 
   
@@ -419,13 +570,13 @@ $(".container1 .row1 .col1 .menumobileunavbar .iconeclose").click(function(){   
 
 
 <script>
-document.querySelector(".singlenav").addEventListener("click", (event) =>
+document.querySelector(".container3 .singlenav").addEventListener("click", (event) =>
 {
 	   if(event.target.classList.contains("nav"))
 	   {
-			 document.querySelector(".singlenav").querySelector(".active").classList.remove("active");
+			 document.querySelector(".container3 .singlenav").querySelector(".active").classList.remove("active");
 			 event.target.classList.add("active");
-			 document.querySelectorAll(".content").forEach((item) =>
+			 document.querySelectorAll(".container3 .singlecontent .content").forEach((item) =>
 			 {
 				   if(  item.classList.contains(event.target.getAttribute("data-filter"))   ||   event.target.getAttribute("data-filter") === 'all'  )
 				   {  item.classList.remove("hide");     	 item.classList.add("show");  }
@@ -438,14 +589,11 @@ document.querySelector(".singlenav").addEventListener("click", (event) =>
 
 
 
-
-
-
 $(".clickimgsrira").click(function(){		
 	$.ajax
 	({   
 	    type: 'post',    
-		data: {ajax: 1,   id:$(this).data('id') },   
+		data: {data0:"",   id:$(this).data('id') },   
 	    success:  function(data){   
 	       $('.preview-box').html(data); 
            $('.shadow').addClass('showshadow');	   
@@ -459,7 +607,7 @@ $(".preview-box").hover(function(){
 		$.ajax
 		({   
 	       type: 'post',    
-		   data: {ajax: 1,   id:$(this).data('id') },   
+		   data: {data0:"",   id:$(this).data('id') },   
 	       success:  function(data){   
 		      $('.preview-box').empty();
 	       	  $('.shadow').removeClass('showshadow');			  
@@ -518,35 +666,31 @@ $(".preview-box").hover(function(){
 
 
 <style>
-.container4{background-color:#eff1f5; width:100%; height:auto;   }
-  .container4 .row1{width:100%;  height:auto; padding:5% 5% 1% 5%;   display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem;}
+.container4{background-color:#eff1f5; width:100%; height:auto; padding:5% 0%;  margin:0%;  }
+
+  .container4 .row1{width:100%;  height:auto; padding:0% 5% 1% 5%;   display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem;}
      .container4 .row1 .text{color:#2e3d62; font:800 30px 'cairo',sans-serif;  }
-  .container4 .row2{width:100%;  height:auto; padding:0% 5% 4% 5%;  display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem; }
+
+  .container4 .row2{width:100%;  height:auto; padding:0% 5% 1% 5%;  display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0rem; grid-column-gap:0rem; }
      .container4 .row2 .text{color:#666e82; font:600 1.1rem 'cairo',sans-serif; }
-  .container4 .row3{width:100%;  height:auto; padding:0% 5% 0% 5%;  display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  grid-row-gap:0.4rem; grid-column-gap:2rem; }
-        .container4 .row3 span{ padding:0px 10px; border:dashed 1px #382068; border-radius:15px;     color:rgb(13, 32, 104); font:600 16px 'cairo',sans-serif;  cursor:pointer;}
-        .container4 .row3 span.active{background-color:blue; color:white; }
-  .container4 .row4{width:auto;  height:auto;  padding:2% 0% 5% 0%;  display:flex; align-items:center; justify-content:center; text-align:center;  margin:0% 5%;   }
-	 .container4 .row4 .item{background-color:transparent; width:33.33333333333333%; max-width:auto; height:auto;  padding:1%; }
-	    .container4 .row4 .item  img {width:100%; max-width:auto; height:200px; border-radius:16px 16px 0px 0px;   display:flex; align-items:center; justify-content:center; text-align:center; }
-        .container4 .row4 .item  .content{background-color:white; border-radius:0px 0px 16px 16px; }
-		  .container4 .row4 .item  .title{color:#2e3d62; font:800 20px 'cairo',sans-serif;     display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%;}
-		  .container4 .row4 .item  .subtitles{color:#666e82; font:600 17px 'cairo',sans-serif;   display:flex; align-items:center; justify-content:flex-start; text-align:right; margin:0% 3% 0% 3%; }
-		  .container4 .row4 .item  .costandshow{display:flex; align-items:center; justify-content:space-between; margin:0% 3% 0% 3%;}
-		     .container4 .row4 .item  .costandshow .prix{ color:black; font:800 20px 'cairo',sans-serif;   }
-		     .container4 .row4 .item  .costandshow .menu{ font-size:20px;}
 
+	.container4 .row3{  background-color:transparent;   padding:0px;  margin:0%; }   
+	   .container4 .singlenav{  background-color:transparent; display: flex; align-items:center; justify-content: center; text-align:center; flex-wrap: wrap; }
+		  .container4 .singlenav .nav{  padding:0px 10px; margin:8px 8px;  border:dashed 1px #382068; border-radius:15px;     color:rgb(13, 32, 104); font:600 16px 'cairo',sans-serif;   cursor: pointer;    transition: all 0.3s ease;}
+		  .container4 .singlenav .nav.active  ,  .singlenav .nav:hover{ background-color:blue; color:white;  }
+	   .container4 .singlecontent{ background-color:transparent;  padding:0%;  margin:0% 8%;  display: flex;  align-items:center; justify-content: center; text-align:center;  flex-wrap:wrap;}
+			.container4 .singlecontent .content{  background-color:transparent;   padding:0; margin:8px;            cursor: pointer;    transition: all 0.3s ease;   animation: animate 0.4s ease;}    @keyframes animate { 0%{   transform: scale(0.5); } 100%{   transform: scale(1); }}
+			.container4 .singlecontent .content.hide{  display: none; animation: animate 0.4s ease;}   @keyframes animate { 0%{   transform: scale(0.5); } 100%{   transform: scale(1); }}
+			 .container4 .singlecontent .items {background-color:white; width:300px; height:auto; border-radius:16px; }
+  			  .container4 .singlecontent .posimg { overflow:hidden; border-radius:16px 16px 0px 0px;  display:flex; align-items:center; justify-content:center; text-align:center; }
+			  .container4 .singlecontent img {width:auto; max-width: 100%;  height:auto; }  .container4 .singlecontent img:hover{transform:scale(1.04); transition:transform 1s ease-in-out 0s;}
+				.container4 .singlecontent .lesinfo{text-align:right; padding:3%;  }
+					.container4 .singlecontent .lesinfo  .title{color:#2e3d62; font:800 20px 'cairo',sans-serif;    }
+					.container4 .singlecontent .lesinfo .subtitles{ color:#666e82; font:600 15px 'cairo',sans-serif; }
+					.container4 .singlecontent .lesinfo .costandshow{ padding:5% 0 0 0; display:flex; align-items:center; justify-content:space-between; }
+						.container4 .singlecontent .lesinfo .prix{ color:black; font:800 20px 'cairo',sans-serif;   }
+						.container4 .singlecontent .lesinfo .menu{ font-size:20px;}
 
-@media (max-width: 1150px){
-	 .container4 .row4 .item{width:50%;    }	
-}
-	
-
-@media (max-width: 640px){
-	 .container4 .row4 .item{width:100%;     }	    
-}
-	
-	
 </style>
 
 
@@ -560,42 +704,56 @@ $(".preview-box").hover(function(){
       <div class="text">   ستجد هنا أحدث منتجاتنا المصممة خصيصاً لتوفر عنك الوقت والجهد لإطلاق مشروعك بأقل الأسعار   </div>  
     </div>
 	
-	<div class="row3">
-        <span data-filter=".a" class="active" >الكل</span> 
-		<span data-filter=".b" >HTML</span> 
-		<span data-filter=".c">LANDING PAGE</span> 
-		<span data-filter=".d">PSD</span> 
-		<span data-filter=".e">SCRIPTS</span> 
-		<span data-filter=".f">WORDPRESS</span>  
-    </div>
-	
-	
-	
-	
-	<div class="row4" >
-	     
-        <?php  		 
-           $result = mysqli_query(    mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane" , "mehdi2014@A" , "freedbtech_wordpresst")            ,        " select * from tableee "      );
-           while($row=mysqli_fetch_assoc($result)) 	 {   $id=$row['id'];     $filter=$row['filter'];    $img=$row['img'];	$imgsrira=$row['imgsrira'];  $title=$row['title']; 	  $subtitles=$row['subtitles']; 	  $description=$row['description'];	  $prix=$row['prix'];	  $tag=$row['tag'];	  $tags=$row['tags']; 	  $category=$row['category']; 	  $author=$row['author'];    	  
-        ?> 		
-        <div class="item <?php echo $filter ?>  " >  		
-	        <a  href="project2post.php?idd=<?php echo $row['id']?>" > <img src="<?php echo $img ?>"   />  </a>	
-			<div class="content">
-			    <div class="title">   <?php echo $title ?>  </div>
-			    <div class="subtitles">  <?php echo $subtitles ?>  </div>
-			    <div class="costandshow">   
-			       <div class="prix"><?php echo $prix ?>  </div> 
-				   <div class="menu">	 <i class="fa fa-shopping-cart"></i>  <i class="fa fa-eye"></i>    <i class="fa fa-info-circle"></i> </div>
-			    </div>	
-			</div>
-		</div>
-        <?php 
-        } 
-        ?>
-		
-		
-	</div>
 
+	<div class="row3">
+			   <div class="singlenav">
+				   <div class="nav active" data-filter="all">الكل</div>
+				   <div class="nav" data-filter="html">HTML</div>
+				   <div class="nav" data-filter="landingpage">LANDING PAGE</div>
+				   <div class="nav" data-filter="psd">PSD</div>
+				   <div class="nav" data-filter="scripts">SCRIPTS</div>
+				   <div class="nav" data-filter="wordpress">WORDPRESS</div>
+				</div> 
+	
+				<div class="singlecontent">		
+					<?php 			  
+							   $result = mysqli_query(   $con        ,        " select * from tableee "      );
+							   foreach($result as $row)  
+							   {      	  
+										?> 	 			
+										<div class="content <?php echo $row['filter'] ?>  " >  	
+												<div class="items">							
+												<div class="posimg"> <a  href="project2post.php?idd=<?php echo $row['id']?>" > <img src="<?php echo $row["img"] ?>"   />  </a>	</div>
+												<div class="lesinfo">
+														<div class="title">   <?php echo $row["title"] ?>  </div>
+														<div class="subtitles">  <?php echo  $row["subtitles"] ?>  </div>
+														<div class="costandshow">   
+														   <div class="prix"> 
+															   <?php echo $row["prix"] ?>  
+															</div> 
+														   <div class="menu">	 
+															   <a  id="<?php echo $row["id"]; ?>" class="addtocart" style="cursor:pointer"> <i class="fa fa-shopping-cart" ></i> </a>  
+															  <i class="fa fa-eye"></i>    
+															  <i class="fa fa-info-circle"></i> 
+														   </div>
+														</div>	
+												 </div>
+												</div>
+										</div>	
+
+										<div style="display:none;">
+											<input type="hidden" src="<?php echo $row["imgsrira"]; ?>" value="<?php echo $row["imgsrira"]; ?>"      id="imgsriraa<?php echo $row["id"]; ?>"   />   <br/>
+											<input type="hidden"                                        value="<?php echo $row["title"]; ?>"         id="titlee<?php echo $row["id"]; ?>"  />  <br/>
+											<input type="hidden"                                        value="<?php echo $row["prix"]; ?>"          id="prixx<?php echo $row["id"]; ?>"  />  <br/>
+											<input type="hidden"                                        value="1"                                    id="quantityy<?php echo $row["id"]; ?>"  />  <br/>
+										</div>										
+										<?php
+										
+										
+							  } 
+					 ?>	
+			   </div>		
+	</div>
 
 	
 </div>
@@ -603,15 +761,104 @@ $(".preview-box").hover(function(){
 
 
 
-<script src="https://asebbane.com/js/isotope.pkgd.min.js"></script>
+
+
 <script>
-$(window).on("load",function (){
-  $('.container4 .row4').isotope(   { itemSelector:'.item' ,  isOriginLeft:false  ,  transitionDuration :'0.8s' }    );  
-  $('.container4 .row3 span').click(function(){
-      $('.container4 .row4').isotope({ filter: $(this).attr('data-filter') }  ); 
-      $(this).addClass('active').siblings().removeClass('active');     
-   });    
+document.querySelector(".container4 .singlenav").addEventListener("click", (event) =>
+{
+	   if(event.target.classList.contains("nav"))
+	   {
+			 document.querySelector(".container4 .singlenav").querySelector(".active").classList.remove("active");
+			 event.target.classList.add("active");
+			 document.querySelectorAll(".content").forEach((item) =>
+			 {
+				   if(  item.classList.contains(event.target.getAttribute("data-filter"))   ||   event.target.getAttribute("data-filter") === 'all'  )
+				   {  item.classList.remove("hide");     	 item.classList.add("show");  }
+				   else
+				   {  	item.classList.remove("show");   item.classList.add("hide");   }
+			 });
+	   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+load_cart_data();	
+function load_cart_data()
+{			
+		$.ajax
+		({   
+		   type: 'post',    
+		   data: {data2:"" },   
+		   dataType:"json",
+		   success:  function(data){ $('.cart_details').html(data.cart_details);   }  
+		});			
+}
+
+
+aa();	
+function aa()
+{			
+		$.ajax
+		({   
+		   type: 'post',    
+		   data: {data3:"" },   
+		   dataType:"json",
+		   success:  function(data){ $('.aa').html(data.aa);   }  
+		});			
+}
+
+
+
+
+
+
+
+$(document).on('click', '.addtocart', function(){
+	$.ajax
+	({				
+		method:"POST",
+		data:{ action: "add",      product_id:$(this).attr("id"),      product_imgsrira:$('#imgsriraa'+$(this).attr("id")+'').val(),     product_title:$('#titlee'+$(this).attr("id")+'').val(),       product_prix:$('#prixx'+$(this).attr("id")+'').val(),         product_quantity:$('#quantityy'+$(this).attr("id")).val()   },
+		success:function(data) {  load_cart_data(); aa();	alert("Item Added"); 	}
+	});	
+});
+
+$(document).on('click', '.delete', function(){
+	$.ajax
+	({			
+		method:"POST",
+		data:{ action:'remove',     product_id: $(this).attr("id")   },
+		success:function()  {  load_cart_data(); aa();  alert("Item Removed");  }
+	})
+});
+$(document).on('click', '.clear', function(){
+	$.ajax
+	({		
+		method:"POST",
+		data:{action:'empty' ,     product_id: $(this).attr("id")},
+		success:function()  {  load_cart_data();  aa();  alert("All Item Removed");  }
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

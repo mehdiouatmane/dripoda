@@ -25,7 +25,7 @@ html , body {direction: rtl; }
 
 
 <?php
-$con=mysqli_connect("localhost","root","root","fedex");             
+$con=mysqli_connect("freedb.tech", "freedbtech_mehdiouatmane","mehdi2014@A" , "freedbtech_wordpresst");             
 
 session_start();
 
