@@ -195,58 +195,6 @@ exit;
 
 
 
-<?php	
-
-function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
-                     
-
-
-							if( isset($_POST["action"])  && $_POST["action"] == "add")
-							{
-									if(isset($_SESSION["shopping_cart"]))
-									{
-											$is_available = 0;
-											foreach($_SESSION["shopping_cart"] as $keys => $values)
-											{
-												if($_SESSION["shopping_cart"][$keys]['product_id'] == $_POST["product_id"])
-												{
-													$is_available++;
-													$_SESSION["shopping_cart"][$keys]['product_quantity'] = $_SESSION["shopping_cart"][$keys]['product_quantity'] + $_POST["product_quantity"];
-												}
-											}
-											if($is_available == 0)
-											{
-												
-												$_SESSION["shopping_cart"][] = array(       'product_id' => $_POST["product_id"],    'ip' => get_ip(),       'product_imgsrira' => $_POST["product_imgsrira"],         'product_title' => $_POST["product_title"],             'product_prix' => $_POST["product_prix"],   	          'product_quantity' => $_POST["product_quantity"]        );
-											}
-									}
-									else
-									{
-										$_SESSION["shopping_cart"][] = array(      'product_id' => $_POST["product_id"],   	   'ip' => get_ip(),    'product_imgsrira' => $_POST["product_imgsrira"],            'product_title' =>  $_POST["product_title"],               'product_prix' => $_POST["product_prix"],         	    'product_quantity' =>  $_POST["product_quantity"]      );
-									}
-							}
-
-
-							if( isset($_POST["action"]) && $_POST["action"] == 'remove')
-							{
-								foreach($_SESSION["shopping_cart"] as $keys => $values)
-								{
-									 if($values["product_id"] == $_POST["product_id"])
-									 {
-										unset($_SESSION["shopping_cart"][$keys]);
-									 }
-								}
-							}
-
-
-							if(  isset($_POST["action"]) &&  $_POST["action"] == 'empty')
-							{
-							  unset($_SESSION["shopping_cart"]);
-							}				  
-
-
-?>
-
 
 
 
@@ -780,6 +728,73 @@ $(".preview-box").hover(function(){
 
 
 
+
+<?php	
+function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
+                     
+
+							if( isset($_POST["action"])  && $_POST["action"] == "add")
+							{
+									if(isset($_SESSION["shopping_cart"]))
+									{
+											$is_available = 0;
+											foreach($_SESSION["shopping_cart"] as $keys => $values)
+											{
+												if($_SESSION["shopping_cart"][$keys]['product_id'] == $_POST["product_id"])
+												{
+													$is_available++;
+													$_SESSION["shopping_cart"][$keys]['product_quantity'] = $_SESSION["shopping_cart"][$keys]['product_quantity'] + $_POST["product_quantity"];
+												}
+											}
+											if($is_available == 0)
+											{
+												
+												$_SESSION["shopping_cart"][] = array
+												(       
+												  'product_id' => $_POST["product_id"],    
+												  'ip' => get_ip(),       
+												  'product_imgsrira' => $_POST["product_imgsrira"],         
+												  'product_title' => $_POST["product_title"],             
+												  'product_prix' => $_POST["product_prix"],   	          
+												  'product_quantity' => $_POST["product_quantity"]        
+												  );
+											}
+									}
+									else
+									{
+										$_SESSION["shopping_cart"][] = array
+										(      
+										  'product_id' => $_POST["product_id"],   	   
+										  'ip' => get_ip(),    
+										  'product_imgsrira' => $_POST["product_imgsrira"],            
+										  'product_title' =>  $_POST["product_title"],               
+										  'product_prix' => $_POST["product_prix"],         	    
+										  'product_quantity' =>  $_POST["product_quantity"]      
+										  );
+									}
+							}
+
+
+							if( isset($_POST["action"]) && $_POST["action"] == 'remove')
+							{
+								foreach($_SESSION["shopping_cart"] as $keys => $values)
+								{
+									 if($values["product_id"] == $_POST["product_id"])
+									 {
+										unset($_SESSION["shopping_cart"][$keys]);
+									 }
+								}
+							}
+
+
+							if(  isset($_POST["action"]) &&  $_POST["action"] == 'empty')
+							{
+							  unset($_SESSION["shopping_cart"]);
+							}				  
+?>
+
+
+
 <script>
 document.querySelector(".container4 .singlenav").addEventListener("click", (event) =>
 {
@@ -864,18 +879,6 @@ $(document).on('click', '.clear', function(){
 		success:function()  {  load_cart_data();  aa();  alert("All Item Removed");  }
 	});
 });
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 

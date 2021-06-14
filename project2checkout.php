@@ -30,7 +30,6 @@ html , body {direction: rtl; background: rgb(239, 241, 245); }
 <?php				
 if(!empty($_SESSION["shopping_cart"]))
 {	
-    $output = '';
     $total_price = 0;
 	$total_item = 0;					
 	foreach($_SESSION["shopping_cart"] as $keys => $values)
@@ -44,14 +43,11 @@ if(!empty($_SESSION["shopping_cart"]))
 						else 
 						{
 						   $ip = $values["ip"];
-						   $product_id =  $values["product_id"];
 						   $product_imgsrira =  $values["product_imgsrira"];
 						   $product_title =  $values["product_title"];
 						   $product_prix = (int)$values["product_prix"]; 	
 						   $product_quantity =  $values["product_quantity"];
-						   $product_subtotal = number_format(  $product_quantity * $product_prix  , 2 ) ; 
-						   $total_price= number_format( $total_price + ($product_quantity * $product_prix ) , 2 ) ;
-						   $total_item = $total_item + 1;					
+						   $product_subtotal = number_format(  $product_quantity * $product_prix  , 2 ) ; 					
 						   $customer_name = $_POST['customer_name'];
 						   $customer_email = $_POST['customer_email'];
 						   $customer_address = $_POST['customer_address'];
@@ -63,7 +59,7 @@ if(!empty($_SESSION["shopping_cart"]))
 						   $card_expiry_month = $_POST['card_expiry_month'];
 						   $card_expiry_year = $_POST['card_expiry_year'];
 						   $card_cvc = $_POST['card_cvc'];
-						   $result = mysqli_query(  $con  ,	"INSERT INTO project2order ( ip, product_imgsrira, product_title, product_prix, product_quantity, product_subtotal, total_price, total_item , customer_name , customer_email , customer_address , customer_city , customer_zip , customer_state , customer_country , card_holder_number , card_expiry_month , card_expiry_year , card_cvc  )    VALUES ( '$ip' , '$product_imgsrira' , '$product_title' , $product_prix ,  '$product_quantity'  , '$product_subtotal'  , '$total_price' , '$total_item' ,   '$customer_name'  , '$customer_email' , '$customer_address' , '$customer_city' , '$customer_zip' , '$customer_state' , '$customer_country' , '$card_holder_number' , '$card_expiry_month' , '$card_expiry_year' , '$card_cvc'  )"   );            
+						   $result = mysqli_query(  $con  ,	"INSERT INTO project2order ( ip, product_imgsrira, product_title, product_prix, product_quantity, product_subtotal, customer_name , customer_email , customer_address , customer_city , customer_zip , customer_state , customer_country , card_holder_number , card_expiry_month , card_expiry_year , card_cvc  )    VALUES ( '$ip' , '$product_imgsrira' , '$product_title' , $product_prix ,  '$product_quantity'  , '$product_subtotal'  ,   '$customer_name'  , '$customer_email' , '$customer_address' , '$customer_city' , '$customer_zip' , '$customer_state' , '$customer_country' , '$card_holder_number' , '$card_expiry_month' , '$card_expiry_year' , '$card_cvc'  )"   );            
 						   if($result) 	  {	 echo'thanks';	  } 	  else	  {		  echo'Please Check Your Query';	  }
 					   
 						}		
@@ -77,25 +73,12 @@ if(!empty($_SESSION["shopping_cart"]))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <form method="post" id="register_form">
 		<input style="display:none;" type="hidden"                                        value="<?php echo $row["ip"]; ?>"            id="ip<?php echo $row["ip"]; ?>"    >       <br/>   					
 		<input style="display:none;" type="hidden" src="<?php echo $row["imgsrira"]; ?>"  value="<?php echo $row["imgsrira"]; ?>"      id="imgsriraa<?php echo $row["id"]; ?>"   />   <br/>
 		<input style="display:none;" type="hidden"                                        value="<?php echo $row["title"]; ?>"         id="titlee<?php echo $row["id"]; ?>"  />  <br/>
 		<input style="display:none;" type="hidden"                                        value="<?php echo $row["prix"]; ?>"          id="prixx<?php echo $row["id"]; ?>"  />  <br/>
-		<input style="display:none;" type="hidden"                                        value="1"                                    id="quantityy<?php echo $row["id"]; ?>"  />  <br/>       					
+		<input style="display:none;" type="hidden"                                        value="1"                                    id="quantityy<?php echo $row["id"]; ?>"  />  <br/>       					 					
 		<input type="text"   placeholder="name" name="customer_name"  />		 <br/>
 		<input type="text"   placeholder="email" name="customer_email"  />	<br/>
 		<input type="text"   placeholder="address" name="customer_address"  /><br/>
@@ -111,7 +94,3 @@ if(!empty($_SESSION["shopping_cart"]))
 </form>
 				
 		
-
-
-
-
