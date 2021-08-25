@@ -111,13 +111,13 @@
  <div class="poscountdown" id="countdown"> <ul>       <li><span class="span1" id="days" ></span> <span class="span2" >يوم</span></li>        <li><span class="span1" id="hours" ></span> <span class="span2" >ساعة</span></li>      <li><span class="span1" id="minutes" ></span> <span class="span2" >دقيقة</span></li>       <li><span class="span1" id="seconds" ></span> <span class="span2" >تانية</span></li>      </ul>      </div> 
 
  <div class="posform1">
-   <form    method="post">       
+   <form  method="post">       
        <div class="posinput1"> <div class="text1">إملئ الإستمارة لتأكيد الطلب </div> </div>
-       <input   style="display:none;" type="text"           placeholder=""          value="<?php echo $row["ip"]; ?>"      name=""                                         />     
+       <div class="posinput2"> <input    type="text"        placeholder=""                          value="<?php echo $row["ip"]; ?>"      name=""                style="display:none;"                       />    </div>  
        <div class="posinput2"> <input    type="text"        placeholder="أدخل الإسم الكامل"          value=""                               name="name"            class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل الإسم الكامل ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-       <div class="posinput2"> <input    type="text"        placeholder="أدخل رقم هاتفك"          value=""                               name="num"             class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل رقم هاتفك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-       <div class="posinput2"> <input    type="text"        placeholder="أدخل عنوانك"          value=""                               name="adresse"         class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-	   <div class="posinput5"> <input    type="submit"      placeholder=""             value=" إضغط هنا لتأكيد طلبك  "        name="submit"          class="inputbtn animatbn1"      required="required"     onClick="fbq( 'track', 'Purchase' );"   /> </div>
+       <div class="posinput2"> <input    type="text"        placeholder="أدخل رقم هاتفك"            value=""                               name="num"             class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل رقم هاتفك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
+       <div class="posinput2"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"         class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
+	   <div class="posinput5"> <input    type="submit"      placeholder=""                          value=" إضغط هنا لتأكيد طلبك  "        name="submit"          class="inputbtn animatbn1"                   required="required"     onClick="fbq( 'track', 'Purchase' );"   /> </div>
    </form> 
  </div>
  
