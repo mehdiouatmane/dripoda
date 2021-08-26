@@ -67,7 +67,7 @@
 
 
 <style>
-.container0 {background-color:RED; width:100%; height:auto; }
+.container0 {background-color:white; width:100%; height:auto; }
    .container0 .row1{background-color:transparent;   padding:2%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
          
 		 .container0 .row1 .col1{background-color:transparent;  width:33.33333333333333%; }      
@@ -132,7 +132,7 @@
 
 
 <style>
-.container1 {background-color:RED; width:100%; height:auto;  direction: rtl;  }
+.container1 {background-color:white; width:100%; height:auto;  direction: rtl;  }
    .container1 .row1{background-color:transparent;   padding:2%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
          
 		 .container1 .row1 .col1{background-color:transparent;  width:100%; }      
@@ -290,7 +290,7 @@ if(         isset($_POST['submit'])                 )
 
 
 <style>
-.container2 {background-color:RED; width:100%; height:auto; }
+.container2 {background-color:white; width:100%; height:auto; }
    .container2 .row1{background-color:transparent;   padding:2%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
          
 		 .container2 .row1 .col1{background-color:transparent;  width:33.33333333333333%; }      
