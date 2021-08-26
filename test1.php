@@ -164,6 +164,7 @@ require 'autre/phpmailer/phpmailer.php';
 require 'autre/phpmailer/smtp.php';
 
 
+
 if(         isset($_POST['submit'])                 )
 {		
 
@@ -174,8 +175,10 @@ if(         isset($_POST['submit'])                 )
 	$adresse = $_POST["adresse"];
 
 	define ('url',"https://api.telegram.org/bot1989218162:AAFnXNFm8i4_xDlk3f6Av9QNQmCY-sgqvAc/sendmessage?chat_id=1217684250&");
-	$message = urlencode( "ip:"  .  $ip        .      "\n name : "  .   $name        .      "\n num : "  .   $num        .      "\n adresse : "  .   $adresse    );
+	$message = urlencode(   "زبون لجهاز غسل الاواني"       .       "\n الايبي:"  .  $ip        .      "\n الاسم : "  .   $name        .      "\n الهاتف : "  .   $num        .      "\n العنوان : "  .   $adresse    );
 	file_get_contents(url."text=".$message."");
-
 }
+
 ?>
+
+
