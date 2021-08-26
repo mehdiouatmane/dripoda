@@ -26,7 +26,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"  rel="stylesheet"  > <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
 
 
-<style>html, body{  background-color:#f7f7f7;  padding:0; border:0; margin:0;  touch-action: manipulation; }   ul li {list-style-type:none;}     </style>
+<style>html, body{  background-color:transparent;  padding:0; border:0; margin:0;  touch-action: manipulation; }   ul li {list-style-type:none;}     </style>
 
 
 <!-- Facebook Pixel Code -->	
@@ -48,6 +48,89 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.container0 {background-color:RED; width:100%; height:auto; }
+   .container0 .row1{background-color:transparent;   padding:2%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
+         
+		 .container0 .row1 .col1{background-color:transparent;  width:33.33333333333333%; }      
+		 .container0 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 2%;         display:flex; align-items:center; justify-content:center; text-align:center;        }  
+              .iconeopen{display:flex; align-items:center; justify-content:center; text-align:center;}  .iconeopen i{font-size:30px;}
+		 .container0 .row1 .col2{background-color:transparent;  width:33.33333333333333%; }      
+		 .container0 .row1 .col2 .content1   {background-color:transparent;  padding:0%; margin:0% 2%;         display:flex; align-items:center; justify-content:center; text-align:center;        }  
+             .container0 .row1 .col2 .content1 .posimg1{display:flex; align-items:center; justify-content:center; text-align:center; }     .container0 .row1 .col2 .content1   .posimg1 .img1{max-width:100%;  height:80px;} 	 
+		 .container0 .row1 .col3{background-color:transparent;  width:33.33333333333333%; }      
+		 .container0 .row1 .col3 .content1   {background-color:transparent; padding:0%; margin:0% 2%;         display:flex; align-items:center; justify-content:center; text-align:center;        }  
+              .iconeshopcart{display:flex; align-items:center; justify-content:center; text-align:center;}  .iconeshopcart i{font-size:30px;}
+
+
+ 
+@media only screen and (max-width:360px)  
+{
+	.container0 .row1 .col2 .content1 .posimg1{display:flex; align-items:center; justify-content:center; text-align:center; }     .container0 .row1 .col2 .content1   .posimg1 .img1{max-width:100%;  height:60px;} 	 		   
+}
+</style>
+
+
+<div class="container0">
+  <div class="row1">
+		
+			<div class="col1"> 
+		    <div class="content1">
+                      <div class="iconeopen"><i class="fas fa-bars"></i> </div>
+		    </div> 
+			</div>
+			
+			<div class="col2"> 
+		    <div class="content1">
+                     <div class="posimg1">  <img class="img1" src="img/hmizatshop/logo.png">  </div> 
+		    </div> 
+			</div> 
+			
+			<div class="col3">
+		    <div class="content1">
+                    <div class="iconeshopcart"><i class="fas fa-shopping-cart"></i></div>
+		    </div> 
+			</div> 
+		
+   </div>		
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
 .container1 {background-color:RED; width:100%; height:auto;  direction: rtl;  }
    .container1 .row1{background-color:transparent;   padding:2%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
@@ -55,15 +138,15 @@
 		 .container1 .row1 .col1{background-color:transparent;  width:100%; }      
 		 .container1 .row1 .col1 .content1  {background-color:green; padding:0%; margin:0% 2%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
 
-				.text1{color:#2effe2; font:800 30px 'Cairo', sans-serif;}
-				
-				.text2{color:yellow; font:800 40px 'Cairo', sans-serif; margin:0 1%; }          
-				
-				.posimg1{background-color:transparent; width:auto; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }        .posimg1 .img1{max-width:100%; height:100px;} 
+				.postext1{display:flex; align-items:center; justify-content:center; text-align:center;  }   .postext1 .text1{color:#2effe2; font:800 30px 'Cairo', sans-serif;}
+
+                .postext2{display:flex; align-items:center; justify-content:center; text-align:center;  }    .postext2 .text2a{  margin:0% 1%;  color:yellow; font:800 40px 'Cairo';  }    .postext2 .text2b{ margin:0% 1%; color:#ff0303; font:800 40px 'Cairo';  text-decoration:line-through;  }          
+ 
+				.posimg1{display:flex; align-items:center; justify-content:center; text-align:center; }       .posimg1 .img1{max-width:100%; height:100px; } 
 			 
-				.posstar{background-color:transparent; width:auto; height:auto;  display:flex; align-items:center; justify-content:center; text-align:center; }           .posstar .star1{color:yellow; font-size:20px; }   
-			 
-				.text3{color:yellow; font:800 35px "cairo",sans-serif;      filter:drop-shadow(0 0 10px yellow);   text-shadow: 2px 2px blue;}         
+			    .posstar{display:flex; align-items:center; justify-content:center; text-align:center;  }      .posstar .star1{color:#ffce07; font-size:20px;  } 
+
+				.postext3{display:flex; align-items:center; justify-content:center; text-align:center;  }     .postext3 .text3{color:yellow; font:800 35px "cairo",sans-serif;      filter:drop-shadow(0 0 10px yellow);   text-shadow: 2px 2px blue;}         
 
 				.poscountdown {background-color:transparent; width:auto; height:auto;  display:flex; align-items:center; justify-content:center; text-align:center; }   
 				.poscountdown ul {padding:0;  display:flex; align-items:center; justify-content:center; text-align:center; }   
@@ -109,10 +192,11 @@
 		
 			<div class="col1"> 
 		    <div class="content1">
-                     <div class="text1">جهاز لغسل الأواني</div> 
-		             <div class="text2"> 250 درهم فقط</div>  
-		             <div class="posimg1">  <img  class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/tawsilmajani2.png" /> </div> 
-		             <div class="text3 animatcolor">العرض محدوود</div> 
+                     <div class="postext1"> <div class="text1">حقيبة نسائية موديل جديد</div> </div>
+					 <div class="postext2">     <div class="text2a"> 250dh</div>   <div class="text2b"> 499dh</div> </div>
+		             <div class="posimg1">  <img  class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/tawsilmajani2.png" /> </div>  <br/> 
+		             <div class="posstar"> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i> </div>
+					 <div class="postext3"> <div class="text3 animatcolor">العرض محدوود</div>   </div> 
 		             <div class="poscountdown" id="countdown"> <ul>       <li><span class="span1" id="days" ></span> <span class="span2" >يوم</span></li>        <li><span class="span1" id="hours" ></span> <span class="span2" >ساعة</span></li>      <li><span class="span1" id="minutes" ></span> <span class="span2" >دقيقة</span></li>       <li><span class="span1" id="seconds" ></span> <span class="span2" >تانية</span></li>      </ul>      </div> 
 					 
 					 <div class="posform1">
@@ -180,5 +264,155 @@ if(         isset($_POST['submit'])                 )
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.container2 {background-color:RED; width:100%; height:auto; }
+   .container2 .row1{background-color:transparent;   padding:2%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
+         
+		 .container2 .row1 .col1{background-color:transparent;  width:33.33333333333333%; }      
+		 .container2 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 2%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
+			
+				   .container2 .row1 .col1 .content1 .text1{color:#2effe2; font:800 30px 'Cairo';}
+
+
+					.carousel1{background-color:transparent;  width:100%;  height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
+					.carousel2{background-color:transparent;  width:500px; height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
+					   .item {background-color:transparent; width:500px; height:auto; padding:0%;  margin:0%; cursor:pointer; display:grid; align-items:center; justify-content:center; text-align:center; }      .item:hover{ background-color:blue; }   
+						 .item .posimg1{display:flex; align-items:center; justify-content:center; text-align:center;  overflow: hidden; }                .item .posimg1 .img1{max-width:100%;  width:500px; height:auto; cursor:pointer;   }        .item .posimg1 .img1:hover{transform:scale(1.1); transition:all ease-in-out .5s;}       
+					.owl-carousel .owl-nav.disabled {display: block;}                                                
+					.owl-carousel .owl-prev {position:absolute; top:45%;  left:0%;}      .owl-carousel .owl-nav  button.owl-prev  {background-color:#f7f9f8;  color:#3799c1;}       .owl-carousel .owl-nav  button.owl-prev:hover {background-color:#3799c1;  color:white;}      .owl-carousel .owl-nav  button.owl-prev:focus {outline: none;}                                                   
+					.owl-carousel .owl-next {position:absolute; top:45%;  right:0%;}     .owl-carousel .owl-nav  button.owl-next  {background-color:#f7f9f8;  color:#3799c1;}       .owl-carousel .owl-nav  button.owl-next:hover {background-color:#3799c1;  color:white;}      .owl-carousel .owl-nav  button.owl-next:focus {outline: none;}  
+					.owl-dots {display:block;  margin:2% 0%;  }    .owl-dots .owl-dot{  background-color:transparent;  }      	.owl-dots .owl-dot span {  background-color:#ccc;  width:9px; height:9px;  border-radius:30px;    transition:all ease-in-out .2s;}         .owl-dots .owl-dot:hover span  { background-color:black;}        .owl-dots .owl-dot.active span { background-color:black;  }   
+
+
+
+@media only screen and (max-width:360px)  
+{
+	
+	 .container2 .row1 .col1 .content1 .text1{color:#2effe2; font:800 25px 'Cairo';}
+
+	 .carousel1{background-color:transparent;  width:100%;  height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
+		.carousel2{background-color:transparent;  width:330px; height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
+			.item {background-color:transparent; width:330px; height:auto; padding:0%;  margin:0%; cursor:pointer; display:grid; align-items:center; justify-content:center; text-align:center; }      .item:hover{ background-color:blue; }   
+				 .item .posimg1{display:flex; align-items:center; justify-content:center; text-align:center;  overflow: hidden; }                .item .posimg1 .img1{max-width:100%;  width:330px; height:auto; cursor:pointer;   }        .item .posimg1 .img1:hover{transform:scale(1.1); transition:all ease-in-out .5s;}       
+	
+	
+}
+</style>
+
+
+<div class="container2">
+  <div class="row1">
+		
+	<div class="col1"> 
+	<div class="content1">
+			
+                <div class="text1"> معلومات اضافية عن المنتوج </div>  <br/>      
+							
+				<div class="carousel1">
+				<div class="carousel2">
+				<div class="carousel3 owl-carousel  owl-theme"> 
+					<div class="item" >	
+						<div class="posimg1"><img class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/accesoira1.jpg"/></div>  						
+					</div>	
+					<div class="item" >	
+						<div class="posimg1"><img class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/accesoira2.jpg"/></div>  						
+					</div>
+					<div class="item" >	
+						<div class="posimg1"><img class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/accesoira3.jpg"/></div>  						
+					</div>						
+				</div>
+				</div>
+				</div>
+										
+	 </div> 
+	</div>
+			
+		
+   </div>		
+</div>
+
+
+
+
+<script>
+$(document).ready(function() {
+var heroSlider=$('.carousel3');
+
+heroSlider.owlCarousel({
+    items:1,    
+	nav: true,     navText: ['<i class="fas fa-angle-left fa-2x fa-fw" aria-hidden="true"></i>','<i class="fas fa-angle-right fa-2x fa-fw" aria-hidden="true" ></i>'],
+	dots: true,
+    loop:true, 	
+	autoplay: true, 
+	autoplayHoverPause:false,
+	autoplayTimeout: 1000,
+    responsive:{  0:{items:1, },  360:{items:1, },  600:{items:1}, 1000:{ items:1}, 1200:{items:1}, },			
+});
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.container4 {background-color:black; width:100%; height:auto; }
+   .container4 .row1{background-color:transparent;   padding:1%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
+         
+		 .container4 .row1 .col1{background-color:transparent;  width:100%; }      
+		 .container4 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 0%;         display:flex; align-items:center; justify-content:center; text-align:center;        }  
+             .container4 .row1 .col1 .content1 .postext1{ display:flex; align-items:center; justify-content:center; text-align:center;   }      .container4 .row1 .col1 .content1   .postext1 .text1{color:white; font:800 30px "cairo";}
+
+@media only screen and (max-width:360px)  
+{
+	.container4 .row1 .col1 .content1 .postext1 .text1{font:800 15px "cairo",sans-serif;}
+}
+</style>
+
+
+<div class="container4">
+  <div class="row1">	
+			<div class="col1"> 
+		    <div class="content1">
+                <div class="postext1"><div class="text1">  HmizatShop © 2021 -   كل الحقوق محفوظة لموقع </div></div>  
+		    </div> 
+			</div>	
+   </div>		
+</div>
+
+
 
 
