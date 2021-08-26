@@ -55,7 +55,7 @@
 		 .container1 .row1 .col1{background-color:transparent;  width:100%; }      
 		 .container1 .row1 .col1 .content1  {background-color:green; padding:0%; margin:0% 2%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
 
-				.text1{color:white; font:800 27px 'Cairo', sans-serif;}
+				.text1{color:#2effe2; font:800 30px 'Cairo', sans-serif;}
 				
 				.text2{color:yellow; font:800 40px 'Cairo', sans-serif; margin:0 1%; }          
 				
@@ -86,7 +86,7 @@
  
 @media only screen and (max-width:360px)  
 {
-	.text1{color:white; font:800 15px 'Cairo', sans-serif;}
+	.text1{color:#2effe2; font:800 30px 'Cairo', sans-serif;}
 			
 	.posimg1{background-color:transparent; width:auto; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }        .posimg1 .img1{max-width:100%; height:80px;} 
 		
@@ -109,7 +109,7 @@
 		
 			<div class="col1"> 
 		    <div class="content1">
-                     <div class="text1">حصريا اخر صيحات موضة الاكسيسوارات لسنة 2021</div> 
+                     <div class="text1">جهاز لغسل الأواني</div> 
 		             <div class="text2"> 250 درهم فقط</div>  
 		             <div class="posimg1">  <img  class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/tawsilmajani2.png" /> </div> 
 		             <div class="text3 animatcolor">العرض محدوود</div> 
