@@ -71,7 +71,7 @@
 				.poscountdown ul li .span2 {padding: 0em 0.4em 0em 0.4em;  color:white;   font:800 25px sans-serif;    display:block;  }  
 				 
 	 
-				.posform1{background-color:#0ba5ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
+				.posform1{background-color:#fbff0b; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
 				.posform1 form{ width:420px;}             
 					.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            
 					   .posinput1 .text1{color:red; font:800 20px 'Cairo';}
@@ -90,7 +90,7 @@
 			
 	.posimg1{background-color:transparent; width:auto; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }        .posimg1 .img1{max-width:100%; height:80px;} 
 		
-	.posform1{background-color:#0ba5ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
+	.posform1{background-color:#fbff0b; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
     .posform1 form{ width:320px;} 
 		.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            			
 			.posinput1 .inputtext{background-color:white;  width:300px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#cdcdcdc9; font:200 15px sans-serif;} 							
