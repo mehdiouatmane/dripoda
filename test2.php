@@ -216,7 +216,7 @@
 		
    </div>		
 </div>
-
+<br/><br/>
 
 
 
@@ -396,7 +396,7 @@ if(         isset($_POST['submit'])                 )
 		
    </div>		
 </div>
-
+<br/><br/>
 
 
 
@@ -479,7 +479,8 @@ $(document).ready(function() {
 			
 				   .container3 .row1 .col1 .content1 .text1{color:#0316f7; font:800 30px 'Cairo';}
 
-
+                   .container3 .row1 .col1 .content1 .posimg1{display:grid; align-items:center; align-content:center; justify-items:center; justify-content:center; text-align:center;}
+                   .container3 .row1 .col1 .content1 .posimg1 .img1{max-width:100%; width:400px; height:auto; }
 
 
 @media only screen and (max-width:360px)  
@@ -500,14 +501,14 @@ $(document).ready(function() {
 	<div class="col1"> 
 	<div class="content1">
 			
-                <div class="text1"> اراء الزبناء حول المنتوج </div>  <br/>      
-										
+                <div class="text1"> اراء بعض الزبناء حول المنتوج </div>  <br/>      
+				<div class="posimg1">	<img class="img1" src="img/hmizatshop/message1.png" />	 <br/>  <img class="img1" src="img/hmizatshop/message2.png" /> <br/>  <img class="img1" src="img/hmizatshop/message3.png" />   </div> 
 	 </div> 
 	</div>
 	
    </div>		
 </div>
-
+<br/><br/>
 
 
 
