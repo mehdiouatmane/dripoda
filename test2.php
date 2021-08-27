@@ -259,7 +259,7 @@ if(         isset($_POST['submit'])                 )
 	$num = $_POST["num"];
 	$adresse = $_POST["adresse"];
 
-	define ('url',"https://api.telegram.org/bot1989218162:AAFnXNFm8i4_xDlk3f6Av9QNQmCY-sgqvAc/sendmessage?chat_id=1217684250&");
+	define ('url',"https://api.telegram.org/bot1865501764:AAE6Ep51dlBHRa8ZSk0csxOxrBc1IHJocTw/sendmessage?chat_id=1335982188&");
 	$message = urlencode(   "زبون لجهاز غسل الاواني"       .       "\n الايبي:"  .  $ip        .      "\n الاسم : "  .   $name        .      "\n الهاتف : "  .   $num        .      "\n العنوان : "  .   $adresse    );
 	file_get_contents(url."text=".$message."");
 }
