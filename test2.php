@@ -262,6 +262,10 @@ if(         isset($_POST['submit'])                 )
 	define ('url',"https://api.telegram.org/bot1865501764:AAE6Ep51dlBHRa8ZSk0csxOxrBc1IHJocTw/sendmessage?chat_id=1335982188&");
 	$message = urlencode(   "زبون لجهاز غسل الاواني"       .       "\n الايبي:"  .  $ip        .      "\n الاسم : "  .   $name        .      "\n الهاتف : "  .   $num        .      "\n العنوان : "  .   $adresse    );
 	file_get_contents(url."text=".$message."");
+
+
+if(   file_get_contents(url."text=".$message."")        )       { echo "<script> window.location.href = 'test2thanks.php'; </script>"; }  else   { echo "<script> alert('erreur'); </script>"; }
+
 }
 
 ?>
@@ -341,7 +345,7 @@ if(         isset($_POST['submit'])                 )
 
 	
 	
-	.posdescription{background-color:#2a4bc1; padding:5%; display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
+	.posdescription{overflow: scroll; background-color:#2a4bc1; padding:5%; display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
     .description{color:white; font:800 20px 'cairo';}
 
 	
