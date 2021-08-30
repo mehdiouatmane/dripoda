@@ -201,13 +201,13 @@
 		             <div class="poscountdown" id="countdown"> <ul>       <li><span class="span1" id="days" ></span> <span class="span2" >يوم</span></li>        <li><span class="span1" id="hours" ></span> <span class="span2" >ساعة</span></li>      <li><span class="span1" id="minutes" ></span> <span class="span2" >دقيقة</span></li>       <li><span class="span1" id="seconds" ></span> <span class="span2" >تانية</span></li>      </ul>      </div> 
 					 
 					 <div class="posform1">
-					   <form  method="post">       
+					   <form  method="post"  id="sendinfo"  action="test2thanks.php">       
 						   <div class="posinput1"> <div class="text1">إملئ الإستمارة لتأكيد الطلب </div> </div>
 						   <div class="posinput1"> <input    type="text"        placeholder=""                          value="<?php echo $row["ip"]; ?>"      name=""                style="display:none;"                       />    </div>  
 						   <div class="posinput1"> <input    type="text"        placeholder="أدخل الإسم الكامل"          value=""                               name="name"            class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل الإسم الكامل ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
 						   <div class="posinput1"> <input    type="text"        placeholder="أدخل رقم هاتفك"            value=""                               name="num"             class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل رقم هاتفك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
 						   <div class="posinput1"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"         class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-						   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا لتأكيد طلبك  "        name="submit"          class="inputbtn animatscale"                   required="required"     onClick="fbq( 'track', 'Purchase' );"   /> </div>
+						   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا لتأكيد طلبك  "        name="submit"          class="inputbtn animatscale"                 required="required"     onClick="fbq( 'track', 'Purchase' );"   /> </div>
 					   </form> 
 					 </div>
 		 
@@ -217,7 +217,6 @@
    </div>		
 </div>
 <br/><br/>
-
 
 
 
@@ -241,15 +240,6 @@ function minus(){  if (count > 1) {      count--;  document.getElementById("coun
 
 
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-require 'autre/phpmailer/exception.php';
-require 'autre/phpmailer/phpmailer.php';
-require 'autre/phpmailer/smtp.php';
-
-
-
 if(         isset($_POST['submit'])                 )
 {		
 
@@ -264,17 +254,22 @@ if(         isset($_POST['submit'])                 )
 	file_get_contents(url."text=".$message."");
 
 
-if(   file_get_contents(url."text=".$message."")        )       { echo "<script> window.location.href = 'test2thanks.php'; </script>"; }  else   { echo "<script> alert('erreur'); </script>"; }
-
 }
 
 ?>
 
 
 
+<div style="background-color:black; width:100%; height:100%; z-index: 5000;      display:none; align-items:center; justify-content:center;      position:fixed;  top:0;    " id="loadingDiv">
+	<img style="max-width:100%; width:300px;" src="https://www.punjabidharti.com/wp-content/plugins/wp-email/images/loading.gif" alt="loading image"/>
+ </div>
 
-
-
+<script>
+$('#sendinfo').submit(function() {
+    document.getElementById("loadingDiv").style.display = 'flex';
+    $('#loadingDiv').show();  
+});
+</script>
 
 
 
@@ -322,10 +317,11 @@ if(   file_get_contents(url."text=".$message."")        )       { echo "<script>
 						.owl-dots {display:none;  margin:2% 0%;  }    .owl-dots .owl-dot{  background-color:transparent;  }      	.owl-dots .owl-dot span {  background-color:#ccc;  width:9px; height:9px;  border-radius:30px;    transition:all ease-in-out .2s;}         .owl-dots .owl-dot:hover span  { background-color:black;}        .owl-dots .owl-dot.active span { background-color:black;  }   
 
 
-					.posdescription{background-color:#2a4bc1; padding:5%; display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
+					.posdescription{background-color:#2a4bc1; padding:5%;    overflow: hidden;     display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
 					.description{color:white; font:800 30px 'cairo';}
 
-@media only screen and (max-width:360px)  
+
+@media only screen and (max-width:530px)  
 {
 	
 	.container2 .row1 .col1 .content1 .text1{color:#0316f7; font:800 25px 'Cairo';}
@@ -339,13 +335,13 @@ if(   file_get_contents(url."text=".$message."")        )       { echo "<script>
 		.carouselB1{  background-color:transparent; width:100%;  height:auto;  display:flex; align-items:center;  justify-content:center; justify-items: center;   text-align:center;   }    
 		.carouselB1 .carouselB2{ background-color:white; width:330px; height:auto;  display:flex; align-items:center;  justify-content:center; justify-items: center;   text-align:center;   }	
         .carouselB1 .carouselB2 .owl-carousel.owl-loaded .owl-item  .owl-carousel.owl-loaded .owl-item{    width: 330px;	display: flex;  align-items: center;   align-content: center;    justify-items:center;  justify-content: center;   text-align:center;     flex-wrap: nowrap;    flex-direction: row;   }
-				.carouselB1 .carouselB2 .item {background-color:red; width:60px; height:auto;   padding: 0px 0px;  margin:0px;    border-radius:3px;  cursor:pointer;   display:flex; align-items:center; justify-content:center;  text-align:center; }          .carouselB1 .carouselB2 .current .item {  background-color: black;}
+				.carouselB1 .carouselB2 .item {background-color:red; width:60px; height:auto;   padding: 10px 0px;  margin:0px;    border-radius:3px;  cursor:pointer;   display:flex; align-items:center; justify-content:center;  text-align:center; }          .carouselB1 .carouselB2 .current .item {  background-color: black;}
 						.carouselB1 .carouselB2 .item .posimg1{display:flex; align-items:center; justify-content:center; text-align:center;  overflow: hidden; }          .carouselB1 .carouselB2 .item .posimg1 .img1{max-width:100%;  width:60px; height:auto; cursor:pointer;   }         .carouselB1 .carouselB2 .item .posimg1 .img1:hover{transform:scale(1.1); transition:all ease-in-out .5s;}       
 
 
 	
 	
-	.posdescription{overflow: scroll; background-color:#2a4bc1; padding:5%; display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
+	.posdescription{background-color:#2a4bc1; padding:5%;   overflow: hidden;     display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
     .description{color:white; font:800 20px 'cairo';}
 
 	
