@@ -160,10 +160,17 @@
 					   .posinput1 .text1{color:white; font:800 20px 'cairo'; }
 					   .posinput1 .inputtext{background-color:white;  width:400px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
 					   .posinput1 .inputbtn {background-color:#ff0000;  width:350px; height:45px; margin:4% 0%;  border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer; display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
-					   
+			
+
+.inputhovererror{  background-color:#F8F8F9;   border-color:#dc3545; }
+.inputhovererror::placeholder{color:#dc3545;  }		       
+.txt_error{color:#dc3545; font:200 11px sans-serif;  }
+
 					
 			  .animatscale{animation: animatscale  0.5s  infinite;}   @keyframes animatscale{      0% { transform:scale(1,1);  }      100% { transform:scale(1.1,1.1) }      }            
 			  .animatcolor{ animation-name: animatcolor;     animation-duration: 0.5s;         animation-direction: alternate;      animation-iteration-count: infinite;        }       @keyframes animatcolor {         from{color:yellow; }  to{color:red;   }   }  
+			  
+			  
 			  
 
  
@@ -179,10 +186,13 @@
             .posinput1 .text1{color:white; font:800 20px 'cairo'; }
 			.posinput1 .inputtext{background-color:white;  width:300px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
 			.posinput1 .inputbtn {background-color:#ff0000;  width:250px; height:45px; margin:4% 0%;   border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer;  display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
-						   
+	
+
 }
    
 </style>
+
+
 
 
 
@@ -201,22 +211,34 @@
 		             <div class="poscountdown" id="countdown"> <ul>       <li><span class="span1" id="days" ></span> <span class="span2" >يوم</span></li>        <li><span class="span1" id="hours" ></span> <span class="span2" >ساعة</span></li>      <li><span class="span1" id="minutes" ></span> <span class="span2" >دقيقة</span></li>       <li><span class="span1" id="seconds" ></span> <span class="span2" >تانية</span></li>      </ul>      </div> 
 					 
 					 <div class="posform1">
-					   <form  method="post"  id="sendinfo"  action="test2thanks.php">       
+					   <form  method="post"  id="register_form"  >       
 						   <div class="posinput1"> <div class="text1">إملئ الإستمارة لتأكيد الطلب </div> </div>
 						   <div class="posinput1"> <input    type="text"        placeholder=""                          value="<?php echo $row["ip"]; ?>"      name=""                style="display:none;"                       />    </div>  
-						   <div class="posinput1"> <input    type="text"        placeholder="أدخل الإسم الكامل"          value=""                               name="name"            class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل الإسم الكامل ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-						   <div class="posinput1"> <input    type="text"        placeholder="أدخل رقم هاتفك"            value=""                               name="num"             class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل رقم هاتفك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-						   <div class="posinput1"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"         class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-						   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا لتأكيد طلبك  "        name="submit"          class="inputbtn animatscale"                 required="required"     onClick="fbq( 'track', 'Purchase' );"   /> </div>
+						   <div class="posinput1"> <input    type="text"        placeholder="أدخل الإسم الكامل"          value=""                               name="name"      id="name"            class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل الإسم الكامل ')"  oninput="setCustomValidity('')" dir="rtl"/></div>
+                               <div class="txt_error" id="txt_error_name" ></div>
+						   <div class="posinput1"> <input    type="text"        placeholder="أدخل رقم هاتفك"            value=""                               name="num"       id="num"              class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل رقم هاتفك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>  	  
+					           <div class="txt_error" id="txt_error_num" ></div>          					   
+						   <div class="posinput1"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"   id="address"          class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
+						       <div class="txt_error" id="txt_error_address" ></div>
+						   <div class="posinput1"> <input    type="button"      placeholder=""                          value=" إضغط هنا لتأكيد طلبك  "        name=""           id="btnpage2"         class="inputbtn animatscale"                     onClick="fbq( 'track', 'Purchase' );"   /> </div>
 					   </form> 
 					 </div>
-		 
+	
+ 
+  
+  
+  
 		    </div> 
 			</div>
 		
    </div>		
 </div>
 <br/><br/>
+
+
+<div style="background-color:black; width:100%; height:100%; z-index: 5000;      display:none; align-items:center; justify-content:center;      position:fixed;  top:0;    " id="loadingDiv">
+	<img style="max-width:100%; width:300px;" src="https://www.punjabidharti.com/wp-content/plugins/wp-email/images/loading.gif" alt="loading image"/>
+ </div>
 
 
 
@@ -234,13 +256,36 @@ var x = setInterval(function() {
 var count = 1;
 function plus(){        count++;  document.getElementById("count").value = count;    };
 function minus(){  if (count > 1) {      count--;  document.getElementById("count").value = count;}   };
+
+
+
+$('#btnpage2').click(function(){
+	 
+  var txt_error_name = '';
+  var txt_error_num = '';  var filterphone = /^\d{10}$/;
+  var txt_error_address = '';
+  
+  if(    $.trim($('#name').val()).length == 0         )           {    txt_error_name = 'name is required';   $('#txt_error_name').text(txt_error_name);                           $('#name').addClass('inputhovererror');         }               else               {    txt_error_name = '';  $('#txt_error_name').text(txt_error_name);                          $('#name').removeClass('inputhovererror');         }
+  if(    $.trim($('#num').val()).length == 0        )           {    txt_error_num = 'phone is required';   $('#txt_error_num').text(txt_error_num);                       $('#num').addClass('inputhovererror');        }               else               {    if (       !filterphone.test($('#num').val())   )              {  txt_error_num = 'Invalid phone';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');  }               else              {  txt_error_num = '';  $('#txt_error_num').text(txt_error_num);             $('#num').removeClass('inputhovererror');   }              }
+  if(    $.trim($('#address').val()).length == 0      )           {    txt_error_address = 'address is required'; $('#txt_error_address').text(txt_error_address);                 $('#address').addClass('inputhovererror');      }               else               {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
+
+ if(  txt_error_name != ''  || txt_error_num != ''  ||  txt_error_address != ''  )  {   return false;  }  
+ else  
+ {  $("#register_form").submit();    document.getElementById("loadingDiv").style.display = 'flex';     $('#loadingDiv').show();       }  
+
+
+ 
+});
+ 
+ 
 </script>
 
 
 
 
+
 <?php
-if(         isset($_POST['submit'])                 )
+if(        isset($_POST["name"])              )
 {		
 
 	function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
@@ -253,28 +298,11 @@ if(         isset($_POST['submit'])                 )
 	$message = urlencode(   "زبون لجهاز غسل الاواني"       .       "\n الايبي:"  .  $ip        .      "\n الاسم : "  .   $name        .      "\n الهاتف : "  .   $num        .      "\n العنوان : "  .   $adresse    );
 	file_get_contents(url."text=".$message."");
 
+      echo "<script> window.location.href = 'test2thanks.php'; </script>"; 
 
 }
 
 ?>
-
-
-
-<div style="background-color:black; width:100%; height:100%; z-index: 5000;      display:none; align-items:center; justify-content:center;      position:fixed;  top:0;    " id="loadingDiv">
-	<img style="max-width:100%; width:300px;" src="https://www.punjabidharti.com/wp-content/plugins/wp-email/images/loading.gif" alt="loading image"/>
- </div>
-
-<script>
-$('#sendinfo').submit(function() {
-    document.getElementById("loadingDiv").style.display = 'flex';
-    $('#loadingDiv').show();  
-});
-</script>
-
-
-
-
-
 
 
 
