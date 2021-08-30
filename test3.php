@@ -83,13 +83,17 @@
          
 		 .container1 .row1 .col1{background-color:transparent;  width:50%; }      
 		 .container1 .row1 .col1 .content1  {background:linear-gradient(40deg ,#ffd86f,#fc6262);   padding:3%;  margin:0% 2%;  border-radius: 15px;       display:grid; align-items:center; justify-content:center; text-align:center;        }  
-                .container1 .row1 .col1 .content1 .prix{color:white; font:800 20px 'cairo';}
+                .container1 .row1 .col1 .content1 .solde { color: rgba(0,0,0,.5); font:600 15px 'cairo';}
+				.container1 .row1 .col1 .content1 .prix{color:white; font:800 20px 'cairo';}
 		 .container1 .row1 .col2{background-color:transparent;  width:50%; }      
 		 .container1 .row1 .col2 .content1   {background: linear-gradient(40deg,#ff6ec4,#7873f5);  padding:3%;  margin:0% 2%;  border-radius: 15px;       display:grid; align-items:center; justify-content:center; text-align:center;      }  
-            .container1 .row1 .col2 .content1 .Validé{color:white; font:800 20px 'cairo';}
+            .container1 .row1 .col2 .content1 .dernierpaiement{color: rgba(0,0,0,.5); font:800 15px 'cairo';}
+			.container1 .row1 .col2 .content1 .Validé{color:white; font:800 20px 'cairo';}
  
 @media only screen and (max-width:360px)  
 {
+  .container1 .row1 .col1 .content1 .solde { color: rgba(0,0,0,.5); font:600 13px 'cairo';} 
+  .container1 .row1 .col2 .content1 .dernierpaiement{color: rgba(0,0,0,.5); font:800 13px 'cairo';}
 }
 </style>
 
