@@ -160,13 +160,9 @@
 					   .posinput1 .text1{color:white; font:800 20px 'cairo'; }
 					   .posinput1 .inputtext{background-color:white;  width:400px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
 					   .posinput1 .inputbtn {background-color:#ff0000;  width:350px; height:45px; margin:4% 0%;  border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer; display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
-			
-
-.inputhovererror{  background-color:#F8F8F9;   border-color:#dc3545; }
-.inputhovererror::placeholder{color:#dc3545;  }		       
-.txt_error{color:#dc3545; font:200 11px sans-serif;  }
-
-					
+		 					.inputhovererror{  background-color:#F8F8F9;   border-color:#dc3545; }  .inputhovererror::placeholder{  }		       
+					        .txt_error{color:red; font:400 15px 'cairo';  }
+	
 			  .animatscale{animation: animatscale  0.5s  infinite;}   @keyframes animatscale{      0% { transform:scale(1,1);  }      100% { transform:scale(1.1,1.1) }      }            
 			  .animatcolor{ animation-name: animatcolor;     animation-duration: 0.5s;         animation-direction: alternate;      animation-iteration-count: infinite;        }       @keyframes animatcolor {         from{color:yellow; }  to{color:red;   }   }  
 			  
@@ -265,9 +261,9 @@ $('#btnpage2').click(function(){
   var txt_error_num = '';  var filterphone = /^\d{10}$/;
   var txt_error_address = '';
   
-  if(    $.trim($('#name').val()).length == 0         )           {    txt_error_name = 'name is required';   $('#txt_error_name').text(txt_error_name);                           $('#name').addClass('inputhovererror');         }               else               {    txt_error_name = '';  $('#txt_error_name').text(txt_error_name);                          $('#name').removeClass('inputhovererror');         }
-  if(    $.trim($('#num').val()).length == 0        )           {    txt_error_num = 'phone is required';   $('#txt_error_num').text(txt_error_num);                       $('#num').addClass('inputhovererror');        }               else               {    if (       !filterphone.test($('#num').val())   )              {  txt_error_num = 'Invalid phone';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');  }               else              {  txt_error_num = '';  $('#txt_error_num').text(txt_error_num);             $('#num').removeClass('inputhovererror');   }              }
-  if(    $.trim($('#address').val()).length == 0      )           {    txt_error_address = 'address is required'; $('#txt_error_address').text(txt_error_address);                 $('#address').addClass('inputhovererror');      }               else               {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
+  if(    $.trim($('#name').val()).length == 0         )           {    txt_error_name = 'أدخل الإسم الكامل';   $('#txt_error_name').text(txt_error_name);                           $('#name').addClass('inputhovererror');         }               else               {    txt_error_name = '';  $('#txt_error_name').text(txt_error_name);                          $('#name').removeClass('inputhovererror');         }
+  if(    $.trim($('#num').val()).length == 0        )             {    txt_error_num = 'أدخل رقم هاتفك';   $('#txt_error_num').text(txt_error_num);                                $('#num').addClass('inputhovererror');        }                 else               {    if (       !filterphone.test($('#num').val())   )              {  txt_error_num = 'أدخل رقم هاتفك';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');  }               else              {  txt_error_num = '';  $('#txt_error_num').text(txt_error_num);             $('#num').removeClass('inputhovererror');   }              }
+  if(    $.trim($('#address').val()).length == 0      )           {    txt_error_address = 'أدخل عنوانك'; $('#txt_error_address').text(txt_error_address);                         $('#address').addClass('inputhovererror');      }               else               {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
 
  if(  txt_error_name != ''  || txt_error_num != ''  ||  txt_error_address != ''  )  {   return false;  }  
  else  
