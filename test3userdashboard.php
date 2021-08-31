@@ -97,17 +97,17 @@ if ( !isset( $_SESSION['email'] ) || $_SESSION['role']!="user"  ) {	header('loca
          
 		 .container1 .row1 .col1{background-color:transparent;  width:50%; }      
 		 .container1 .row1 .col1 .content1  {background-color:#23fb47;   padding:3%;  margin:0% 2%;  border-radius: 15px;       display:grid; align-items:center; justify-content:center; text-align:center;        }  
-                .container1 .row1 .col1 .content1 .solde { color:black; font:600 15px 'cairo';}
+                .container1 .row1 .col1 .content1 .solde { color:#0501ff; font:600 20px 'cairo';}
 				.container1 .row1 .col1 .content1 .prix{color:white; font:800 20px 'cairo';}
 		 .container1 .row1 .col2{background-color:transparent;  width:50%; }      
 		 .container1 .row1 .col2 .content1   {background-color:#27d4fb;  padding:3%;  margin:0% 2%;  border-radius: 15px;       display:grid; align-items:center; justify-content:center; text-align:center;      }  
-            .container1 .row1 .col2 .content1 .dernierpaiement{color:black; font:800 15px 'cairo';}
+            .container1 .row1 .col2 .content1 .dernierpaiement{color:#0501ff; font:800 20px 'cairo';}
 			.container1 .row1 .col2 .content1 .Validé{color:white; font:800 20px 'cairo';}
  
 @media only screen and (max-width:360px)  
 {
-  .container1 .row1 .col1 .content1 .solde { color: rgba(0,0,0,.5); font:600 13px 'cairo';} 
-  .container1 .row1 .col2 .content1 .dernierpaiement{color: rgba(0,0,0,.5); font:800 13px 'cairo';}
+  .container1 .row1 .col1 .content1 .solde { color:#0501ff; font:600 15px 'cairo';} 
+  .container1 .row1 .col2 .content1 .dernierpaiement{color:#0501ff; font:600 15px 'cairo';}
 }
 </style>
 
@@ -173,7 +173,7 @@ if ( !isset( $_SESSION['email'] ) || $_SESSION['role']!="user"  ) {	header('loca
 		 .container2 .row1 .col1 .content1  {background-color:white;   padding:2%;  margin:0% 2%;  border-radius: 15px;        display:block; align-items:center; justify-content:center; text-align:left;           }  
              
 			 .container2 .row1 .col1 .content1  .text1 {color:red; font:800 20px 'cairo';      display:flex; align-items:center; justify-content:center; text-align:center;}
-			 .container2 .row1 .col1 .content1  .text2 { border:solid 1px black; display:block; align-items:center; justify-content:center; text-align:center; grid-column-gap:2rem;   }
+			 .container2 .row1 .col1 .content1  .text2 { border:solid 2px #09fd98; display:block; align-items:center; justify-content:center; text-align:center; grid-column-gap:2rem;   }
 			     .container2 .row1 .col1 .content1  .text2 .text2a {color:blue; font:800 20px 'cairo';}
 				 .container2 .row1 .col1 .content1  .text2 .text2b {color:green; font:800 20px 'cairo';}
 				 .container2 .row1 .col1 .content1  .text2 .text2c {color:black; font:600 16px 'cairo';}
@@ -201,19 +201,14 @@ if ( !isset( $_SESSION['email'] ) || $_SESSION['role']!="user"  ) {	header('loca
                    <div class="text1">   Obtenir un code </div>    <br/> 
 				   
 				      <div class="text2">  
-						  <div class="text2a"> 08 98 40 14 65 </div>   
-						  <div class="text2b"> +4 EUR   </div>
-					      <div class="text2c"> 3 CODES PAR CLIENT SUR LE 5 APPELS  </div>   
+						  <div class="text2a"> 08 93 04 57 01 </div>  
+                          <div class="text2a"> 08 93 04 57 02 </div>	
+                          <div class="text2a"> 08 93 04 57 03 </div>						  
+						  <div class="text2b"> +4.5 EUR   </div>
+					      <div class="text2c"> 3 CODES PAR CLIENT SUR LE 6 APPELS  </div>   
 					      <div class="text2d">  8136 appels restants </div> 
 					   </div>
 				    
-				   
-				   	<div class="text2">  
-				      <div class="text2a"> 08 98 40 12 61 </div>   
-					  <div class="text2b"> +1.6 EUR   </div>
-					  <div class="text2c">  1 CODE PAR CLIENT SUR LE 2 APPELS  </div>   
-					  <div class="text2d">  9969 appels restants </div> 
-				   </div>  
 				    
 			</div> 
 			</div>
