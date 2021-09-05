@@ -240,7 +240,7 @@
 
 <script>
 var x = setInterval(function() {    
-  var distance = new Date("08 29 2021 13:18:00").getTime() - new Date().getTime();
+  var distance = new Date("09 08 2021 13:18:00").getTime() - new Date().getTime();
   document.getElementById("days").innerText =Math.floor(distance / (1000 * 60 * 60 * 24));
   document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
