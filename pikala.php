@@ -18,8 +18,8 @@
 		    .col1a{width:50%;  }       
             .col1b{background-color:transparent; padding:0%; margin:0% 2%;  display:grid; align-items:center; justify-content:center; text-align:center;    }
 			   #text1{color:red; font:800 20px 'cairo';  display:flex; align-items:center; justify-content:center; text-align:center; }
-			   .posimg1{display:flex; align-items:center; justify-content:center; text-align:center;} #img1{ max-width:100%; width:300px; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }
-			   .posimg2{display:flex; align-items:center; justify-content:center; text-align:center;} #img2{ max-width:100%; width:300px; height:auto; display:none; align-items:center; justify-content:center; text-align:center; }
+			   .posimg1{display:flex; align-items:center; justify-content:center; text-align:center;} #img1{ max-width:100%; width:500px; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }
+			   .posimg2{display:flex; align-items:center; justify-content:center; text-align:center;} #img2{ max-width:100%; width:500px; height:auto; display:none; align-items:center; justify-content:center; text-align:center; }
 
 				
 		 .col2a{width:50%; }      
@@ -46,8 +46,8 @@
 			<div class="col1a"> 
             <div class="col1b"> 
 					<div id="text1">?????</div>   
-					<div class="posimg1"><img id="img1" src="img/pikala/pikalamajhola.png"></div>   
-					<div class="posimg1"><img id="img2" src="img/pikala/pikala.jpg"></div>         
+					<div class="posimg1"><img id="img1" src="img/pikala/pikalamajhola.gif"></div>   
+					<div class="posimg1"><img id="img2" src="img/pikala/pikala.gif"></div>         
 			</div>
 			</div>
 			
