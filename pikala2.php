@@ -35,14 +35,14 @@ if(        isset($_POST["sendinfo"])              )
 <script type="text/javascript"  src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css"/> 
 
-<style>html, body{  background:transparent;  padding:0; border:0; margin:0;  touch-action: manipulation; }   ul li {list-style-type:none;}     </style>       
+<style>html, body{  background: url(https://casino5.netlify.app/background.jpg);  background-position: cover;   background-size:cover;   background-repeat: no-repeat;   padding:0; border:0; margin:0;  touch-action: manipulation; }   ul li {list-style-type:none;}     </style>       
 
 
 
 
 
 <style>
-#container3 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:100vh;   display:block;   }
+#container3 {background-color:transparent;  width:100%; height:auto;  display:block;   }
 #container3 .row{background-color:transparent;   padding:0%; margin:0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center; flex-wrap:wrap; flex-direction: row; }       
 
 		    #container3 .col1a{width:100%;  }       
