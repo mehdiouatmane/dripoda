@@ -34,7 +34,7 @@ if(        isset($_POST["sendinfo"])              )
 
 
 <style>
-#container1 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:100vh; display:block; }
+#container1 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:auto; display:block; }
 .row{background-color:transparent;   padding:0%; margin:0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center; flex-wrap:wrap; flex-direction: row; }       
 
 	 .col1a{width:100%; }      
