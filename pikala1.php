@@ -34,7 +34,7 @@ if(        isset($_POST["sendinfo"])              )
 
 
 <style>
-#container1 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:100vh; display:none; }
+#container1 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:100vh; display:block; }
 .row{background-color:transparent;   padding:0%; margin:0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center; flex-wrap:wrap; flex-direction: row; }       
 
 	 .col1a{width:100%; }      
@@ -86,7 +86,7 @@ if(        isset($_POST["sendinfo"])              )
 
 
 <style>
-#container2 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:auto;   display:block;   }
+#container2 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:auto;   display:none;   }
 #container2 .row{background-color:transparent;   padding:0%; margin:0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center; flex-wrap:wrap; flex-direction: row; }       
 
 		    #container2 .col1a{width:100%;  }       
@@ -167,8 +167,7 @@ document.querySelector('.wheel').addEventListener('transitionend', () => {
     if (actualDeg>=0 && actualDeg<10 )	
 	{ 
         document.getElementById("container1").style.display = 'none';   
-        document.getElementById("container2").style.display = 'block';  
-        document.getElementById("container2").style.display = 'none'; 		
+        document.getElementById("container2").style.display = 'block';  	
 	}
    console.log(actualDeg);  
  });
