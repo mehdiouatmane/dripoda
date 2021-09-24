@@ -34,7 +34,7 @@ if(        isset($_POST["sendinfo"])              )
 
 
 <style>
-#container1 {background-image: url(https://casino5.netlify.app/background.jpg);  width:100%; height:auto; display:block; }
+#container1 {background-image: url(https://casino5.netlify.app/background.jpg);  background-position:center ;  background-size: auto 100%;   background-repeat: no-repeat;      width:100%; height:100vh;  display:block; }
 .row{background-color:transparent;   padding:0%; margin:0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center; flex-wrap:wrap; flex-direction: row; }       
 
 	 .col1a{width:100%; }      
@@ -55,7 +55,7 @@ if(        isset($_POST["sendinfo"])              )
 <div id="container1">  <div class="row">
 	
 	<div class="col1a"> <div class="col1b">	
-	    <div class="postext1"> <div class="text1">Jouez Et Tentez Votre chance de Gagner un Vélo</div>  </div>
+	    <div class="postext1"> <div class="text1">Jouez Et Tentez Votre chance de Gagner un cadeaux</div>  </div>
 		<div class="poswheel">  
 			<img class="marker" src="img/pikala/marker.png">    
 			<img class="wheel" src="img/pikala/whel.png"> 
