@@ -11,14 +11,9 @@ session_start();
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css"/>   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" /> 
 <style>html, body{  background: url(https://casino5.netlify.app/background.jpg);  background-position: cover;   background-size:cover;   background-repeat: no-repeat; height:100%;  padding:0; border:0; margin:0;  touch-action: manipulation; }   ul li {list-style-type:none;}     </style>       
 
+<audio src="https://dripoda.herokuapp.com/img/pikala/wow.mp3" id="my_audio" loop="loop"></audio>
+<script type="text/javascript">   window.onload=function(){     document.getElementById("my_audio").play();    }  </script>
 
-
-  <audio src="img/pikala/wow.mp3" id="my_audio" loop="loop"></audio>
-  <script type="text/javascript">
-    window.onload=function(){
-      document.getElementById("my_audio").play();
-    }
-  </script>
 
 
 <style>
