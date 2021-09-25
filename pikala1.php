@@ -182,9 +182,5 @@ document.querySelector('.wheel').addEventListener('transitionend', () => {
 })
 ();	
 	
-	
-	
-
- 
 </script>
   

@@ -3,7 +3,6 @@ session_start();
 ?>
 
 
-
 <!DOCTYPE html>
 <html>
 <title>pikala</title>
@@ -14,6 +13,12 @@ session_start();
 
 
 
+  <audio src="img/pikala/wow.mp3" id="my_audio" loop="loop"></audio>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById("my_audio").play();
+    }
+  </script>
 
 
 <style>
@@ -22,7 +27,8 @@ session_start();
 
 		    #container3 .col1a{width:100%;  }       
             #container3 .col1b{background-color:transparent; padding:0%; margin:0% 2%;  display:grid; align-items:center; justify-content:center; text-align:center;    }
-               #container3 .postext1{display:flex; align-items:center; justify-content:center; text-align:center;  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);   }  #container3 .text1{color:white; font:800 30px 'cairo'; line-height: 30px; }
+			   #container3 .posimg{margin:4% 0%; display:flex; align-items:center; justify-content:center; text-align:center;     }  #container3 .img1{max-width:100%; width:auto; height:auto; }
+               #container3 .postext1{display:flex; align-items:center; justify-content:center; text-align:center;  }  #container3 .text1{color:white; font:800 30px 'cairo'; line-height: 30px; }
 
    
 @media only screen and (max-width:885px)  
@@ -34,13 +40,8 @@ session_start();
 
 <div id="container3"> <div class="row">			
 	<div class="col1a">  <div class="col1b">
-		<div class="postext1"> 
-		    <div class="text1">
-				Félicitation  <br/><br/>
-				Le délais de livraison est prévu maximum dans 3 jours  <br/><br/>
-				Nous vous envoyons le numéro de suivre de votre cadeau par sms  <br/>
-		    </div>    
-		</div> 
+		    <div class="posimg">	<img class="img1" src="img/pikala/felicitation.gif"> </div>  <br/>
+		    <div class="postext1"> 	    <div class="text1"> 	Le délais de livraison est prévu maximum dans 3 jours  <br/>			Nous vous envoyons le numéro de suivre de votre cadeau par sms  <br/>     </div>     </div> 
 	</div></div>
 </div></div>
 
