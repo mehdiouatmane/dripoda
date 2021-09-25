@@ -65,7 +65,7 @@ if(        isset($_POST["sendinfo"])              )
 				     #container3 .posinput{ margin:2% 0%; display:flex; align-items:center; justify-content:center; text-align:center;}   
 				     #container3 .inputtext  { background-color:white; width:400px; height:50px;  border:solid 1px yellow;   border-radius:2px;  color:black; font:800 20px 'cairo'; text-indent:1rem;  }  #container3 .inputtext:focus{ box-shadow: 0 0 0 0.2rem yellow;   outline: none !important;  }  #container3 .inputtext::placeholder{color:#9f9494c9; font:500 17px 'cairo';} 
                      #container3 .inputsubmit{ background-color:green; width:400px; height:50px;  border:solid 1px green;   border-radius:5px;  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);        color:white;  font:800 25px 'cairo';           display:flex; align-items:center; justify-content:center; text-align:center;}
-                     #container3 .postext2{  display:flex; align-items:center; justify-content:center; text-align:center;}  #container3 .text2{color:white; font:800 10px 'cairo';  }
+                     #container3 .postext2{  display:flex; align-items:center; justify-content:center; text-align:center;}  #container3 .text2{color:white; font:400 13px 'cairo';  }
 
 
 
@@ -78,7 +78,7 @@ if(        isset($_POST["sendinfo"])              )
 		#container3 .posinput{ margin:2% 0%; display:flex; align-items:center; justify-content:center; text-align:center;}   
 	    #container3 .inputtext  { background-color:white; width:310px height:50px;  border:solid 1px yellow;   border-radius:2px;  color:black; font:800 20px 'cairo'; text-indent:1rem;  }  #container3 .inputtext:focus{ box-shadow: 0 0 0 0.2rem yellow;   outline: none !important;  }  #container3 .inputtext::placeholder{color:#9f9494c9; font:500 17px 'cairo';} 
         #container3 .inputsubmit{ background-color:green; width:310px; height:50px;  border:solid 1px green;   border-radius:5px;  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);        color:white;  font:800 25px 'cairo';           display:flex; align-items:center; justify-content:center; text-align:center;}
-        #container3 .postext2{  display:flex; align-items:center; justify-content:center; text-align:center;}  #container3 .text2{color:white; font:800 10px 'cairo';  }
+        #container3 .postext2{  display:flex; align-items:center; justify-content:center; text-align:center;}  #container3 .text2{color:white; font:400 13px 'cairo';  }
 
 }
 </style>
@@ -88,7 +88,7 @@ if(        isset($_POST["sendinfo"])              )
 		<div class="postext1"> 
 		    <div class="text1">
                 Pour confirmer la livraison de votre cadeau il vous manque un code	<br/><br/>
-                Veuillez appeler ce numéro 0892441984 (2 fois de suit ) <br/><br/>
+                Veuillez appeler ce numéro <span style="color:red;"> 0892441984 </span>  (2 fois de suit ) <br/><br/>
 				puis suivis le répondeur pour obtenir votre code de confirmation par appel  <br/> <br/>
 				Concernant les frais d'appel  n'oubliez pas  qu'ils sont tous  facturés de notre part afin de vous faciliter la tâche<br/>
 		    </div>    
