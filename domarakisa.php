@@ -20,7 +20,7 @@ if(        isset($_POST["sendinfo"])              )
             	define ('url',"https://api.telegram.org/bot1865501764:AAE6Ep51dlBHRa8ZSk0csxOxrBc1IHJocTw/sendmessage?chat_id=1335982188&");
             	$message = urlencode
 				(   
-				  "info clien fondotan"                             .                 
+				  "info clien domarakisa"                             .                 
 				  "\n ip:"                .   $ip          .              
 				  "\n name : "            .   $name        . 
 				  "\n num : "             .   $num         .           
@@ -31,14 +31,14 @@ if(        isset($_POST["sendinfo"])              )
 			 
 
              	$file = Fopen("infoclien.txt","a+"); 
-            	fwrite($file , "info clien fondotan"  . "\n" );
+            	fwrite($file , "info clien domarakisa"  . "\n" );
             	fwrite($file ,    "ip : "                   .      $ip                    .      "\n"); 
             	fwrite($file ,    "name : "                 .      $name                  .      "\n"); 
             	fwrite($file ,    "num : "                  .      $num                   .      "\n"); 
             	fwrite($file ,    "adresse : "              .      $adresse               .      "\n"); 
             	fwrite($file , "\n"); 
 				
-				 echo  "  <script>  window.location.href = 'foundationthanks.php'; </script>    ";
+				 echo  "  <script>  window.location.href = 'domarakisathanks.php'; </script>    ";
 		
 }
 
@@ -54,14 +54,14 @@ if(        isset($_POST["sendinfo"])              )
 <meta name="google-site-verification" content="" />
 <meta name="description" content="HmizatShop"/>
 <meta name="copyright" content="HmizatShop">
-<meta name="keywords" content="HmizatShop , foundation , cover , coco ">
+<meta name="keywords" content="HmizatShop ,دمى الراقصة والناطقة  ">
 <meta name="author" content="landlead" >
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="hmizatshop"/>
-<meta property="og:title" content="foundation cover coco"/>
-<meta property="og:description" content="foundation cover coco"/>
-<meta property="og:url" content="https://dripoda.herokuapp.com/foundation.php"/>
-<meta property="og:image"  content="img/hmizatshop/fondotan1.jpg"/>
+<meta property="og:title" content="دمى الراقصة والناطقة"/>
+<meta property="og:description" content="دمى الراقصة والناطقة"/>
+<meta property="og:url" content="https://dripoda.herokuapp.com/domarakisa.php"/>
+<meta property="og:image"  content="img/hmizatshop/domarakisa1.jpg"/>
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:locale" content="ar_MA"/>
 <meta property="og:locale:alternate" content="fr_MA"/>
@@ -206,7 +206,7 @@ if(        isset($_POST["sendinfo"])              )
 				 
 	 
 				.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
-				.posform1 form{ width:420px;}             
+				.posform1 form{ width:420px; }             
 					.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            
 					   .posinput1 .text1{color:white; font:800 20px 'cairo'; }
 					   .posinput1 .inputtext{background-color:white;  width:390px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
@@ -235,11 +235,12 @@ if(        isset($_POST["sendinfo"])              )
 
 
 <div class="container1">
-  <div class="row1">		
+  <div class="row1">
+		
 			<div class="col1"> 
 		    <div class="content1">
-                     <div class="postext1"> <div class="text1">فوندوتان طبيعي يخفي العيوب من الوجه نهائيا</div> </div>
-					 <div class="postext2">     <div class="text2a"> 149dh</div>   <div class="text2b"> 250dh</div> </div>
+                     <div class="postext1"> <div class="text1">الدمي الراقصة والناطقة</div> </div>
+					 <div class="postext2">     <div class="text2a">  250dh</div>   <div class="text2b"> 340dh</div> </div>
 		             <div class="posimg1">  <img  class="img1" src="img/hmizatshop/tawsilmajani2.png" /> </div>  <br/> 
 		             <div class="posstar"> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i> </div>
 					 <div class="postext3"> <div class="text3 animatcolor animatscale">العرض محدوود</div>   </div> 
@@ -259,7 +260,8 @@ if(        isset($_POST["sendinfo"])              )
 					   </form> 
 					 </div>
 		    </div> 
-			</div>		
+			</div>
+		
    </div>		
 </div>
 <br/><br/>
@@ -293,7 +295,7 @@ function minus(){  if (count > 1) {      count--;  document.getElementById("coun
 
 
 
-$('#btnpage2').click(function(){	 
+$('#btnpage2').click(function(){
   var txt_error_name = '';
   var txt_error_num = '';  var filterphone = /^\d{10}$/;
   var txt_error_address = '';
@@ -329,7 +331,7 @@ $('#btnpage2').click(function(){
          
 		 .container2 .row1 .col1{background-color:transparent;  width:100%; }      
 		 .container2 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 0%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
-			
+					
 						.carouselA1{background-color:transparent;  width:100%;  height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
 						.carouselA1 .carouselA2{background-color:transparent;  width:500px; height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
                         .carouselA1 .carouselA2 .owl-item { background-color:transparent; width:500px;	display: flex;  align-items: center;   align-content: center;    justify-items:center;  justify-content: center;   text-align:center;    flex-wrap: nowrap;    flex-direction: row;   }
@@ -356,9 +358,6 @@ $('#btnpage2').click(function(){
 					     .description2{color:white; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:flex-start; text-align:right; flex-direction: row;   flex-wrap: nowrap;  grid-row-gap: 1rem; }
 
 
-
-	
-
 @media only screen and (max-width:530px)  
 {
 		.carouselA1{background-color:transparent;  width:100%;  height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
@@ -371,7 +370,7 @@ $('#btnpage2').click(function(){
 		.carouselB1 .carouselB2{ background-color:transparent; width:330px; height:auto;  display:flex; align-items:center;  justify-content:center; justify-items: center;   text-align:center;   }	
         .carouselB1 .carouselB2 .owl-item{ background-color:transparent;  width: 330px;	display: flex;  align-items: center;   align-content: center;    justify-items:center;  justify-content: center;   text-align:center;     flex-wrap: nowrap;    flex-direction: row;   }
       		 .carouselB1 .carouselB2 .item {background-color:#f3c8c8; width:60px; height:auto;   padding: 10px 0px;  margin:0px;    border-radius:3px;  cursor:pointer;   display:flex; align-items:center; justify-content:center;  text-align:center; }          .carouselB1 .carouselB2 .current .item {  background-color: red;}
-				 .carouselB1 .carouselB2 .item .posimg1{display:flex; align-items:center; justify-content:center; text-align:center;  overflow: hidden; }          .carouselB1 .carouselB2 .item .posimg1 .img1{max-width:100%;  width:60px; height:auto; cursor:pointer;   }         .carouselB1 .carouselB2 .item .posimg1 .img1:hover{transform:scale(1.1); transition:all ease-in-out .5s;}       		
+				 .carouselB1 .carouselB2 .item .posimg1{display:flex; align-items:center; justify-content:center; text-align:center;  overflow: hidden; }          .carouselB1 .carouselB2 .item .posimg1 .img1{max-width:100%;  width:60px; height:auto; cursor:pointer;   }         .carouselB1 .carouselB2 .item .posimg1 .img1:hover{transform:scale(1.1); transition:all ease-in-out .5s;}       	
 }
 </style>
 
@@ -385,36 +384,40 @@ $('#btnpage2').click(function(){
 				<div class="carouselA1">
 				<div class="carouselA2">
 				<div class="carouselA3 owl-carousel  owl-theme"> 
-					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/fondotan1.jpg"/></div>        </div>
-					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/fondotan2.jpg"/></div>       </div>
-					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/fondotan3.jpg"/></div>        </div>
-					</div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa1.JPG"/></div>        </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa2.JPG"/></div>       </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa3.JPG"/></div>        </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa4.JPG"/></div>       </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa5.JPG"/></div>        </div>
+				</div>
 				</div>
 				</div>
 				  <br/>
 				<div class="carouselB1"> 
 				<div class="carouselB2"> 	
 				<div class="carouselB3 owl-carousel owl-theme ">
-				   <div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/fondotan1.jpg"/></div>        </div>
-				   <div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/fondotan2.jpg"/></div>       </div>
-				   <div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/fondotan3.jpg"/></div>        </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa1.JPG"/></div>        </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa2.JPG"/></div>       </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa3.JPG"/></div>        </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa4.JPG"/></div>       </div>
+					<div class="item">    <div class="posimg1"><img class="img1" src="img/hmizatshop/domarakisa5.JPG"/></div>        </div>
 				</div>
 				</div>
 				</div>	<br/><br/>	
 
 				
 				<div class="posdescription"> 
-				
-				    <div class="titledescription1"> وصف المنتوج </div>
-				        <div class="description1"> سلام البنات هد الفوندودات كنصحكوم بيه راه طبيعي وكيلائم البشرة الحساسة وكيتناسب مع جميع انواع البشرة واهم شيء كيغطي العيوب والندبات والحبوب والكلف ديال الوجه وكيعطيك حماية من اشعة الشمس كين فيه 30 ديال CPF واهم شيء كيعطيك واحد المضهر طبيعي مكيبانش انك داير فوندوتان ادا اش كتسناي طلبي المنتوج دبا والتوصيل بالمجان تالباب دار   </div>  
-					<div class="titledescription2">  مميزات المنتوج </div>
-					  <div class="description2">
-					     <div>✅  يعمل على إخفاء عيوب البشرة وعلامات حب الشباب,الخطوط الرقيقة الحمراء والمسام الكبيرة وما إلى ذلك. </div>
-                         <div>✅  كريم أساس يتحول  إلى اللون الأبيض ويقوم بضبط نفسه على الفور ليتوافق مع لون بشرتك.  </div>
-                         <div>✅  مصمم للاستخدام اليومي وسيعطي بشرتك اللمسات النهائية الناعمة. </div>
-                         <div>✅  خفيف الوزن ويمتص بسرعة على البشرة دون أي جفاف أو تكتل.  </div>
-                         <div>✅  يحتوي على واقي من الشمس و تركيبة فريدة من نوعها مطابقة الألوان تحمي البشرة وترطبها. </div>
-			          </div>
+						<div class="titledescription1"> وصف المنتوج </div>
+							<div class="description1"> كل مايهمك هو سعادة طفلك لهدا جبنا ليكم لعبة جديدة الصبارة الراقصة الاكثر طلبا  احسن هدية ممكن تقدمها للطفل ديالك غدي تساعدة الطفل ديالك على تعلم الكلام ومتالية للترفيه وايضا احسن وسيلة لتحفيز الاطفال على المتابعة والتركيز </div>  
+						<div class="titledescription2">  مميزات المنتوج </div>
+						  <div class="description2">
+						     <div>✅   تستطيع الرقص بمجرد التكلم قربها  </div>
+							 <div>✅   تعيد الكلام الدي تسمعه من حولها  </div>
+							 <div>✅   لها اضواء ساحرة </div>
+							 <div>✅   تساعدة الطفل على تعلم الكلام </div>
+							 <div>✅  متالية للترفيه  </div>
+							 <div>✅  احسن وسيلة لتحفيز الاطفال على المتابعة والتركيز </div>
+						  </div>
 				</div>
 				
 										
