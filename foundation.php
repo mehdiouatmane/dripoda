@@ -245,7 +245,7 @@ if(        isset($_POST["sendinfo"])              )
 		    <div class="content1">
                      <div class="postext1"> <div class="text1">فوندوتان طبيعي يخفي العيوب من الوجه نهائيا</div> </div>
 					 <div class="postext2">     <div class="text2a"> 149dh</div>   <div class="text2b"> 250dh</div> </div>
-		             <div class="posimg1">  <img  class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/tawsilmajani2.png" /> </div>  <br/> 
+		             <div class="posimg1">  <img  class="img1" src="img/hmizatshop/tawsilmajani2.png" /> </div>  <br/> 
 		             <div class="posstar"> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i> </div>
 					 <div class="postext3"> <div class="text3 animatcolor animatscale">العرض محدوود</div>   </div> 
 		             <div class="poscountdown" id="countdown"> <ul>       <li><span class="span1" id="days" ></span> <span class="span2" >يوم</span></li>        <li><span class="span1" id="hours" ></span> <span class="span2" >ساعة</span></li>      <li><span class="span1" id="minutes" ></span> <span class="span2" >دقيقة</span></li>       <li><span class="span1" id="seconds" ></span> <span class="span2" >تانية</span></li>      </ul>      </div> 
