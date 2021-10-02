@@ -77,9 +77,7 @@ if(        isset($_POST["sendinfo"])              )
 
 <style>html, body{ background-color:transparent;  padding:0; border:0; margin:0;  touch-action: manipulation;    user-select: none;   }   ul li {list-style-type:none;}     </style>
 
-
-
-
+<meta name="facebook-domain-verification" content="4v6ohl9pe3ks7lff0cndesm6e90stx" />
 <!-- Facebook Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
