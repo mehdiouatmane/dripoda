@@ -363,7 +363,7 @@ $('#btnpage2').click(function(){
 					.container2 .posdescription{background-color:#2a4bc1; padding:5%;    overflow: hidden;     display:grid; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
 					   .titledescription1 {color:#00e7ff; font:800 30px 'cairo'; }
 					     .description1{color:white; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:center; text-align:center;  flex-direction: row;   flex-wrap: nowrap;     }
-					   .titledescription2 {color:#00e7ff; font:800 30px 'cairo'; }
+					   .titledescription2 {margin:5% 0% 0% 0%; color:#00e7ff; font:800 30px 'cairo'; }
 					     .description2{color:white; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:flex-start; text-align:right; flex-direction: row;   flex-wrap: nowrap;  grid-row-gap: 1rem; }
 
 
