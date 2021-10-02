@@ -342,8 +342,7 @@ $('#btnpage2').click(function(){
 		 .container2 .row1 .col1{background-color:transparent;  width:100%; }      
 		 .container2 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 0%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
 			
-				   .container2 .row1 .col1 .content1 .text1{color:#0316f7; font:800 30px 'Cairo';}
-
+			
 						.carouselA1{background-color:transparent;  width:100%;  height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
 						.carouselA1 .carouselA2{background-color:transparent;  width:500px; height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
        					.carouselA1 .carouselA2 .item {background-color:transparent; width:500px; height:auto; padding:0%;  margin:0%; border-radius:3px;   cursor:pointer;  display:flex; align-items:center; justify-content:center; text-align:center; }      .carouselA1 .carouselA2 .item:hover{ background-color:blue; }   
@@ -361,14 +360,18 @@ $('#btnpage2').click(function(){
 						.owl-dots {display:none;  margin:2% 0%;  }    .owl-dots .owl-dot{  background-color:transparent;  }      	.owl-dots .owl-dot span {  background-color:#ccc;  width:9px; height:9px;  border-radius:30px;    transition:all ease-in-out .2s;}         .owl-dots .owl-dot:hover span  { background-color:black;}        .owl-dots .owl-dot.active span { background-color:black;  }   
 
 
-					.posdescription{background-color:#2a4bc1; padding:5%;    overflow: hidden;     display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
-					.description{color:white; font:800 30px 'cairo';}
+					.container2 .posdescription{background-color:#2a4bc1; padding:5%;    overflow: hidden;     display:grid; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
+					   .titledescription1 {color:#00e7ff; font:800 30px 'cairo'; }
+					     .description1{color:white; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:center; text-align:center;  flex-direction: row;   flex-wrap: nowrap;     }
+					   .titledescription2 {color:#00e7ff; font:800 30px 'cairo'; }
+					     .description2{color:white; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:flex-start; text-align:right; flex-direction: row;   flex-wrap: nowrap;  grid-row-gap: 1rem; }
 
+
+
+	
 
 @media only screen and (max-width:530px)  
 {
-	
-	.container2 .row1 .col1 .content1 .text1{color:#0316f7; font:800 25px 'Cairo';}
 
 		.carouselA1{background-color:transparent;  width:100%;  height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
 		.carouselA1 .carouselA2{background-color:transparent;  width:330px; height:auto;  display:flex; align-items:center;  justify-content:center;   justify-items: center;   text-align:center;  }  
@@ -382,9 +385,6 @@ $('#btnpage2').click(function(){
 
 
 	
-	
-	.posdescription{background-color:#2a4bc1; padding:5%;   overflow: hidden;     display:flex; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
-    .description{color:white; font:800 20px 'cairo';}
 
 	
 }
@@ -396,9 +396,6 @@ $('#btnpage2').click(function(){
 		
 	<div class="col1"> 
 	<div class="content1">
-			
-                <div class="text1"> معلومات اضافية عن المنتوج </div>  <br/>      
-							
 							
 				<div class="carouselA1">
 				<div class="carouselA2">
@@ -421,7 +418,19 @@ $('#btnpage2').click(function(){
 				</div>	<br/><br/>	
 
 				
-				<div class="posdescription"> <div class="description"> سلام البنات هد الفوندودات كنصحكوم بيه راه طبيعي وكيلائم البشرة الحساسة وكيتناسب مع جميع انواع البشرة واهم شيء كيغطي العيوب والندبات والحبوب والكلف ديال الوجه وكيعطيك حماية من اشعة الشمس كين فيه 30 ديال CPF واهم شيء كيعطيك واحد المضهر طبيعي مكيبانش انك داير فوندوتان ادا اش كتسناي طلبي المنتوج دبا والتوصيل بالمجان تالباب دار   </div>  </div>
+				<div class="posdescription"> 
+				
+				    <div class="titledescription1"> وصف المنتوج </div>
+				        <div class="description1"> سلام البنات هد الفوندودات كنصحكوم بيه راه طبيعي وكيلائم البشرة الحساسة وكيتناسب مع جميع انواع البشرة واهم شيء كيغطي العيوب والندبات والحبوب والكلف ديال الوجه وكيعطيك حماية من اشعة الشمس كين فيه 30 ديال CPF واهم شيء كيعطيك واحد المضهر طبيعي مكيبانش انك داير فوندوتان ادا اش كتسناي طلبي المنتوج دبا والتوصيل بالمجان تالباب دار   </div>  
+					<div class="titledescription2">  مميزات المنتوج </div>
+					  <div class="description2">
+					     <div>✅  يعمل على إخفاء عيوب البشرة وعلامات حب الشباب,الخطوط الرقيقة الحمراء والمسام الكبيرة وما إلى ذلك. </div>
+                         <div>✅  كريم أساس يتحول  إلى اللون الأبيض ويقوم بضبط نفسه على الفور ليتوافق مع لون بشرتك.  </div>
+                         <div>✅  مصمم للاستخدام اليومي وسيعطي بشرتك اللمسات النهائية الناعمة. </div>
+                         <div>✅  خفيف الوزن ويمتص بسرعة على البشرة دون أي جفاف أو تكتل.  </div>
+                         <div>✅  يحتوي على واقي من الشمس و تركيبة فريدة من نوعها مطابقة الألوان تحمي البشرة وترطبها. </div>
+			          </div>
+				</div>
 				
 										
 	 </div> 
