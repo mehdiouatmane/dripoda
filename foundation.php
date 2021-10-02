@@ -288,7 +288,7 @@ if(        isset($_POST["name"])              )
 
 <script>
 var x = setInterval(function() {    
-  var distance = new Date("09 30 2021 13:18:00").getTime() - new Date().getTime();
+  var distance = new Date("10 04 2021 13:18:00").getTime() - new Date().getTime();
   document.getElementById("days").innerText =Math.floor(distance / (1000 * 60 * 60 * 24));
   document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -425,7 +425,7 @@ $('#btnpage2').click(function(){
 				</div>	<br/><br/>	
 
 				
-				<div class="posdescription"> <div class="description"> هد الفوندودات البنات كنصحكوم بيه راه طبيعي وكيلائم البشرة الحساسة وكيتناسب مع جميع انواع البشرة واهم شيء كيغطي العيوب  والندبات ديال الوجه الحبوب او الكلف  او الندبات وكيعطيك حماية من اشعة الشمس كين فيه 30 ديال CPF واهم شيء كيعطيك واحد المضهر طبيعي مكيبانش انك داير فوندوتان ادا اش كتسناي طلبي المنتوج دبا والتوصيل تالباب دار وبالمجان  </div>  </div>
+				<div class="posdescription"> <div class="description"> سلام البنات هد الفوندودات كنصحكوم بيه راه طبيعي وكيلائم البشرة الحساسة وكيتناسب مع جميع انواع البشرة واهم شيء كيغطي العيوب والندبات والحبوب والكلف ديال الوجه وكيعطيك حماية من اشعة الشمس كين فيه 30 ديال CPF واهم شيء كيعطيك واحد المضهر طبيعي مكيبانش انك داير فوندوتان ادا اش كتسناي طلبي المنتوج دبا والتوصيل بالمجان تالباب دار   </div>  </div>
 				
 										
 	 </div> 
