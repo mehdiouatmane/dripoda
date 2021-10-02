@@ -187,17 +187,17 @@ if(        isset($_POST["sendinfo"])              )
    .container1 .row1{background-color:transparent;   padding:0%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
          
 		 .container1 .row1 .col1{background-color:transparent;  width:100%; }      
-		 .container1 .row1 .col1 .content1  {background-color:green; padding:0%; margin:0% 0%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
+		 .container1 .row1 .col1 .content1  {background-color:#2a4bc1; padding:0%; margin:0% 0%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
+	
+				.postext1{display:flex; align-items:center; justify-content:center; text-align:center;  }   .postext1 .text1{color:white; font:800 30px 'Cairo', sans-serif;}
 
-				.postext1{display:flex; align-items:center; justify-content:center; text-align:center;  }   .postext1 .text1{color:#2effe2; font:800 30px 'Cairo', sans-serif;}
-
-                .postext2{display:flex; align-items:center; justify-content:center; text-align:center;  }    .postext2 .text2a{  margin:0% 1%;  color:yellow; font:800 40px 'Cairo';  }    .postext2 .text2b{ margin:0% 1%; color:#ff0303; font:800 40px 'Cairo';  text-decoration:line-through;  }          
+                .postext2{display:flex; align-items:center; justify-content:center; text-align:center;  }    .postext2 .text2a{  margin:0% 1%;  color:yellow; font:800 40px 'Cairo';  }    .postext2 .text2b{ margin:0% 1%; color:#ddff21; font:800 40px 'Cairo';  text-decoration:line-through;  }          
  
 				.posimg1{display:flex; align-items:center; justify-content:center; text-align:center; }       .posimg1 .img1{max-width:100%; height:100px; } 
 			 
 			    .posstar{display:flex; align-items:center; justify-content:center; text-align:center;  }      .posstar .star1{color:#ffce07; font-size:20px;  } 
 
-				.postext3{display:flex; align-items:center; justify-content:center; text-align:center;  }     .postext3 .text3{color:yellow; font:800 35px "cairo",sans-serif;      filter:drop-shadow(0 0 10px yellow);   text-shadow: 2px 2px blue;}         
+				.postext3{display:flex; align-items:center; justify-content:center; text-align:center;  }     .postext3 .text3{color:yellow; font:800 35px "cairo",sans-serif;      filter:drop-shadow(0 0 10px yellow);   }         
 
 				.poscountdown {background-color:transparent; width:auto; height:auto;  display:flex; align-items:center; justify-content:center; text-align:center; }   
 				.poscountdown ul {padding:0;  display:flex; align-items:center; justify-content:center; text-align:center; }   
@@ -205,7 +205,7 @@ if(        isset($_POST["sendinfo"])              )
 				.poscountdown ul li .span2 {padding: 0em 0.4em 0em 0.4em;  color:white;   font:800 25px sans-serif;    display:block;  }  
 				 
 	 
-				.posform1{background-color:blue; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
+				.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
 				.posform1 form{ width:420px;}             
 					.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            
 					   .posinput1 .text1{color:white; font:800 20px 'cairo'; }
@@ -214,8 +214,8 @@ if(        isset($_POST["sendinfo"])              )
 		 					.inputhovererror{  background-color:#F8F8F9;   border-color:#dc3545; }  .inputhovererror::placeholder{  }		       
 					        .txt_error{color:red; font:400 15px 'cairo';  }
 	
-			  .animatscale{animation: animatscale  0.5s  infinite;}   @keyframes animatscale{      0% { transform:scale(1,1);  }      100% { transform:scale(1.1,1.1) }      }            
-			  .animatcolor{ animation-name: animatcolor;     animation-duration: 0.5s;         animation-direction: alternate;      animation-iteration-count: infinite;        }       @keyframes animatcolor {         from{color:yellow; }  to{color:red;   }   }  
+			  .animatscale{animation: animatscale 0.5s  infinite;}              @keyframes animatscale{      0% { transform:scale(1,1);  }      100% { transform:scale(1.1,1.1) }      }            
+			  .animatcolor{animation: animatcolor 0.5s alternate infinite; }    @keyframes animatcolor{     from{color:yellow; }  to{color:red;   }    }  
 			  
 			  
 			  
@@ -223,11 +223,10 @@ if(        isset($_POST["sendinfo"])              )
  
 @media only screen and (max-width:360px)  
 {
-	.text1{color:#2effe2; font:800 30px 'Cairo', sans-serif;}
 			
 	.posimg1{background-color:transparent; width:auto; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }        .posimg1 .img1{max-width:100%; height:80px;} 
 		
-	.posform1{background-color:blue; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
+	.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
     .posform1 form{ width:320px;} 
 		.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            			
             .posinput1 .text1{color:white; font:800 20px 'cairo'; }
@@ -248,7 +247,7 @@ if(        isset($_POST["sendinfo"])              )
 					 <div class="postext2">     <div class="text2a"> 149dh</div>   <div class="text2b"> 250dh</div> </div>
 		             <div class="posimg1">  <img  class="img1" src="https://raw.githubusercontent.com/Dripoda/dripoda.github.io/master/img/accessoire1/tawsilmajani2.png" /> </div>  <br/> 
 		             <div class="posstar"> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i> </div>
-					 <div class="postext3"> <div class="text3 animatcolor">العرض محدوود</div>   </div> 
+					 <div class="postext3"> <div class="text3 animatcolor animatscale">العرض محدوود</div>   </div> 
 		             <div class="poscountdown" id="countdown"> <ul>       <li><span class="span1" id="days" ></span> <span class="span2" >يوم</span></li>        <li><span class="span1" id="hours" ></span> <span class="span2" >ساعة</span></li>      <li><span class="span1" id="minutes" ></span> <span class="span2" >دقيقة</span></li>       <li><span class="span1" id="seconds" ></span> <span class="span2" >تانية</span></li>      </ul>      </div> 
 					 
 					 <div class="posform1">
