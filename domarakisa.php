@@ -78,7 +78,7 @@ if(        isset($_POST["sendinfo"])              )
 <style>html, body{ background-color:transparent;  padding:0; border:0; margin:0;  touch-action: manipulation;    user-select: none;   }   ul li {list-style-type:none;}     </style>
 
 
-
+<head>
 <!-- Facebook Pixel Code -->
 <script>
   !function(f,b,e,v,n,t,s)
@@ -96,7 +96,7 @@ if(        isset($_POST["sendinfo"])              )
   src="https://www.facebook.com/tr?id=991930968320416&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Facebook Pixel Code -->
-
+</head>
 
 
 
