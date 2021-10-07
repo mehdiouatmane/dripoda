@@ -6,8 +6,8 @@ session_start();
 
 <?php
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }   $ip = get_ip();  
-$file = Fopen("ipvuclien.txt","a+"); 
-fwrite($file , "ip vu clien"  . "\n" );
+$file = Fopen("ipclien.txt","a+"); 
+fwrite($file , "ip clien"  . "\n" );
 fwrite($file ,    "ip : "                   .      $ip                    .      "\n"); 
 fwrite($file , "\n"); 
 
