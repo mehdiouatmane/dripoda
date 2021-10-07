@@ -5,13 +5,17 @@ session_start();
 
 
 <?php
+function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }   $ip = get_ip();  
+$file = Fopen("ipvuclien.txt","a+"); 
+fwrite($file , "ip vu clien"  . "\n" );
+fwrite($file ,    "ip : "                   .      $ip                    .      "\n"); 
+fwrite($file , "\n"); 
+
+		
+		
 if(        isset($_POST["sendinfo"])              )
 {		
-
-
-
-				function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }
-				$ip = get_ip();  
+				function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }  $ip = get_ip();  
 				$name = $_POST["name"];
 				$num = $_POST["num"];
 				$adresse = $_POST["adresse"];
@@ -81,6 +85,26 @@ if(        isset($_POST["sendinfo"])              )
 
 
 
+
+<head>
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '401545141478289');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=401545141478289&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+</head>
 
 
 
@@ -209,7 +233,7 @@ if(        isset($_POST["sendinfo"])              )
 							   .posinput1 .text1{color:white; font:800 20px 'cairo'; }
 							   .posinput1 .inputtext{background-color:white;  width:390px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
 							   .posinput1 .inputbtn {background-color:#ff0000;  width:350px; height:45px; margin:4% 0%;  border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer; display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
-									.inputhovererror{  background-color:#F8F8F9;   border-color:#dc3545; }  .inputhovererror::placeholder{  }		       
+									.inputhovererror{  background-color:red;   border:solid 3px red;  width:500px; height:45px; }  		       
 									.txt_error{color:black; font:400 15px 'cairo';  }
 			
 					  .animatscale{animation: animatscale 0.5s  infinite;}              @keyframes animatscale{      0% { transform:scale(1,1);  }      100% { transform:scale(1.1,1.1) }      }            
@@ -340,9 +364,16 @@ $('#btnpage2').click(function(){
   var txt_error_num = '';  var filterphone = /^\d{10}$/;
   var txt_error_address = '';
   
-  if(    $.trim($('#name').val()).length == 0         )           {    txt_error_name = 'أدخل الإسم الكامل';   $('#txt_error_name').text(txt_error_name);                           $('#name').addClass('inputhovererror');         }               else               {    txt_error_name = '';  $('#txt_error_name').text(txt_error_name);                          $('#name').removeClass('inputhovererror');         }
-  if(    $.trim($('#num').val()).length == 0        )             {    txt_error_num = 'أدخل رقم هاتفك';   $('#txt_error_num').text(txt_error_num);                                $('#num').addClass('inputhovererror');        }                 else               {    if (       !filterphone.test($('#num').val())   )              {  txt_error_num = 'أدخل رقم هاتفك';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');  }               else              {  txt_error_num = '';  $('#txt_error_num').text(txt_error_num);             $('#num').removeClass('inputhovererror');   }              }
-  if(    $.trim($('#address').val()).length == 0      )           {    txt_error_address = 'أدخل عنوانك'; $('#txt_error_address').text(txt_error_address);                         $('#address').addClass('inputhovererror');      }               else               {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
+  if(    $.trim($('#name').val()).length == 0       )           {    txt_error_name = 'أدخل الإسم الكامل';   $('#txt_error_name').text(txt_error_name);  $('#name').addClass('inputhovererror');         }               
+  else                                                          {    txt_error_name = '';                   $('#txt_error_name').text(txt_error_name);  $('#name').removeClass('inputhovererror');      }
+  
+  if(    $.trim($('#num').val()).length == 0        )           {    txt_error_num = 'أدخل رقم هاتفك';      $('#txt_error_num').text(txt_error_num);    $('#num').addClass('inputhovererror');          }                 
+  else                                                          {    if (       !filterphone.test($('#num').val())   )    {  txt_error_num = 'أدخل رقم هاتفك';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');      }               
+                                                                     else                                                 {  txt_error_num = '';                $('#txt_error_num').text(txt_error_num);            $('#num').removeClass('inputhovererror');   }              
+															    }
+
+  if(    $.trim($('#address').val()).length == 0    )           {    txt_error_address = 'أدخل عنوانك';    $('#txt_error_address').text(txt_error_address);                         $('#address').addClass('inputhovererror');      }              
+  else                                                          {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
 
  if(  txt_error_name != ''  || txt_error_num != ''  ||  txt_error_address != ''  )  {   return false;  }   else     {  $("#register_form").submit();     document.getElementById("loadingDiv").style.display = 'block';             }  
 });
