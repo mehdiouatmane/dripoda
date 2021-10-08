@@ -13,15 +13,13 @@ session_start();
 $query  =  mysqli_query(      $con   ,       "   select  * FROM infocliendomarakisa    "           );
 foreach($query as $row)	
 {		
-	  ?> 
-	      	   <?php echo $row["ip"]; ?> 
-			   <?php echo $row["iplocation"]; ?> 
-			   <?php echo $row['name']   ?>
-			   <?php echo $row['num']   ?>
-			   <?php echo $row['adresse']   ?>
-			   <?php echo $row["datetime"]; ?>  
-		       <br/>
- 			
+	  ?>       info clien domarakisa<br/>
+	      	   <?php echo $row["ip"]; ?> <br/>
+			   <?php echo $row["iplocation"]; ?> <br/>
+			   <?php echo $row['name']   ?><br/>
+			   <?php echo $row['num']   ?><br/>
+			   <?php echo $row['adresse']   ?><br/>
+			   <?php echo $row["datetime"]; ?>  <br/><br/>
 	 <?php	
  
 }    
