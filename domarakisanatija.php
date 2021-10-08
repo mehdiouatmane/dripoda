@@ -15,6 +15,7 @@ foreach($query as $row)
 {		
 	  ?> 
 	      	   <?php echo $row["ip"]; ?> 
+			   <?php echo $row["iplocation"]; ?> 
 			   <?php echo $row['name']   ?>
 			   <?php echo $row['num']   ?>
 			   <?php echo $row['adresse']   ?>
@@ -31,11 +32,12 @@ foreach($query as $row)
 
 
 <?php
-$query  =  mysqli_query(      $con   ,     " SELECT datetime , count(datetime) ,  ip , count(ip) FROM ipcliendomarakisa GROUP BY ip , datetime HAVING count(*) >= 1  "           );
+$query  =  mysqli_query(      $con   ,     " SELECT iplocation , datetime  ,  ip  , count(ip) FROM ipcliendomarakisa GROUP BY ip , iplocation, datetime HAVING count(*) >= 1  "           );
 foreach($query as $row)	
 {
 	  ?> 
 			     <?php echo $row["ip"]; ?>  
+				 <?php echo $row["iplocation"]; ?> 
                  (<?php echo $row["count(ip)"]; ?>) 				 
                  <?php echo $row["datetime"]; ?>  					 
   		 	     <br>		
