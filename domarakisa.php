@@ -236,18 +236,9 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 
 						.poscountdown {background-color:transparent; width:auto; height:auto;  display:flex; align-items:center; justify-content:center; text-align:center; }   
 						.poscountdown ul {padding:0;  display:flex; align-items:center; justify-content:center; text-align:center; }   
-						.poscountdown ul li .span1 { color:white;   font:800 30px sans-serif;    display:block;  }      
-						.poscountdown ul li .span2 {padding: 0em 0.4em 0em 0.4em;  color:white;   font:800 25px sans-serif;    display:block;  }  
+						.poscountdown ul li .span1 { color:red;   font:800 30px sans-serif;    display:block;  }      
+						.poscountdown ul li .span2 {padding: 0em 0.4em 0em 0.4em;  color:red;   font:800 25px sans-serif;    display:block;  }  
 						 
-			 
-						.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
-						.posform1 form{ width:420px; }             
-							.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            
-							   .posinput1 .text1{color:white; font:800 20px 'cairo'; }
-							   .posinput1 .inputtext{background-color:white;  width:390px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
-							   .posinput1 .inputbtn {background-color:#ff0000;  width:350px; height:45px; margin:4% 0%;  border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer; display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
-									.inputhovererror{  background-color:red;   border:solid 3px red;  width:500px; height:45px; }  		       
-									.txt_error{color:black; font:400 15px 'cairo';  }
 			
 					  .animatscale{animation: animatscale 0.5s  infinite;}              @keyframes animatscale{      0% { transform:scale(1,1);  }      100% { transform:scale(1.1,1.1) }      }            
 					  .animatcolor{animation: animatcolor 0.5s alternate infinite; }    @keyframes animatcolor{     from{color:yellow; }  to{color:red;   }    }  
@@ -270,16 +261,7 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 
 @media only screen and (max-width:360px)  
 {
-
-
 	.posimg1{background-color:transparent; width:auto; height:auto; display:flex; align-items:center; justify-content:center; text-align:center; }        .posimg1 .img1{max-width:100%; height:80px;} 
-		
-	.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
-    .posform1 form{ width:320px;} 
-		.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            			
-            .posinput1 .text1{color:white; font:800 16px 'cairo'; }
-			.posinput1 .inputtext{background-color:white;  width:290px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
-			.posinput1 .inputbtn {background-color:#ff0000;  width:250px; height:45px; margin:4% 0%;   border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer;  display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
 }  
 </style>
 
@@ -290,6 +272,7 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 		
 		
 			<div class="col1">  <div class="content1">				
+			
 					   <div class="postext1"> <div class="text1">الدمي الراقصة والناطقة</div> </div>
 	 
 						<div class="carouselA1">
@@ -324,39 +307,20 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 						 <div class="postext3"> <div class="text3 animatcolor animatscale">العرض محدوود</div>   </div> 
 						 <div class="poscountdown" id="countdown"> <ul>       <li><span class="span1" id="days" ></span> <span class="span2" >يوم</span></li>        <li><span class="span1" id="hours" ></span> <span class="span2" >ساعة</span></li>      <li><span class="span1" id="minutes" ></span> <span class="span2" >دقيقة</span></li>       <li><span class="span1" id="seconds" ></span> <span class="span2" >تانية</span></li>      </ul>      </div> 
 						 
-						 <div class="posform1">
-						   <form  method="post"  id="register_form"  >       
-							   <div class="posinput1"> <div class="text1">أدخل معلوماتك لنتصل بك ونرسل لك المنتوج </div> </div>
-							   <div class="posinput1"> <input    type="text"        placeholder=""                          value="<?php echo $row["ip"]; ?>"      name=""                style="display:none;"                       />    </div>  
-							   <div class="posinput1"> <input    type="text"        placeholder="أدخل الإسم الكامل"          value=""                               name="name"      id="name"            class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل الإسم الكامل ')"  oninput="setCustomValidity('')" dir="rtl"/></div>
-								   <div class="txt_error" id="txt_error_name" ></div>
-							   <div class="posinput1"> <input    type="text"        placeholder="أدخل رقم هاتفك"            value=""                               name="num"       id="num"              class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل رقم هاتفك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>  	  
-								   <div class="txt_error" id="txt_error_num" ></div>          					   
-							   <div class="posinput1"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"   id="address"          class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
-								   <div class="txt_error" id="txt_error_address" ></div>
-							   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا للشراء "        name="sendinfo"           id="btnpage2"         class="inputbtn animatscale"                     onClick="fbq( 'track', 'Purchase' );"   /> </div>
-						   </form> 
-						 </div>	 
+
 		    </div>  </div>
 		
 </div>	</div>
-<br/><br/>
 
 
 
-<style>
-.loader{ background-color:black;  width: 100%;  height: 100%;  padding: 0px; margin: 0px;  border: none;  opacity: 0.96;   z-index: 5000;   cursor: default;     position:fixed; top: 0px;   left: 0px;   display:none;}
-.loader:after {  content: "";  width: 100px; height: 100px;   border: solid 3px #BBB;   border-left:solid 3px black; border-radius:50%;               display: inline-block; vertical-align: middle;               position:absolute; top:50%; left:50%; transform:translate(-50%) rotate(0deg);   animation:spin 4s linear infinite;  }
-@keyframes spin {     100% {   transform:translate(-50%) rotate(360deg);     }      }
-</style>
-<div id="loadingDiv" class="loader" ></div>
 
 
 
 
 <script>
 var x = setInterval(function() {    
-  var distance = new Date("10 04 2021 13:18:00").getTime() - new Date().getTime();
+  var distance = new Date("10 10 2021 13:18:00").getTime() - new Date().getTime();
   document.getElementById("days").innerText =Math.floor(distance / (1000 * 60 * 60 * 24));
   document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -370,30 +334,6 @@ function minus(){  if (count > 1) {      count--;  document.getElementById("coun
 
 
 
-
-
-$('#btnpage2').click(function(){
-  var txt_error_name = '';
-  var txt_error_num = '';  var filterphone = /^\d{10}$/;
-  var txt_error_address = '';
-  
-  if(    $.trim($('#name').val()).length == 0       )           {    txt_error_name = 'أدخل الإسم الكامل';   $('#txt_error_name').text(txt_error_name);  $('#name').addClass('inputhovererror');         }               
-  else                                                          {    txt_error_name = '';                   $('#txt_error_name').text(txt_error_name);  $('#name').removeClass('inputhovererror');      }
-  
-  if(    $.trim($('#num').val()).length == 0        )           {    txt_error_num = 'أدخل رقم هاتفك';      $('#txt_error_num').text(txt_error_num);    $('#num').addClass('inputhovererror');          }                 
-  else                                                          {    if (       !filterphone.test($('#num').val())   )    {  txt_error_num = 'أدخل رقم هاتفك';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');      }               
-                                                                     else                                                 {  txt_error_num = '';                $('#txt_error_num').text(txt_error_num);            $('#num').removeClass('inputhovererror');   }              
-															    }
-
-  if(    $.trim($('#address').val()).length == 0    )           {    txt_error_address = 'أدخل عنوانك';    $('#txt_error_address').text(txt_error_address);                         $('#address').addClass('inputhovererror');      }              
-  else                                                          {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
-
- if(  txt_error_name != ''  || txt_error_num != ''  ||  txt_error_address != ''  )  {   return false;  }   else     {  $("#register_form").submit();     document.getElementById("loadingDiv").style.display = 'block';             }  
-});
- 
- 
- 
- 
 $(document).ready(function() {
   var sync1 = $(".carouselA3");
   var sync2 = $(".carouselB3");
@@ -443,23 +383,28 @@ $(document).ready(function() {
 
 <style>
 .container2 {background-color:white; width:100%; height:auto; } .container2 .row1{background-color:transparent;   padding:0%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
-         
+
 		 .container2 .row1 .col1{background-color:transparent;  width:100%; }       .container2 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 0%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
-					.container2 .posdescription{background-color:#2a4bc1; padding:5%;    overflow: hidden;     display:grid; align-items:center; justify-content:center; justfiy-items:center; text-align:center;}
-					   .titledescription1 {color:#00e7ff; font:800 30px 'cairo'; }
-					     .description1{color:white; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:center; text-align:center;  flex-direction: row;   flex-wrap: nowrap;     }
-					   .titledescription2 {margin:5% 0% 0% 0%; color:#00e7ff; font:800 30px 'cairo'; }
-					     .description2{color:white; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:flex-start; text-align:right; flex-direction: row;   flex-wrap: nowrap;  grid-row-gap: 1rem; }
+                  .infoproduct{margin:0% 2%;}
+					   .postitledescription1 { margin:5% 0% 2% 0%; display:flex; align-content:center;  align-items:center;  justify-content:center;  justify-items: center; text-align:center;   } .titledescription1 {background-color:#18e6fb; width:300px;  color:white; font:800 30px 'cairo';   }
+					     .description1{color:#1000ff; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:center; text-align:center;  flex-direction: row;   flex-wrap: nowrap;     }
+					  .postitledescription2 { margin:5% 0% 2% 0%; display:flex; align-content:center;  align-items:center;  justify-content:center;  justify-items: center; text-align:center;   }   .titledescription2 {  background-color:#18e6fb; width:300px;  color:white; font:800 30px 'cairo'; }
+					     .description2{color:#1000ff; font:800 25px 'cairo'; direction: rtl;         display:grid; align-items:center; justify-content:flex-start; text-align:right; flex-direction: row;   flex-wrap: nowrap;  grid-row-gap: 1rem; }
+				       .postitledescription3 { margin:5% 0% 5% 0%; display:flex; align-content:center;  align-items:center;  justify-content:center;  justify-items: center; text-align:center;   }  .titledescription3{ background-color:#18e6fb; width:300px;   color:white; font:800 30px 'Cairo';}
+					      .posimg1review{ display:grid; align-items:center; align-content:center; justify-items:center; justify-content:center; text-align:center;}  .posimg1review .img1{max-width:100%; width:400px; height:auto; }
+
+
+
 </style>
 
 
 <div class="container2"><div class="row1">
 		
-	<div class="col1"> <div class="content1">		
-				<div class="posdescription"> 
-						<div class="titledescription1"> وصف المنتوج </div>
+	<div class="col1"> <div class="content1">
+	                <div class="infoproduct">
+						<div class="postitledescription1"> <div class="titledescription1"> وصف المنتوج </div> </div>
 							<div class="description1"> كل مايهمك هو سعادة طفلك لهدا جبنا ليكم لعبة جديدة الصبارة الراقصة الاكثر طلبا  احسن هدية ممكن تقدمها للطفل ديالك غدي تساعدة الطفل ديالك على تعلم الكلام ومتالية للترفيه وايضا احسن وسيلة لتحفيز الاطفال على المتابعة والتركيز </div>  
-						<div class="titledescription2">  مميزات المنتوج </div>
+						<div class="postitledescription2"> <div class="titledescription2">  مميزات المنتوج </div> </div>
 						  <div class="description2">
 						     <div>✅   تستطيع الرقص بمجرد التكلم قربها  </div>
 							 <div>✅   تعيد الكلام الدي تسمعه من حولها  </div>
@@ -468,11 +413,13 @@ $(document).ready(function() {
 							 <div>✅  متالية للترفيه  </div>
 							 <div>✅  احسن وسيلة لتحفيز الاطفال على المتابعة والتركيز </div>
 						  </div>
-				</div>										
+                       <div class="postitledescription3">   <div class="titledescription3">تقييمات الزبناء للمنتوج</div>   </div>      
+				          <div class="posimg1review">	<img class="img1" src="img/hmizatshop/message1.png" />	 <br/>  <img class="img1" src="img/hmizatshop/message2.png" /> <br/>  <img class="img1" src="img/hmizatshop/message3.png" />   </div> 
+              	   </div>
+														
 	 </div></div>	
 	 
 </div></div>
-<br/><br/>
 
 
 
@@ -502,45 +449,6 @@ $(document).ready(function() {
 
 
 
-
-
-
-<style>
-.container3 {background-color:white; width:100%; height:auto; }
-   .container3 .row1{background-color:transparent;   padding:2%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
-         
-		 .container3 .row1 .col1{background-color:transparent;  width:100%; }      
-		 .container3 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 2%;         display:grid; align-items:center; justify-content:center; text-align:center;        }  
-			
-				   .container3 .row1 .col1 .content1 .text1{color:#0316f7; font:800 30px 'Cairo';}
-
-                   .container3 .row1 .col1 .content1 .posimg1{display:grid; align-items:center; align-content:center; justify-items:center; justify-content:center; text-align:center;}
-                   .container3 .row1 .col1 .content1 .posimg1 .img1{max-width:100%; width:400px; height:auto; }
-
-
-@media only screen and (max-width:360px)  
-{	
-	.container3 .row1 .col1 .content1 .text1{color:#0316f7; font:800 25px 'Cairo';}	
-}
-</style>
-
-
-
-
-<div class="container3">
-  <div class="row1">
-		
-	<div class="col1"> 
-	<div class="content1">
-			
-                <div class="text1"> اراء بعض الزبناء حول المنتوج </div>  <br/>      
-				<div class="posimg1">	<img class="img1" src="img/hmizatshop/message1.png" />	 <br/>  <img class="img1" src="img/hmizatshop/message2.png" /> <br/>  <img class="img1" src="img/hmizatshop/message3.png" />   </div> 
-	 </div> 
-	</div>
-	
-   </div>		
-</div>
-<br/><br/>
 
 
 
@@ -552,11 +460,9 @@ $(document).ready(function() {
 
 
 <style>
-.container4 {background-color:black; width:100%; height:auto; }
-   .container4 .row1{background-color:transparent;   padding:1%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
+.container4 {background-color:black; width:100%; height:auto;  z-index:500; } .container4 .row1{background-color:transparent;   padding:1%; margin:0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;  }
          
-		 .container4 .row1 .col1{background-color:transparent;  width:100%; }      
-		 .container4 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 0%;         display:flex; align-items:center; justify-content:center; text-align:center;        }  
+		 .container4 .row1 .col1{background-color:transparent;  width:100%; }       .container4 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0% 0%;         display:flex; align-items:center; justify-content:center; text-align:center;        }  
              .container4 .row1 .col1 .content1 .postext1{ display:flex; align-items:center; justify-content:center; text-align:center;   }      .container4 .row1 .col1 .content1   .postext1 .text1{color:white; font:800 30px "cairo";}
 
 @media only screen and (max-width:360px)  
@@ -566,16 +472,128 @@ $(document).ready(function() {
 </style>
 
 
-<div class="container4">
-  <div class="row1">	
-			<div class="col1"> 
-		    <div class="content1">
-                <div class="postext1"><div class="text1">  HmizatShop © 2021 -   كل الحقوق محفوظة لموقع </div></div>  
-		    </div> 
-			</div>	
-   </div>		
+<div class="container4"> <div class="row1">	
+			<div class="col1">  <div class="content1">
+                 <div class="postext1"><div class="text1">  HmizatShop © 2021 -   كل الحقوق محفوظة لموقع </div></div>  
+		    </div> </div>	
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.button{background-color:red; width:100%; height:70px; border: solid 4px #7aff01; border-radius: 30px;     color:white; font:800 20px 'cairo';  z-index:200;     position:fixed; bottom:0;  }  .button:hover{background-color:blue;}
+</style>
+
+<button id="buttoninfoclien" class="button animatscale" > 👉 اضفط هنا للشراء الان 👈 </button>
+
+
+<script>
+$('#buttoninfoclien').click(function(){
+  document.getElementById("buy").style.display = 'block';         
+});
+</script> 
+ 
+
+
+
+<style>
+.buy{ background-color:black;  width: 100%;  height: 100%;  padding: 0px; margin: 0px;  border: none;  opacity: 1;   z-index: 5000;   cursor: default;     position:fixed; top: 0px;   left: 0px;   display:none;}
+	
+.posform0{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:0%; padding:2%;  border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;  }             
+.posform1 form{ width:420px; }             
+   .posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            
+	  .posinput1 .text1{color:white; font:800 20px 'cairo'; }
+	  .posinput1 .inputtext{background-color:white;  width:390px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
+	  .posinput1 .inputbtn {background-color:#ff0000;  width:350px; height:45px; margin:4% 0%;  border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer; display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
+		 .inputhovererror{  background-color:red;   border:solid 3px red;  width:500px; height:45px; }  		       
+		  .txt_error{color:black; font:400 15px 'cairo';  }
+
+
+
+@media only screen and (max-width:360px)  
+{
+.posform0{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:0%; padding:2%;  border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
+.posform1 form{ width:320px;} 
+	.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            			
+        .posinput1 .text1{color:white; font:800 16px 'cairo'; }
+		.posinput1 .inputtext{background-color:white;  width:290px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
+		.posinput1 .inputbtn {background-color:#ff0000;  width:250px; height:45px; margin:4% 0%;   border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer;  display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
+}  
+</style>
+<div id="buy" class="buy" >
+                     <div class="posform0">
+						 <div class="posform1">
+						   <form  method="post"  id="register_form"  >       
+							   <div class="posinput1"> <div class="text1">أدخل معلوماتك لنتصل بك ونرسل لك المنتوج </div> </div>
+							   <div class="posinput1"> <input    type="text"        placeholder=""                          value="<?php echo $row["ip"]; ?>"      name=""                style="display:none;"                       />    </div>  
+							   <div class="posinput1"> <input    type="text"        placeholder="أدخل الإسم الكامل"          value=""                               name="name"      id="name"            class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل الإسم الكامل ')"  oninput="setCustomValidity('')" dir="rtl"/></div>
+								   <div class="txt_error" id="txt_error_name" ></div>
+							   <div class="posinput1"> <input    type="text"        placeholder="أدخل رقم هاتفك"            value=""                               name="num"       id="num"              class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل رقم هاتفك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>  	  
+								   <div class="txt_error" id="txt_error_num" ></div>          					   
+							   <div class="posinput1"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"   id="address"          class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
+								   <div class="txt_error" id="txt_error_address" ></div>
+							   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا للشراء "        name="sendinfo"           id="btnpage2"         class="inputbtn animatscale"                     onClick="fbq( 'track', 'Purchase' );"   /> </div>
+						   </form> 
+						 </div>	 						 
+                      </div>						 
 </div>
 
 
 
+<script>
+$('#btnpage2').click(function(){
+  var txt_error_name = '';
+  var txt_error_num = '';  var filterphone = /^\d{10}$/;
+  var txt_error_address = '';
+  
+  if(    $.trim($('#name').val()).length == 0       )           {    txt_error_name = 'أدخل الإسم الكامل';   $('#txt_error_name').text(txt_error_name);  $('#name').addClass('inputhovererror');         }               
+  else                                                          {    txt_error_name = '';                   $('#txt_error_name').text(txt_error_name);  $('#name').removeClass('inputhovererror');      }
+  
+  if(    $.trim($('#num').val()).length == 0        )           {    txt_error_num = 'أدخل رقم هاتفك';      $('#txt_error_num').text(txt_error_num);    $('#num').addClass('inputhovererror');          }                 
+  else                                                          {    if (       !filterphone.test($('#num').val())   )    {  txt_error_num = 'أدخل رقم هاتفك';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');      }               
+                                                                     else                                                 {  txt_error_num = '';                $('#txt_error_num').text(txt_error_num);            $('#num').removeClass('inputhovererror');   }              
+															    }
+
+  if(    $.trim($('#address').val()).length == 0    )           {    txt_error_address = 'أدخل عنوانك';    $('#txt_error_address').text(txt_error_address);                         $('#address').addClass('inputhovererror');      }              
+  else                                                          {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
+
+ if(  txt_error_name != ''  || txt_error_num != ''  ||  txt_error_address != ''  )  {   return false;  }   else     {  $("#register_form").submit();     document.getElementById("loadingDiv").style.display = 'block';             }  
+});
+</script> 
+ 
+ 
+ 
+ 
+ 
+ <style>
+.loader{ background-color:black;  width: 100%;  height: 100%;  padding: 0px; margin: 0px;  border: none;  opacity: 0.96;   z-index: 9000;   cursor: default;     position:fixed; top: 0px;   left: 0px;   display:none;}
+.loader:after {  content: "";  width: 100px; height: 100px;   border: solid 3px #BBB;   border-left:solid 3px black; border-radius:50%;               display: inline-block; vertical-align: middle;               position:absolute; top:50%; left:50%; transform:translate(-50%) rotate(0deg);   animation:spin 4s linear infinite;  }
+@keyframes spin {     100% {   transform:translate(-50%) rotate(360deg);     }      }
+</style>
+<div id="loadingDiv" class="loader" ></div>
 
