@@ -14,12 +14,12 @@ $query  =  mysqli_query(      $con   ,       "   select  * FROM infocliendomarak
 foreach($query as $row)	
 {		
 	  ?>       #info clien domarakisa<br/>
-	      	   <?php echo $row["ip"]; ?> <br/>
-			   <?php echo $row["iplocation"]; ?> <br/>
-			   <?php echo $row['name']   ?><br/>
-			   <?php echo $row['num']   ?><br/>
-			   <?php echo $row['adresse']   ?><br/>
-			   <?php echo $row["datetime"]; ?>  <br/><br/>
+	      	   ip = <?php echo $row["ip"]; ?> <br/>
+			   iplocation =<?php echo $row["iplocation"]; ?> <br/>
+			   fullname = <?php echo $row['name']   ?><br/>
+			   num = <?php echo $row['num']   ?><br/>
+			   adresse = <?php echo $row['adresse']   ?><br/>
+			   datetime = <?php echo $row["datetime"]; ?>  <br/><br/>
 	 <?php	
  
 }    
