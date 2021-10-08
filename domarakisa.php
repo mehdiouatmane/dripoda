@@ -1,6 +1,7 @@
 <?php
-$con=  mysqli_connect("sql104.epizy.com",     "epiz_29985917" , "IEUfs5LusO3" ,"epiz_29985917_hmizatshop" ) or die ("could not connect to mysql");
+$con=  mysqli_connect("remotemysql.com",     "zFLO12yis6" , "dE1lgGhUfa"       ,"zFLO12yis6" ) or die ("could not connect to mysql");
 mysqli_query($con,"SET CHARACTER SET 'utf8'");
+
 session_start();
 ?>
 
