@@ -318,7 +318,7 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 
 						
 					
-						 <div class="postext2">     <div class="text2a">  250dh</div>   <div class="text2b"> 340dh</div> </div>
+						 <div class="postext2">     <div class="text2a">  250درهم</div>   <div class="text2b"> 340درهم</div> </div>
 						 <div class="posimg1">  <img  class="img1" src="img/hmizatshop/tawsilmajani2.png" /> </div>  <br/> 
 						 <div class="posstar"> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i>  <i class="star1 fas fa-star"></i> <i class="star1 fas fa-star"></i> </div>
 						 <div class="postext3"> <div class="text3 animatcolor animatscale">العرض محدوود</div>   </div> 
