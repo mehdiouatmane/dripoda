@@ -9,13 +9,14 @@ session_start();
 
 <?php
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }   $ip = get_ip();  
+$iplocation = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));       $city= isset($iplocation['city']) ?  $iplocation['city'] : '';       $country= isset($iplocation['country']) ?  $iplocation['country'] : '';  
 date_default_timezone_set('Africa/Casablanca');  $datetime = date('m/d/Y h:i:s', time());  
 
-$query1 = "INSERT INTO ipcliendomarakisa (ip , datetime ) VALUES ('$ip' , '$datetime' )";	
+
+$query1 = "INSERT INTO ipcliendomarakisa (ip ,  datetime , iplocation ) VALUES ('$ip' , '$datetime' , '$country $city' )";	
 mysqli_query($con,$query1);
 
 
-	
 	
 if(        isset($_POST["sendinfo"])              )
 {
@@ -28,9 +29,10 @@ if(        isset($_POST["sendinfo"])              )
             	$message = urlencode
 				(   
 				  "info clien domarakisa"                             .                 
-				  "\n ip:"                .   $ip          .              
-				  "\n name : "            .   $name        . 
-				  "\n num : "             .   $num         .           
+				  "\n ip:"                .   $ip                     . 
+                  "\n iplocation:"        .   $city." ".$country      . 				  
+				  "\n name : "            .   $name                   . 
+				  "\n num : "             .   $num                    .           
 				  "\n adresse : "         .   $adresse                        
 				 );
             	file_get_contents(url."text=".$message."");
@@ -40,6 +42,7 @@ if(        isset($_POST["sendinfo"])              )
              	$file = Fopen("infoclien.txt","a+"); 
             	fwrite($file , "info clien domarakisa"  . "\n" );
             	fwrite($file ,    "ip : "                   .      $ip                    .      "\n"); 
+				fwrite($file ,    "iplocation : "           .      $city." ".$country     .      "\n"); 
             	fwrite($file ,    "name : "                 .      $name                  .      "\n"); 
             	fwrite($file ,    "num : "                  .      $num                   .      "\n"); 
             	fwrite($file ,    "adresse : "              .      $adresse               .      "\n"); 
@@ -47,7 +50,7 @@ if(        isset($_POST["sendinfo"])              )
 
 
 
-                $query2 = "INSERT INTO infocliendomarakisa (ip , name , num , adresse , datetime ) VALUES ('$ip' , '$name' , '$num' , '$adresse' , '$datetime'  )";	
+                $query2 = "INSERT INTO infocliendomarakisa (ip , iplocation , name , num , adresse , datetime ) VALUES ('$ip' , '$country $city' ,  '$name' , '$num' , '$adresse' , '$datetime'  )";	
                 mysqli_query($con,$query2);
 			
 			
