@@ -1,5 +1,4 @@
 <?php
-$con=  mysqli_connect("sql104.epizy.com",     "epiz_29985917" , "IEUfs5LusO3" ,"epiz_29985917_hmizatshop" ) or die ("could not connect to mysql");
 
 session_start();
 ?>
@@ -45,9 +44,6 @@ if(        isset($_POST["sendinfo"])              )
 
 
 
-               $query1 = "INSERT INTO domarakisa (name , num , adresse ) VALUES ('$name' , '$num' , '$adresse'  )";	
-               mysqli_query($con,$query1);
-			
   			    echo  "  <script>  window.location.href = 'domarakisathanks.php'; </script>    ";
 		
 }
