@@ -9,15 +9,13 @@ session_start();
 
 <?php
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }   $ip = get_ip();  
-$file = Fopen("ipclien.txt","a+"); 
-fwrite($file , "ip clien"  . "\n" );
-fwrite($file ,    "ip : "                   .      $ip                    .      "\n"); 
-fwrite($file , "\n"); 
 
-		
-		
+$query1 = "INSERT INTO ipcliendomarakisa (ip) VALUES ('$ip' )";	
+mysqli_query($con,$query1);
+	
+	
 if(        isset($_POST["sendinfo"])              )
-{		
+{
 				$name = $_POST["name"];
 				$num = $_POST["num"];
 				$adresse = $_POST["adresse"];
@@ -45,13 +43,13 @@ if(        isset($_POST["sendinfo"])              )
             	fwrite($file , "\n"); 
 
 
-	
-                $query1 = "INSERT INTO domarakisa (name , num , adresse ) VALUES ('$name' , '$num' , '$adresse'  )";	
-                mysqli_query($con,$query1);
 
-
-	
-  		echo  "  <script>  window.location.href = 'domarakisathanks.php'; </script>    ";
+                $query2 = "INSERT INTO infocliendomarakisa (ip , name , num , adresse ) VALUES ('$ip' , '$name' , '$num' , '$adresse'  )";	
+                mysqli_query($con,$query2);
+			
+			
+			
+  			    echo  "  <script>  window.location.href = 'domarakisathanks.php'; </script>    ";
 		
 }
 
