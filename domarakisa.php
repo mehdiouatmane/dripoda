@@ -11,8 +11,14 @@ session_start();
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }   $ip = get_ip();  
 date_default_timezone_set('Africa/Casablanca');  $datetime = date('m/d/Y h:i:s', time());  
 
-$query1 = "INSERT INTO ipcliendomarakisa (ip , datetime ) VALUES ('$ip' , '$datetime' )";	
+
+if(      isset($iplocation)         &&      $iplocation =@unserialize(file_get_contents('http://ip-api.com/php/'.$ip))         ) 
+{
+$city=$iplocation['city'];
+$query1 = "INSERT INTO ipcliendomarakisa (ip , datetime , city) VALUES ('$ip' , '$datetime' ,  '$city' )";	
 mysqli_query($con,$query1);
+}
+
 	
 	
 if(        isset($_POST["sendinfo"])              )
