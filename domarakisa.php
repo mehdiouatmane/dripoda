@@ -9,8 +9,9 @@ session_start();
 
 <?php
 function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }   $ip = get_ip();  
+date_default_timezone_set('Africa/Casablanca');  $datetime = date('m/d/Y h:i:s', time());  
 
-$query1 = "INSERT INTO ipcliendomarakisa (ip) VALUES ('$ip' )";	
+$query1 = "INSERT INTO ipcliendomarakisa (ip , datetime ) VALUES ('$ip' , '$datetime' )";	
 mysqli_query($con,$query1);
 	
 	
@@ -44,7 +45,7 @@ if(        isset($_POST["sendinfo"])              )
 
 
 
-                $query2 = "INSERT INTO infocliendomarakisa (ip , name , num , adresse ) VALUES ('$ip' , '$name' , '$num' , '$adresse'  )";	
+                $query2 = "INSERT INTO infocliendomarakisa (ip , name , num , adresse , datetime ) VALUES ('$ip' , '$name' , '$num' , '$adresse' , '$datetime'  )";	
                 mysqli_query($con,$query2);
 			
 			

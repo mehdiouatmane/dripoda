@@ -32,12 +32,13 @@ foreach($query as $row)
 
 
 <?php
-$query  =  mysqli_query(      $con   ,     "  select ip , count(ip) FROM ipcliendomarakisa GROUP BY ip  "           );
+$query  =  mysqli_query(      $con   ,     "  select datetime , ip , count(ip) FROM ipcliendomarakisa GROUP BY ip , datetime  "           );
 foreach($query as $row)	
 {		
 	  ?> 
 			     <?php echo $row["ip"]; ?>  
-		  count  <?php echo $row["count(ip)"]; ?>  			   
+		  count  <?php echo $row["count(ip)"]; ?>  	
+         datetime <?php echo $row["datetime"]; ?>  		  
   		 	     <br>		
 	 <?php	
  
