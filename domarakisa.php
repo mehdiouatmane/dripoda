@@ -277,7 +277,7 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 	.posform1{background-color:#0fa7ff; width:auto; height:auto;   margin:2%;   border:solid 3px #cf0628; border-radius:10px 10px;   display:grid; align-items:center; justify-content:center; text-align:center;   }             
     .posform1 form{ width:320px;} 
 		.posinput1 {background-color:transparent; width:auto; height:auto;  margin:2% 2%;  display:flex; align-items:center; justify-content:center; text-align:center;  }            			
-            .posinput1 .text1{color:white; font:800 20px 'cairo'; }
+            .posinput1 .text1{color:white; font:800 16px 'cairo'; }
 			.posinput1 .inputtext{background-color:white;  width:290px; height:40px;  border: solid 2px #cccccc; border-radius:15px;  box-shadow: 0 0 5px #cccccc;  color:black; font:400 20px black; text-indent: 9px;   }     					 .inputtext:focus{ outline: none !important;  border:solid 2px #0000ff5e; box-shadow: 0 0 5px #719ECE; }       					 .inputtext::placeholder {color:#aba5a5c9;  font:400 20px 'cairo';} 							
 			.posinput1 .inputbtn {background-color:#ff0000;  width:250px; height:45px; margin:4% 0%;   border:solid 2px #cccccc; border-radius:15px; box-shadow: 0 0 5px #cccccc;   color:white; font:800 25px sons-serif;   text-decoration:none;   cursor:pointer;  display:flex; align-items:center;  justify-content:center; text-align:center; transform:scale(1,1); }                     					 .inputbtn:hover{background-color:#f10000b8;}               					 .inputbtn:focus{  outline: none !important;  border:solid 2px red; box-shadow: 0 0 2px red;}            					 
 }  
@@ -326,7 +326,7 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 						 
 						 <div class="posform1">
 						   <form  method="post"  id="register_form"  >       
-							   <div class="posinput1"> <div class="text1">إملئ الإستمارة لتأكيد الطلب </div> </div>
+							   <div class="posinput1"> <div class="text1">أدخل معلوماتك لنتصل بك ونرسل لك المنتوج </div> </div>
 							   <div class="posinput1"> <input    type="text"        placeholder=""                          value="<?php echo $row["ip"]; ?>"      name=""                style="display:none;"                       />    </div>  
 							   <div class="posinput1"> <input    type="text"        placeholder="أدخل الإسم الكامل"          value=""                               name="name"      id="name"            class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل الإسم الكامل ')"  oninput="setCustomValidity('')" dir="rtl"/></div>
 								   <div class="txt_error" id="txt_error_name" ></div>
@@ -334,7 +334,7 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 								   <div class="txt_error" id="txt_error_num" ></div>          					   
 							   <div class="posinput1"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"   id="address"          class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
 								   <div class="txt_error" id="txt_error_address" ></div>
-							   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا لتأكيد طلبك  "        name="sendinfo"           id="btnpage2"         class="inputbtn animatscale"                     onClick="fbq( 'track', 'Purchase' );"   /> </div>
+							   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا للشراء "        name="sendinfo"           id="btnpage2"         class="inputbtn animatscale"                     onClick="fbq( 'track', 'Purchase' );"   /> </div>
 						   </form> 
 						 </div>	 
 		    </div>  </div>
