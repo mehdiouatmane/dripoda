@@ -18,6 +18,7 @@ foreach($query as $row)
 			   <?php echo $row['name']   ?>
 			   <?php echo $row['num']   ?>
 			   <?php echo $row['adresse']   ?>
+			   <?php echo $row["datetime"]; ?>  
 		       <br/>
  			
 	 <?php	
@@ -37,8 +38,8 @@ foreach($query as $row)
 {		
 	  ?> 
 			     <?php echo $row["ip"]; ?>  
-		  count  <?php echo $row["count(ip)"]; ?>  	
-         datetime <?php echo $row["datetime"]; ?>  		  
+		         (<?php echo $row["count(ip)"]; ?>) 	
+                 <?php echo $row["datetime"]; ?>  		  
   		 	     <br>		
 	 <?php	
  
