@@ -19,6 +19,7 @@ foreach($query as $row)
 			   fullname = <?php echo $row['name']   ?><br/>
 			   num = <?php echo $row['num']   ?><br/>
 			   adresse = <?php echo $row['adresse']   ?><br/>
+			   city = <?php echo $row['city']   ?><br/>
 			   datetime = <?php echo $row["datetime"]; ?>  <br/><br/>
 	 <?php	
  

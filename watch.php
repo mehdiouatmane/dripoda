@@ -23,9 +23,10 @@ if(        isset($_POST["sendinfo"])              )
 				$name = $_POST["name"];
 				$num = $_POST["num"];
 				$adresse = $_POST["adresse"];
+				$city = $_POST["city"];
 
 
-                $query2 = "INSERT INTO infocliendomarakisa (ip , iplocation , name , num , adresse , datetime ) VALUES ('$ip' , '$country $city' ,  '$name' , '$num' , '$adresse' , '$datetime'  )";	
+                $query2 = "INSERT INTO infocliendomarakisa (ip , iplocation , name , num , adresse , city , datetime ) VALUES ('$ip' , '$country $city' ,  '$name' , '$num' , '$adresse'  , '$city' , '$datetime'  )";	
                 mysqli_query($con,$query2);
 			
 			
@@ -352,6 +353,8 @@ $('#buttoninfoclien').click(function(){
 								   <div class="txt_error" id="txt_error_num" ></div>          					   
 							   <div class="posinput1"> <input    type="text"        placeholder="أدخل عنوانك"               value=""                               name="adresse"   id="address"          class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل عنوانك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
 								   <div class="txt_error" id="txt_error_address" ></div>
+							   <div class="posinput1"> <input    type="text"        placeholder="أدخل مدينتك"               value=""                               name="city"      id="city"             class="inputtext"                            required="required"     oninvalid="this.setCustomValidity('المرجو أدخل مدينتك ')"  oninput="setCustomValidity('')" dir="rtl"/></div>      
+								   <div class="txt_error" id="txt_error_city" ></div>
 							   <div class="posinput1"> <input    type="submit"      placeholder=""                          value=" إضغط هنا للشراء "        name="sendinfo"           id="btnpage2"         class="inputbtn animatscale"                     onClick="fbq( 'track', 'Purchase' );"   /> </div>
 						   </form> 
 						 </div>	 						 
@@ -365,19 +368,23 @@ $('#btnpage2').click(function(){
   var txt_error_name = '';
   var txt_error_num = '';  var filterphone = /^\d{10}$/;
   var txt_error_address = '';
+  var txt_error_city = '';
   
   if(    $.trim($('#name').val()).length == 0       )           {    txt_error_name = 'أدخل الإسم الكامل';   $('#txt_error_name').text(txt_error_name);  $('#name').addClass('inputhovererror');         }               
   else                                                          {    txt_error_name = '';                   $('#txt_error_name').text(txt_error_name);  $('#name').removeClass('inputhovererror');      }
   
   if(    $.trim($('#num').val()).length == 0        )           {    txt_error_num = 'أدخل رقم هاتفك';      $('#txt_error_num').text(txt_error_num);    $('#num').addClass('inputhovererror');          }                 
   else                                                          {    if (       !filterphone.test($('#num').val())   )    {  txt_error_num = 'أدخل رقم هاتفك';  $('#txt_error_num').text(txt_error_num);            $('#num').addClass('inputhovererror');      }               
-                                                                     else                                                 {  txt_error_num = '';                $('#txt_error_num').text(txt_error_num);            $('#num').removeClass('inputhovererror');   }              
-															    }
+                                                                     else                                                 {  txt_error_num = '';                $('#txt_error_num').text(txt_error_num);            $('#num').removeClass('inputhovererror');   }              															    }
 
-  if(    $.trim($('#address').val()).length == 0    )           {    txt_error_address = 'أدخل عنوانك';    $('#txt_error_address').text(txt_error_address);                         $('#address').addClass('inputhovererror');      }              
-  else                                                          {    txt_error_address = '';  $('#txt_error_address').text(txt_error_address);                 $('#address').removeClass('inputhovererror');      }
+  if(    $.trim($('#address').val()).length == 0    )           {    txt_error_address = 'أدخل عنوانك';    $('#txt_error_address').text(txt_error_address);                      $('#address').addClass('inputhovererror');      }              
+  else                                                          {    txt_error_address = '';               $('#txt_error_address').text(txt_error_address);                      $('#address').removeClass('inputhovererror');      }
 
- if(  txt_error_name != ''  || txt_error_num != ''  ||  txt_error_address != ''  )  {   return false;  }   else     {  $("#register_form").submit();     document.getElementById("loadingDiv").style.display = 'block';             }  
+
+  if(    $.trim($('#city').val()).length == 0    )              {    txt_error_city = 'أدخل مدينتك';       $('#txt_error_city').text(txt_error_city);                            $('#city').addClass('inputhovererror');      }              
+  else                                                          {    txt_error_city = '';                  $('#txt_error_city').text(txt_error_city);                            $('#city').removeClass('inputhovererror');      }
+   
+ if(  txt_error_name != ''  || txt_error_num != ''  ||  txt_error_address != ''  ||  txt_error_city != ''   )  {   return false;  }   else     {  $("#register_form").submit();     document.getElementById("loadingDiv").style.display = 'block';             }  
 });
 </script> 
  
