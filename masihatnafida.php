@@ -88,7 +88,10 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 
 <div class="container1"><div class="row1">
 	  <div class="col1"><div class="content1">
-	  
+
+			<div class="posimgtawsilmajani">  <img  class="imgtawsilmajani" src="img/hmizatshop/tawsilmajani2.png" /> </div>  <br/> 						 						    
+
+
 	        <div class="posimg1">	<img class="img1" src="img/hmizatshop/masihatnafida/1.jpg" />	 </div>  
 	        <div class="posimg1">	<img class="img1" src="img/hmizatshop/masihatnafida/2.jpg" />	 </div>  			
 	        <div class="posimg1">	<img class="img1" src="img/hmizatshop/masihatnafida/4.jpg" />	 </div>  				
@@ -98,9 +101,7 @@ src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
 	        <div class="posimg1">	<img class="img1" src="img/hmizatshop/masihatnafida/8.jpg" />	 </div>    			
 				
 				
-
 		
-			<div class="posimgtawsilmajani">  <img  class="imgtawsilmajani" src="img/hmizatshop/tawsilmajani2.png" /> </div>  <br/> 						 						    
 			<div class="posimgreview">	<img class="imgreview" src="img/hmizatshop/tayimat.png" />	 </div>     
 			
 	  </div></div>	
