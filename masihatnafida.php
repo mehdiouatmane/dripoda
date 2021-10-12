@@ -8,32 +8,30 @@ session_start();
 
 
 <?php
-if(  isset($_POST["name"])   )
-{ 
+
 	function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }   $ip = get_ip();  
 	$iplocation = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));       $city= isset($iplocation['city']) ?  $iplocation['city'] : '';       $country= isset($iplocation['country']) ?  $iplocation['country'] : '';  
 	date_default_timezone_set('Africa/Casablanca');  $datetime = date('m/d/Y h:i:s', time());  
 	$product = 'masihatnafida';
+
+$query1 = "INSERT INTO ipcliendomarakisa (ip , product , datetime , iplocation ) VALUES ('$ip' , '$product' , '$datetime' , '$country $city' )";	
+mysqli_query($con,$query1);
+
+
+
+
+if(  isset($_POST["sendinfo"])    )
+{ 
 	$name = $_POST["name"];
 	$num = $_POST["num"];
 	$adresse = $_POST["adresse"];
 	$city = $_POST["city"];
-}
-
-
-if(  isset($_POST["ip"])   )
-{ 
-   $query1 = "INSERT INTO ipcliendomarakisa (ip , product , datetime , iplocation ) VALUES ('$ip' , '$product' , '$datetime' , '$country $city' )";	
-   mysqli_query($con,$query1);
-}
-
-
-if(  isset($_POST["sendinfo"])    )
-{         
-   $query2 = "INSERT INTO infocliendomarakisa (ip , product , iplocation , name , num , adresse , city , datetime ) VALUES ('$ip' , '$product' , '$country $city' ,  '$name' , '$num' , '$adresse'  , '$city' , '$datetime'  )";	
-   mysqli_query($con,$query2);
+	
+	
+$query2 = "INSERT INTO infocliendomarakisa (ip , product , iplocation , name , num , adresse , city , datetime ) VALUES ('$ip' , '$product' , '$country $city' ,  '$name' , '$num' , '$adresse'  , '$city' , '$datetime'  )";	
+mysqli_query($con,$query2);
 			
-   echo  "  <script>  window.location.href = 'thanks.php'; </script>    ";		
+echo  "  <script>  window.location.href = 'thanks.php'; </script>    ";		
 }
 
 ?>
