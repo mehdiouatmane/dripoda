@@ -31,7 +31,7 @@ foreach($query as $row)
 
 
 <?php
-$query  =  mysqli_query(      $con   ,     " SELECT iplocation , datetime  ,  ip  , count(ip) FROM ipcliendomarakisa GROUP BY ip , iplocation, datetime HAVING count(*) >= 1  "           );
+$query  =  mysqli_query(      $con   ,     " SELECT product , datetime ,  iplocation ,  ip  , count(ip) FROM ipcliendomarakisa GROUP BY ip , iplocation, datetime , product HAVING count(*) >= 1  "           );
 foreach($query as $row)	
 {
 	  ?>
