@@ -250,7 +250,7 @@ document.querySelectorAll('.opemegamenu').forEach(function(link) {
 
 
 <style>
-.container4 {background-color:black; width:100%; height:auto;  padding:0%; margin:2% 0% 0% 0%; } .container4 .row1{background-color:transparent;   padding:0%; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; grid-row-gap:0rem;  }
+.container4 {background-color:black; width:100%; height:auto;  padding:1% 0%; margin:2% 0% 0% 0%; } .container4 .row1{background-color:transparent;   padding:0%; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; grid-row-gap:0rem;  }
   
    .container4 .row1 .col1{background-color:transparent;  width:25%; }       .container4 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0%;         display:flex; align-items:center; justify-content:center; text-align:center;        }    
         .container4 .row1 .col1 .content1 .postext1{display:flex;  align-items:center; align-content:center; justify-items:center; justify-content:center; text-align:center;}    .container4 .row1 .col1 .content1 .postext1 .text1{font:800 40px 'cairo';}
@@ -265,7 +265,7 @@ document.querySelectorAll('.opemegamenu').forEach(function(link) {
  @media only screen and (max-width:953px)  
 {
 	
-	.container4 {background-color:black; width:100%; height:auto;  padding:0%; margin:2% 0% 0% 0%; } .container4 .row1{background-color:transparent;   padding:0%; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; grid-row-gap:1rem;  }
+	.container4 {background-color:black; width:100%; height:auto;   padding:0% 0% 3% 0%;    margin:2% 0% 0% 0%; } .container4 .row1{background-color:transparent;   padding:0%; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; grid-row-gap:1rem;  }
 	
 	   .container4 .row1 .col1{background-color:transparent;  width:100%; }       .container4 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0%;         display:flex; align-items:center; justify-content:center; text-align:center;        }    
 			.container4 .row1 .col1 .content1 .postext1{display:flex;  align-items:center; align-content:center; justify-items:center; justify-content:center; text-align:center;}    .container4 .row1 .col1 .content1 .postext1 .text1{font:800 40px 'cairo';}
@@ -280,7 +280,7 @@ document.querySelectorAll('.opemegamenu').forEach(function(link) {
 @media only screen and (max-width:360px)  
 {
 	
-	.container4 {background-color:black; width:100%; height:auto;  padding:0%; margin:2% 0% 0% 0%; } .container4 .row1{background-color:transparent;   padding:0%; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; grid-row-gap:1rem;  }
+	.container4 {background-color:black; width:100%; height:auto;   padding:0% 0% 3% 0%;   margin:2% 0% 0% 0%; } .container4 .row1{background-color:transparent;   padding:0%; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap; grid-row-gap:1rem;  }
 	
 	   .container4 .row1 .col1{background-color:transparent;  width:100%; }       .container4 .row1 .col1 .content1  {background-color:transparent; padding:0%; margin:0%;         display:flex; align-items:center; justify-content:center; text-align:center;        }    
 			.container4 .row1 .col1 .content1 .postext1{display:flex;  align-items:center; align-content:center; justify-items:center; justify-content:center; text-align:center;}    .container4 .row1 .col1 .content1 .postext1 .text1{font:800 40px 'cairo';}
@@ -296,7 +296,7 @@ document.querySelectorAll('.opemegamenu').forEach(function(link) {
 
 <div class="container4"><div class="row1">
 	  <div class="col1">  <div class="content1">	
-                  <div class="postext1">  <div class="text1">  <span style="color:blue">Resto-</span><span style="color:red">Déco</span>  </div>   </div>
+           <div class="postext1">  <div class="text1">  <span style="color:blue">Resto-</span><span style="color:red">Déco</span>  </div>   </div>
 	  </div> </div>
 	  
 	  <div class="col2">  <div class="content1">
