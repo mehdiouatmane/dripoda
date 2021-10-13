@@ -116,12 +116,26 @@ document.querySelectorAll('.opemegamenu').forEach(function(link) {
                 link.querySelector('.megamenu').classList.remove('megamenuhover');  				
 		});	
 		
-		link.addEventListener('click', function(e) 
-		{ 	        
-                link.querySelector('.iconplus').classList.remove('iconplushover');
+		
+});
+ 
+ 
+document.querySelectorAll('.opemegamenu').forEach(function(link) {
+		link.addEventListener('click', function(e) { 	
+			if (!link.querySelector('.megamenu').classList.contains('megamenuhover'))  
+			{ 
+			   link.querySelector('.iconplus').classList.add('iconplushover'); 
+                link.querySelector('.kht').classList.add('khthover'); 	
+	            link.querySelector('.megamenu').classList.add('megamenuhover'); 							  
+			} 	
+			else
+			{
+			     link.querySelector('.iconplus').classList.remove('iconplushover');
                 link.querySelector('.kht').classList.remove('khthover'); 		 	
-                link.querySelector('.megamenu').classList.remove('megamenuhover');  				
-		});	
+                link.querySelector('.megamenu').classList.remove('megamenuhover');  					
+			}	
+			e.preventDefault();			
+		});
 });
 </script>
 
