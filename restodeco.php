@@ -115,6 +115,13 @@ document.querySelectorAll('.opemegamenu').forEach(function(link) {
                 link.querySelector('.kht').classList.remove('khthover'); 		 	
                 link.querySelector('.megamenu').classList.remove('megamenuhover');  				
 		});	
+		
+		link.addEventListener('click', function(e) 
+		{ 	        
+                link.querySelector('.iconplus').classList.remove('iconplushover');
+                link.querySelector('.kht').classList.remove('khthover'); 		 	
+                link.querySelector('.megamenu').classList.remove('megamenuhover');  				
+		});	
 });
 </script>
 
