@@ -2,7 +2,7 @@
 <?php
 $ip = $_SERVER['REMOTE_ADDR'];
 $ips = array();
-$getcountry=@unserialize(file_get_contents("http://ipinfo.io/".$ip));
+$getcountry=@unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
 $country=$getcountry-->country;
 $page = file("ips.txt");
 
