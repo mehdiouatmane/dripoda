@@ -11,16 +11,17 @@
 <?php
 
 $ip=$_SERVER['REMOTE_ADDR'];
-$details = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=$ip"));
-$continent=$details->geoplugin_continentCode;
-$country=$details->geoplugin_countryCode;
-if($continent==="EU" && $country==="UK" || $continent!="EU")
+
+$details = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));       
+$country= isset($details['country']) ?  $details['country'] : '';  
+
+if($country==="US")
 {
-      echo " country is UK .";
+      echo " country is US .";
 }
 else
 { 
-	echo "country is not UK .";
+	echo "country is not US .";
 }
 
 
