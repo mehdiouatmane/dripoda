@@ -16,11 +16,11 @@ $continent=$details->geoplugin_continentCode;
 $country=$details->geoplugin_countryCode;
 if($continent==="EU" && $country==="UK" || $continent!="EU")
 {
-      echo " country is UK or not from Europe .";
+      echo " country is UK .";
 }
 else
 { 
-	echo "country is in Europe , but its not UK .";
+	echo "country is not UK .";
 }
 
 
