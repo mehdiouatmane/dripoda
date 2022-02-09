@@ -81,16 +81,6 @@ foreach($de as $value)
 
 
 
-$agent = $_SERVER['HTTP_USER_AGENT'];
-$entry_line = "FALSE | TIME : $current_date | IP : $ip | ISP : $isp  | HN : $hostname | UA: $agent \r\n";
-$fp = fopen("ip.log", "a");
-fputs($fp, $entry_line);
-fclose($fp);
-
-header('Location: https://www.deutschepost.de/');
-exit();
-
-
 ?>
 
 
