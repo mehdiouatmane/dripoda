@@ -1,11 +1,10 @@
-kk
 
 <?php
 $ip = $_SERVER['REMOTE_ADDR'];
 $ips = array();
 $getcountry=json_decode(file_get_contents("http://ipinfo.io/".$ip));
 $country=$getcountry-->country;
-$page = file ("ips.txt");
+$page = file("ips.txt");
 
 foreach($page as $line)
 {
