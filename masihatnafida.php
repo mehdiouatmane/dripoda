@@ -45,7 +45,9 @@ echo  "  <script>  window.location.href = 'thanks.php'; </script>    ";
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"  rel="stylesheet"  > <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
 <style>html, body{ background-color:transparent;  padding:0; border:0; margin:0;  touch-action: manipulation;    user-select: none;   }   ul li {list-style-type:none;}     </style>
 
-<!-- Facebook Pixel Code -->
+
+
+<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -55,17 +57,13 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '290489539559427');
+fbq('init', '1005326677061402');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=290489539559427&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=1005326677061402&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Facebook Pixel Code -->
-
-
-
-
+<!-- End Meta Pixel Code -->
 
 
 
