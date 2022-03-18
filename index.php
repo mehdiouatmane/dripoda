@@ -1,6 +1,5 @@
 <html>
 <head>
-  <meta name="facebook-domain-verification" content="hv76utc2tqbwehjg3dlo6emqqnqvyq" />
   
 <!-- Meta Pixel Code -->
 <script>
@@ -20,10 +19,15 @@ src="https://www.facebook.com/tr?id=1005326677061402&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
   
+  
+    <meta name="facebook-domain-verification" content="hv76utc2tqbwehjg3dlo6emqqnqvyq" />
+  
 </head> 
   
 <body>
 </body>
+  
+  
 </html>
 
 
