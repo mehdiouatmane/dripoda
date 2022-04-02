@@ -61,11 +61,15 @@ if(  isset($_POST["sendinfo"])  )
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>   <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"      ></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"  rel="stylesheet"  > <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
 <link rel="shortcut icon" type="image/x-icon" media="all" href="" />
-<style>htm,body{ background-image:url(img/smartsm/background.jpg);   background-repeat:no-repeat;  background-size: auto; background-position:center;    padding:0; border:0; margin:0;  touch-action: manipulation;    user-select: none;   }   ul li {list-style-type:none; text-decoration:none;  }  a{text-decoration:none; }    </style>
+<style>htm,body{padding:0; border:0; margin:0;  touch-action: manipulation;    user-select: none;   }   ul li {list-style-type:none; text-decoration:none;  }  a{text-decoration:none; }    </style>
  
 
  
 <style>
+.container00 {  width:935px;  height:auto;   } 
+
+.container0 {  background-image:url(img/smartsm/background.jpg);    background-repeat:no-repeat;  background-size:auto; background-position:center;      width:935px; height:100vh;   position:absolute; top:50%;  left:50%; transform:translate(-50%,-50%);   }
+
 .container1 { background-color:white; width:593px; height:auto;  border:solid 1px black; position:absolute; top:50%;  left:50%; transform:translate(-50%,-50%);  }
 
 
@@ -89,7 +93,9 @@ if(  isset($_POST["sendinfo"])  )
 
 
 
-<form method="post" >  
+<form method="post" > 
+<div class="container00" >
+<div class="container0" > 
 <div class="container1" >
   
 	<div class="row1">
@@ -119,5 +125,7 @@ if(  isset($_POST["sendinfo"])  )
 	</div>
 
 
+</div>
+</div>
 </div>
 </form>
