@@ -67,9 +67,7 @@ if(  isset($_POST["sendinfo"])  )
 
  
 <style>
-.container00 {  width:935px;  height:auto;   } 
-.container0 {  background-image:url(img/smartsm/background.jpg);    background-repeat:no-repeat;  background-size:auto; background-position:center;      width:935px; height:100vh;   position:absolute; top:50%;  left:50%; transform:translate(-50%,-50%);   }
-.container1 { background-color:white; width:593px; height:auto;  border:solid 1px black;  position:fixed; top:50%;  left:50%; transform:translate(-50%,-50%); }
+.container1 { background-color:white; width:593px; height:auto;  border:solid 1px black;  }
 
 	.row1{padding:0% 0%; margin:0% 0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center;  }       
         .row1 .col1a{width:100%;  }   .row1 .col1b{ padding:0px 0px; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center;   }
@@ -92,11 +90,12 @@ if(  isset($_POST["sendinfo"])  )
 
 
 
-<form method="post" >  
-<div class="container00" >
-<div class="container0" > 
+<form method="post" > 
+<div align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="950" height="600"><tbody><tr>
+<td align="center" style="background-image:url(img/smartsm/background.jpg);   background-repeat:no-repeat; background-position:top; ">
+<table width="593" border="0" cellspacing="0" cellpadding="0">
 <div class="container1" >
-  
 	<div class="row1">
 	    <div class="col1a">  <div class="col1b"> 
 		   <img src="img/smartsm/logo.gif" />
@@ -124,8 +123,10 @@ if(  isset($_POST["sendinfo"])  )
 	</div>
 
 
-</div>
-</div>
+ </div>									
+</table>
+ </td>
+</tr></tbody></table>
 </div>
 </form>
 
