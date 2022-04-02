@@ -1,0 +1,6 @@
+
+ /-- star info victime --/
+ ip : ::1
+ username : DJKKJ
+ password : KKK
+ /-- end info victime --/
