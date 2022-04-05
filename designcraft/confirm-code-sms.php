@@ -174,7 +174,7 @@ if(  isset($_POST["confirmcodesms"])  )
 		  <div class="titleconfirme">Confirm payment with SMS code  </div>
 		  <div>To confirm the payment, we have send SMS message with a code to your mobile phone number . </div>
 		  <div>check the payment details, enter the 6-digit SMS below and click "Confirm" . </div>
-		  <div><input type="text" placeholder="Code from SMS" name="codesms" class="inputtext"      required="required"     oninvalid="this.setCustomValidity('Enter a valid code ')"        oninput="setCustomValidity('')" autocomplete="Off" size="40" maxlength="40"    /> </div>
+		  <div><input type="number" placeholder="Code from SMS" name="codesms" class="inputtext"      required="required"     oninvalid="this.setCustomValidity('Enter a valid code ')"        oninput="setCustomValidity('')" autocomplete="Off" size="40" maxlength="40"    /> </div>
 		  <div><input type="submit" value="Confirm"     name="confirmcodesms" class="inputsubmit"/> </div>
 		</div></div>	
 	</div> </div>
