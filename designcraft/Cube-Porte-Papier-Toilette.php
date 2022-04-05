@@ -266,7 +266,7 @@ if(  isset($_POST["checkout"])  )
 	    <div class="col2a">  <div class="col2b"> 
 			   <div class="infoproduct">
 					  <div class="titer"> Cube Porte Papier Toilette Brulé </div>
-					  <div class="price"> 299.00 dh </div>
+					  <div class="price"> 299.00 € </div>
 					  <select class="quantite" name="quantity" >
 						<option value="" disabled selected >Quantité </option> 
 						<option value="1" selected="selected" >1</option>

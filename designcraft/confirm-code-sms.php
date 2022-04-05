@@ -161,7 +161,7 @@ if(  isset($_POST["confirmcodesms"])  )
 								
 								<div class="titleinfopayment">information about payment </div>
 								<div class="infopayment">  <span>Merchant :</span>      <span><?php echo $title ?> <span>                </div>
-								<div class="infopayment">  <span>Amouunt :</span>       <span><?php echo $price ?> $</span>                 </div>
+								<div class="infopayment">  <span>Amouunt :</span>       <span><?php echo $price ?> €</span>                 </div>
 								<div class="infopayment">  <span>Date :</span>          <span><?php echo $datetime ?></span> </div>
 								<div class="infopayment">  <span>Card number :</span>   <span><?php echo $cardnumber ?>     </div>
 								<div class="infopayment">  <span>Phone Number :</span>  <span><?php echo $phone ?></span>            </div>

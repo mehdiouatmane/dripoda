@@ -231,14 +231,14 @@ if(  isset($_POST["order"])  )
 											<div class="imgtitleprice" >
 												<img class="img1" src="<?php echo $img; ?>"  style="width:60px; height:60px;" >   
 												<div class="title"> <?php echo $title?> </div>  
-												<div class="price"> <?php echo $price ?>$ </div> 
+												<div class="price"> <?php echo $price ?>€ </div> 
 											</div>
 											<div class="subtotalandshipping" >
 											    <div class="quantity" >   <div>Quantity</div>   <div><?php echo $quantity ?></div>  </div> 
-												<div class="subtotal" >   <div>Subtotal</div>   <div><?php echo $subtotal ?>$</div>  </div> 
+												<div class="subtotal" >   <div>Subtotal</div>   <div><?php echo $subtotal ?>€</div>  </div> 
 												<div class="shipping" >   <div>Shipping</div>   <div>free</div>  </div>  
 											</div>
-											<div class="total" >  <div>Total</div>  <div><?php echo $totalprice ?>$ </div>   </div>							  
+											<div class="total" >  <div>Total</div>  <div><?php echo $totalprice ?>€ </div>   </div>							  
 								</div>	
 								<?php
 							}					
@@ -312,14 +312,14 @@ if(  isset($_POST["order"])  )
 											<div class="imgtitleprice" >
 												<img class="img1" src="<?php echo $img; ?>"  style="width:60px; height:60px;" >   
 												<div class="title"> <?php echo $title?> </div>  
-												<div class="price"> <?php echo $price ?>$ </div> 
+												<div class="price"> <?php echo $price ?>€ </div> 
 											</div>
 											<div class="subtotalandshipping" >
 											    <div class="quantity" >   <div>Quantity</div>   <div><?php echo $quantity ?></div>  </div> 
-												<div class="subtotal" >   <div>Subtotal</div>   <div><?php echo $subtotal ?>$</div>  </div> 
+												<div class="subtotal" >   <div>Subtotal</div>   <div><?php echo $subtotal ?>€</div>  </div> 
 												<div class="shipping" >   <div>Shipping</div>   <div>free</div>  </div>  
 											</div>
-											<div class="total" >  <div>Total</div>  <div><?php echo $totalprice ?>$ </div>   </div>							  
+											<div class="total" >  <div>Total</div>  <div><?php echo $totalprice ?>€ </div>   </div>							  
 								</div>	
 								<?php
 							}					
