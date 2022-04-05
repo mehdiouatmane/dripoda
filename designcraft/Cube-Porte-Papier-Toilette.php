@@ -274,7 +274,7 @@ if(  isset($_POST["checkout"])  )
 						<option value="3">3</option>
 						<option value="4">4</option>
 					  </select>
-					  <input type="button" value="Ajouter au panier"    name=""    class="adtocart" />
+					  <input style="display:none;" type="button" value="Ajouter au panier"    name=""    class="adtocart" />
 					  <input type="submit" value="Acheter maintenant"   name="checkout"    class="checkout" />
 					  <div class="shortdescription">   Porte-papier de toilette Ce support de papier hygiénique est non seulement fonctionnel mais aussi un beau décor pour votre toilette. Le support de papier hygiénique peut contenir 5 rouleaux de papier.  </div>
 					  <div class="partage"> Partager :  <i class="fab fa-facebook"></i>    <i class="fab fa-instagram"></i>    <i class="fab fa-whatsapp"></i>  <i class="fab fa-twitter"></i></div>  
