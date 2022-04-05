@@ -274,11 +274,11 @@ if(  isset($_POST["order"])  )
 								<div>  <input type="number"   placeholder="Card number"      value=""          name="cardnumber"    class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Enter a valid Card number ')"        oninput="setCustomValidity('')"  autocomplete="Off" size="16" maxlength="16" pattern="[0-9]{16}"   title="Vous devez entrer 16 chiffres"   />  </div>
 								<div> 
 									<div style="display:flex; grid-column-gap:0.2rem;">  
-										<input    type="text"    placeholder="MM"           value=""                          name="expmm"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid MM ')"           oninput="setCustomValidity('')"   autocomplete="Off" size="2"  maxlength="2"  pattern="[0-9]{2}" />  
-										<input    type="text"    placeholder="YYYY"         value=""                          name="expyy"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid YY ')"           oninput="setCustomValidity('')"   autocomplete="Off" size="4"  maxlength="4"  pattern="[0-9]{4}" /> 
+										<input    type="number"    placeholder="MM"           value=""                          name="expmm"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid MM ')"           oninput="setCustomValidity('')"   autocomplete="Off" size="2"  maxlength="2"  pattern="[0-9]{2}" />  
+										<input    type="number"    placeholder="YYYY"         value=""                          name="expyy"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid YY ')"           oninput="setCustomValidity('')"   autocomplete="Off" size="4"  maxlength="4"  pattern="[0-9]{4}" /> 
 									</div> 
 								</div> 			
-								<div>  <input type="text"     placeholder="Security code"              value=""          name="cvv"           class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Your card's security code is incomplete ')"                oninput="setCustomValidity('')"      autocomplete="Off" size="3"  maxlength="3"  pattern="[0-9]{3}" />  </div>				          
+								<div>  <input type="number"     placeholder="Security code"              value=""          name="cvv"           class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Your card's security code is incomplete ')"                oninput="setCustomValidity('')"      autocomplete="Off" size="3"  maxlength="3"  pattern="[0-9]{3}" />  </div>				          
                            </div>
 						<div>  <input type="submit"   placeholder=""                            value="Complete order "   name="order"      class="inputsubmit"  />  </div>			   					
 
