@@ -5,5 +5,5 @@
 @media only screen and (max-width:360px)  {   
 .img1{width: 100%;  max-width: 900px;  height: auto;  }} 
 </style>
-<div class="posimg1"> <img class="img1" src="img/hmizatshop/mabrok.png" /> </div>
+<div class="posimg1"> <img class="img1" src="img/mabrok.png" /> </div>
 
