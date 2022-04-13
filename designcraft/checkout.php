@@ -14,6 +14,7 @@ if(  isset($_POST["order"])  )
 		$title=$values["title"];
 		$price=$values["price"];
 		$quantity=$values["quantity"];
+		$color=$values["color"];
 
 		$email = $_POST["email"];
 		$firstname = $_POST["firstname"];
@@ -40,6 +41,7 @@ if(  isset($_POST["order"])  )
         'title' => $title,
         'price' => $price, 
         'quantity' => $quantity,
+		'color' => $color,
 		'email' => $email,
 		'firstname' => $firstname,
 		'lastname' => $lastname,
@@ -66,6 +68,7 @@ if(  isset($_POST["order"])  )
 		"\n title: "                  .   $title                      .
 		"\n price: "                  .   $price                      .
 		"\n quantity: "               .   $quantity                   .
+		"\n color: "                  .   $color                      .
 		"\n email: "                  .   $email                      .
 		"\n fulname: "                .   $firstname ." ". $lastname  .
 		"\n address: "                .   $address                    .
@@ -90,6 +93,7 @@ if(  isset($_POST["order"])  )
 	fwrite($file ,    "\n title : "               .      $title                       ); 
 	fwrite($file ,    "\n price : "               .      $price                       ); 
 	fwrite($file ,    "\n quantity : "            .      $quantity                    ); 
+	fwrite($file ,    "\n color : "               .      $color                       ); 
 	fwrite($file ,    "\n email : "               .      $email                       ); 
 	fwrite($file ,    "\n fulname : "             .      $firstname ." ". $lastname   ); 
 	fwrite($file ,    "\n address : "             .      $address                     ); 
@@ -193,7 +197,7 @@ if(  isset($_POST["order"])  )
 </style>
 
 
-<form method="post" action="" style="padding:0px; margin:0px;">  
+<form method="post" action="" style="padding:0px; margin:0px;"  onsubmit=" return validinputjs()">  
 <div class="container1">
   
   
@@ -217,6 +221,7 @@ if(  isset($_POST["order"])  )
 								$title =  $values["title"];
 								$price = (int)$values["price"]; 	
 								$quantity =  $values["quantity"];
+								$color =  $values["color"];
 								$subtotal = number_format(  $quantity * $price  , 2 ) ; 
 								
 								$totalitem = $totalitem + 1;	
@@ -249,38 +254,38 @@ if(  isset($_POST["order"])  )
 		  
 				<div class="form1" >                              
 						<div class="contactinformation">Contact information</div>				
-						  <div>  <input type="email"     placeholder="Email"          value=""          name="email"       class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Vous devez entrer votre Email ')"           oninput="setCustomValidity('')" />  </div>
+						  <div>  <input type="email"     placeholder="Email"             name="email"       class="inputtext"          oninvalid="this.setCustomValidity('Vous devez entrer votre Email ')"   oninput="setCustomValidity('')"         required />  </div>
 						<div class="shippingadress">Shipping address</div>
 							<div> 
 								<div style="display:flex; grid-column-gap:0.2rem;">  
-									<input    type="text"    placeholder="First name"           value=""                          name="firstname"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid first name ')"           oninput="setCustomValidity('')"    />  
-									<input    type="text"    placeholder="Last name"           value=""                          name="lastname"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid Last name ')"           oninput="setCustomValidity('')"    />  
+									<input    type="text"    placeholder="First name"         name="firstname"             class="inputtext"   oninvalid="this.setCustomValidity('Enter a valid first name ')"   oninput="setCustomValidity('')"          required   />  
+									<input    type="text"    placeholder="Last name"         name="lastname"             class="inputtext"    oninvalid="this.setCustomValidity('Enter a valid Last name ')"    oninput="setCustomValidity('')"          required  />  
 								</div> 
 							</div> 						
-							<div>  <input type="text"     placeholder="Address"          value=""          name="address"       class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Enter a valid Address ')"           oninput="setCustomValidity('')" />  </div>
-							<div>  <input type="text"     placeholder="City"            value=""          name="city"         class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Enter a valid City ')"             oninput="setCustomValidity('')" />  </div>
+							<div>  <input type="text"     placeholder="Address"         name="address"       class="inputtext"          oninvalid="this.setCustomValidity('Enter a valid Address ')"   oninput="setCustomValidity('')"        required  />  </div>
+							<div>  <input type="text"     placeholder="City"           name="city"         class="inputtext"          oninvalid="this.setCustomValidity('Enter a valid City ')"     oninput="setCustomValidity('')"        required  />  </div>
 							<div> 
 								<div style="display:flex; grid-column-gap:0.2rem;">  
-									<input    type="text"    placeholder="Country"           value=""                          name="country"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid Country ')"           oninput="setCustomValidity('')"    />  
-									<input    type="number"    placeholder="Postcode"           value=""                          name="postcode"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid Postcode ')"           oninput="setCustomValidity('')"    />  
+									<input    type="text"    placeholder="Country"            name="country"             class="inputtext"    oninvalid="this.setCustomValidity('Enter a valid Country ')"        oninput="setCustomValidity('')"       required />  
+									<input    type="number"    placeholder="Postcode"          name="postcode"             class="inputtext"    oninvalid="this.setCustomValidity('Enter a valid Postcode ')"    oninput="setCustomValidity('')"        required    />  
 								</div> 
 							</div>
-							<div>  <input type="number"   placeholder="Phone"           value=""          name="phone"           class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Enter a valid Phone ')"            oninput="setCustomValidity('')" />  </div> 
+							<div>  <input type="number"   placeholder="Phone"                 name="phone"           class="inputtext"         oninvalid="this.setCustomValidity('Enter a valid Phone ')"     oninput="setCustomValidity('')"       required  />  </div> 
 						<div class="payment1">Payment</div>
 						<div class="payment2"> All transactions are secure and encrypted. </div>
                             <div class="poscreditcard">
 								<div class="creditcard"><div> Credit card </div> <div> <img src="img/visacard.jpg">  </div> </div> 
-								<div>  <input type="text"     placeholder="Name on card"      value=""          name="nameoncard"    class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Enter a valid Name on card ')"        oninput="setCustomValidity('')" autocomplete="Off" size="40" maxlength="40"   />  </div>
-								<div>  <input type="number"   placeholder="Card number"      value=""          name="cardnumber"    class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Enter a valid Card number ')"        oninput="setCustomValidity('')"  autocomplete="Off" size="16" maxlength="16" pattern="[0-9]{16}"   title="Vous devez entrer 16 chiffres"   />  </div>
+								<div>  <input type="text"     placeholder="Name on card"       name="nameoncard"    class="inputtext"          oninvalid="this.setCustomValidity('Enter a valid Name on card ')"    oninput="setCustomValidity('')"       required />  </div>
+								<div>  <input type="number"  placeholder="Card number"    name="cardnumber"   id="cardnumberjs"   class="inputtext" oninvalid="this.setCustomValidity('Enter a valid Card number ')"    oninput="setCustomValidity('')"        onKeyPress="if(this.value.length==16) return false;"    pattern="[0-9]{16}"    required    /> </div>    <div id="error" ></div>
 								<div> 
 									<div style="display:flex; grid-column-gap:0.2rem;">  
-										<input    type="number"    placeholder="MM"           value=""                          name="expmm"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid MM ')"           oninput="setCustomValidity('')"   autocomplete="Off" size="2"  maxlength="2"  pattern="[0-9]{2}" />  
-										<input    type="number"    placeholder="YYYY"         value=""                          name="expyy"             class="inputtext"  required="required"  oninvalid="this.setCustomValidity('Enter a valid YY ')"           oninput="setCustomValidity('')"   autocomplete="Off" size="4"  maxlength="4"  pattern="[0-9]{4}" /> 
+										<input    type="number"    placeholder="MM"            name="expmm"             class="inputtext"    oninvalid="this.setCustomValidity('Enter a valid MM ')"     oninput="setCustomValidity('')"          onKeyPress="if(this.value.length==2) return false;"   pattern="[0-9]{2}"   required />  
+										<input    type="number"    placeholder="YYYY"           name="expyy"             class="inputtext"    oninvalid="this.setCustomValidity('Enter a valid YY ')"    oninput="setCustomValidity('')"           onKeyPress="if(this.value.length==4) return false;"  pattern="[0-9]{4}"   required /> 
 									</div> 
 								</div> 			
-								<div>  <input type="number"     placeholder="Security code"              value=""          name="cvv"           class="inputtext"     required="required"     oninvalid="this.setCustomValidity('Your card's security code is incomplete ')"                oninput="setCustomValidity('')"      autocomplete="Off" size="3"  maxlength="3"  pattern="[0-9]{3}" />  </div>				          
+								<div>  <input type="number"     placeholder="Security code"      name="cvv"           class="inputtext"        oninvalid="this.setCustomValidity('Your card's security code is incomplete ')"                oninput="setCustomValidity('')"      onKeyPress="if(this.value.length==3)  return false;"  pattern="[0-9]{3}" required  />  </div>				          
                            </div>
-						<div>  <input type="submit"   placeholder=""                            value="Complete order "   name="order"      class="inputsubmit"  />  </div>			   					
+						<div>  <input type="submit"         value="Complete order "   name="order"      class="inputsubmit" />  </div>			   					
 
                 </div>
             </div>				 
@@ -298,6 +303,7 @@ if(  isset($_POST["order"])  )
 								$title =  $values["title"];
 								$price = (int)$values["price"]; 	
 								$quantity =  $values["quantity"];
+								$color =  $values["color"];
 								$subtotal = number_format(  $quantity * $price  , 2 ) ; 
 								
 								$totalitem = $totalitem + 1;	
@@ -333,3 +339,8 @@ if(  isset($_POST["order"])  )
 
 </div>
 </form>  
+
+
+
+
+

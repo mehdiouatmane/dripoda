@@ -1,15 +1,20 @@
 <?php
 session_start();
 
+if( isset($_POST['postoutputtotalitems'])  ) {  $outputtotalitems = '';  $totalitem = 0;  if(!empty($_SESSION["infocookiess1"]))  {   foreach($_SESSION["infocookiess1"] as $keys => $values)   {    $totalitem = $totalitem + 1;         $outputtotalitems .=     '       '.$totalitem.'     ';   }        }  else  {   $outputtotalitems .= '';  }      echo json_encode(      array(  'outputtotalitems'=> $outputtotalitems      )         );   exit;     } 
+
+
 if(  isset($_POST["checkout"])  )
 {
-	$datetime = date('m/d/Y h:i:s', time());							
-	function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }      	$ip = get_ip();  
+	date_default_timezone_set('Africa/Casablanca');  $datetime = date('m/d/Y h:i:s', time());  
+	function get_ip(){   if( isset($_SERVER['HTTP_CLIENT_IP']) )   {  return $_SERVER['HTTP_CLIENT_IP'];}  elseif  ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) )     { return $_SERVER['HTTP_X_FORWARDED_FOR'];}   else  { return (  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''   ); }     }      	$ip = get_ip();            $iplocation = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));       $iplocationcity= isset($iplocation['city']) ?  $iplocation['city'] : '';       $iplocationcountry= isset($iplocation['country']) ?  $iplocation['country'] : '';   $BROWSER  =  $_SERVER['HTTP_USER_AGENT'];	
 	$id='1';
-	$img = "img/accesoira1.jpg";
+	$img = $_POST["img"];
 	$title = "Cube Porte Papier Toilette Brulé";
 	$price = "299.00";
 	$quantity= $_POST["quantity"];
+	$color= $_POST["color"];
+	
 
    
 	if(isset($_SESSION["infocookiess1"]))
@@ -20,7 +25,12 @@ if(  isset($_POST["checkout"])  )
 				if(  $_SESSION["infocookiess1"][$keys]['id'] == $id   )
 				{
 					$is_available++;
-					$_SESSION["infocookiess1"][$keys]['quantity'] = $_SESSION["infocookiess1"][$keys]['quantity'] + $quantity;
+					$_SESSION["infocookiess1"][$keys]['id']       =  $id;
+					$_SESSION["infocookiess1"][$keys]['img']      =  $img;
+					$_SESSION["infocookiess1"][$keys]['title']    =  $title;
+					$_SESSION["infocookiess1"][$keys]['price']    =  $price;
+					$_SESSION["infocookiess1"][$keys]['quantity'] =  $quantity;
+					$_SESSION["infocookiess1"][$keys]['color']    =  $color;
 				}
 			}
 			if($is_available == 0)
@@ -33,7 +43,8 @@ if(  isset($_POST["checkout"])  )
 					'img' => $img  ,         
 					'title' => $title,             
 					'price' => $price,   	          
-					'quantity' => $quantity       
+					'quantity' => $quantity,
+                    'color' => $color  					
 				);
 			}
 	}
@@ -47,7 +58,8 @@ if(  isset($_POST["checkout"])  )
 			'img' => $img ,            
 			'title' =>  $title,               
 			'price' => $price,         	    
-			'quantity' =>  $quantity      
+			'quantity' =>  $quantity,
+            'color' =>  $color 			
 		 );
 	}
 	
@@ -55,7 +67,6 @@ if(  isset($_POST["checkout"])  )
 	echo "<script> window.location.href = 'checkout.php'; </script>"; 
 	
 }
-
 
 ?>
 
@@ -124,6 +135,8 @@ if(  isset($_POST["checkout"])  )
             .infoproduct .titer{color:black; font:800 30px 'cairo';}
             .infoproduct .price{color:black; font:800 30px 'cairo';}
             .infoproduct .quantite {width:auto; height:40px;  color:black; font:800 20px 'cairo';  text-indent:0.5rem; }  
+            .infoproduct .color {width:auto; height:40px;  color:black; font:800 20px 'cairo';  text-indent:0.5rem; }  
+                .infoproduct .color option:nth-child(1){ color: black;}  .infoproduct .color option:nth-child(2){ color: red;}  .infoproduct .color option:nth-child(3){ color: blue; }  .infoproduct .color option:nth-child(4){ color: green; }
             .infoproduct .adtocart {background-color:transparent; width:auto; height:40px; border:solid 1px black;    color:black; font:800 20px 'cairo'; cursor:pointer;}   .infoproduct .adtocart:hover{ background-color:#5c6f66;  color:white; }
 			.infoproduct .checkout {background-color:transparent; width:auto; height:40px; border:solid 1px black;    color:black; font:800 20px 'cairo'; cursor:pointer;}   .infoproduct .checkout:hover{ background-color:#5c6f66;  color:white; }
             .infoproduct .shortdescription{color:black; font:800 15px 'cairo';}
@@ -134,18 +147,21 @@ if(  isset($_POST["checkout"])  )
    
     .row4{padding:0% 0%; margin:2% 0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center;  }       
 		.row4 .col1a{width:100%;  }   .row4 .col1b{padding:0px 0px; margin:0% 0%;   display:flex; align-items:center; justify-content:center; text-align:center;    }
-		    .discription {background-color:transparent; padding:0%; margin:0% 2%;         display:grid; align-items:center; justify-content:center; text-align:center;        }   
+			.discription {background-color:transparent; padding:0%; margin:0% 2%;         display:grid; align-items:center; justify-content:center; text-align:center;        }   
 				.discription .title{color:red; font:800 30px 'cairo';}
 				.discription .paragraph{color:black; font:800 20px 'cairo';}
 
 
 
-     .row7{background-color:red; padding:0% 0%; margin:0% 0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center;  }       
+   .row7{background-color:red; padding:0% 0%; margin:0% 0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center;  }       
 		.row7 .col1a{width:100%;  }   .row7 .col1b{padding:0px 0px; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center;   }
-		   .footer{background-color:black; width:100%; height:60px;         display:flex; align-items:center; justify-content:center; text-align:center;       }
-              .footer .text{color:white; font:800 30px "cairo",sans-serif;}
+			.footer{background-color:black; width:100%; height:60px;         display:flex; align-items:center; justify-content:center; text-align:center;       }
+				.footer .text{color:white; font:800 30px "cairo",sans-serif;}
 
    
+
+
+
 
 @media only screen and (max-width:1000px) 
 {  
@@ -174,8 +190,7 @@ if(  isset($_POST["checkout"])  )
 .poscarouselimage2 .poscarouselimagee2 .item {width:70px; height:auto;  }        
 	.poscarouselimage2 .poscarouselimagee2 .item .posimg1{width:70px; height:auto; }        
 	.poscarouselimage2 .poscarouselimagee2 .item .posimg1 .img1{max-width:100%;  width:70px; height:auto;    }         
- 
- 
+
 .footer .text{ font:800 20px "cairo",sans-serif;}
 }
 
@@ -205,11 +220,12 @@ if(  isset($_POST["checkout"])  )
 			  <a class="numberphone "><i class="fas fa-mobile-alt" ></i>  <span> contactez-nous au 0667 79 25 60 </span>  </a>
 		 </div></div>			   
 		<div class="col3a">    <div class="col3b">
-				<img src="img/logo.png" class="logo"  />	   
+				<a href="Cube-Porte-Papier-Toilette.php">  <img src="img/logo.png" class="logo"  />	</a>    
 		</div></div> 		  
 		<div class="col4a">    <div class="col4b">
 				  <a class="search">   <i class="fas fa-search ">  </i> </a> 
-				  <a class="shoppcart">  <i class="fas fa-shopping-cart"></i>  </a>	   
+				  <a href="addtocart.php"  class="shoppcart"> <i class="fas fa-shopping-cart"></i> <span class="outputtotalitems"></span>	 </a>	     	
+				  
 		</div></div>
 	</div>
 
@@ -265,19 +281,46 @@ if(  isset($_POST["checkout"])  )
         </div></div>
 	    <div class="col2a">  <div class="col2b"> 
 			   <div class="infoproduct">
-					  <div class="titer"> Cube Porte Papier Toilette Brulé </div>
-					  <div class="price"> 299.00 € </div>
-					  <select class="quantite" name="quantity" >
+					<div class="titer"> Cube Porte Papier Toilette Brulé </div>
+					<div class="price"> 299.00 € </div>
+					<select class="quantite" name="quantity"  >
 						<option value="" disabled selected >Quantité </option> 
 						<option value="1" selected="selected" >1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
-					  </select>
-					  <input style="display:none;" type="button" value="Ajouter au panier"    name=""    class="adtocart" />
-					  <input type="submit" value="Acheter maintenant"   name="checkout"    class="checkout" />
-					  <div class="shortdescription">   Porte-papier de toilette Ce support de papier hygiénique est non seulement fonctionnel mais aussi un beau décor pour votre toilette. Le support de papier hygiénique peut contenir 5 rouleaux de papier.  </div>
-					  <div class="partage"> Partager :  <i class="fab fa-facebook"></i>    <i class="fab fa-instagram"></i>    <i class="fab fa-whatsapp"></i>  <i class="fab fa-twitter"></i></div>  
+					</select>
+					<select class="color" name="color"  id="countrySelect" onchange="changeselect(this.value)">
+						<option value="" disabled selected >Color </option> 
+						<option value="red" selected="selected" > RED</option>
+						<option value="blue">Blue</option>
+						<option value="green">Green</option>
+					</select>	
+	                <select style="display:none;" id="imgselect"  name="img"  >
+		            <option disabled selected>img</option>
+					<option value="img/accesoira1.jpg" selected="selected" > <img class="img1" src="img/accesoira1.jpg"/></option>
+					<option value="img/accesoira6.jpg" > <img class="img1" src="img/accesoira6.jpg"/></option>
+					<option value="img/accesoira3.jpg"> <img class="img1" src="img/accesoira3.jpg"/> </option>
+	                </select>
+	
+					<script>
+					function changeselect(value) 
+					{
+						if(value.length==0) document.getElementById("imgselect").innerHTML = "<option></option>";
+						else 
+						{  
+						    var citiesByState =  { red: ["img/accesoira1.jpg"], blue: ["img/accesoira6.jpg"],  green: ["img/accesoira3.jpg"],   }
+							var citiesOptions = ""; 
+							for(cityId in citiesByState[value]) {citiesOptions+="<option>"+citiesByState[value][cityId]+"</option>";}
+							document.getElementById("imgselect").innerHTML = citiesOptions;
+						}
+					}
+					</script>
+	
+					<input style="display:none;" type="button" value="Ajouter au panier"    name=""    class="adtocart" />
+					<input type="submit" value="Acheter maintenant"   name="checkout"    class="checkout" />
+					<div class="shortdescription">   Porte-papier de toilette Ce support de papier hygiénique est non seulement fonctionnel mais aussi un beau décor pour votre toilette. Le support de papier hygiénique peut contenir 5 rouleaux de papier.  </div>
+					<div class="partage"> Partager :  <i class="fab fa-facebook"></i>    <i class="fab fa-instagram"></i>    <i class="fab fa-whatsapp"></i>  <i class="fab fa-twitter"></i></div>  
 			   </div>
         </div></div>		
 	</div>	
@@ -372,4 +415,21 @@ $(document).ready(function() {
   
 
 });
+
+
+
+
+
+
+
+ ajaxx(); function ajaxx() {     $.ajax  ({      type: 'post',       data: {postoutputtotalitems:"" },      dataType:"json",   success:  function(data){ $('.outputtotalitems').html(data.outputtotalitems);          }    });    } 
 </script>
+
+
+
+
+
+
+
+
+

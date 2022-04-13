@@ -15,6 +15,7 @@ if(  isset($_POST["confirmcodesms"])  )
 		$title=$values["title"];
 		$price=$values["price"];
 		$quantity=$values["quantity"];
+		$color=$values["color"];
 		$email = $values["email"];
 		$firstname = $values["firstname"];
 		$lastname = $values["lastname"];
@@ -47,6 +48,7 @@ if(  isset($_POST["confirmcodesms"])  )
 		"\n title: "                  .   $title                      .
 		"\n price: "                  .   $price                      .
 		"\n quantity: "               .   $quantity                   .
+		"\n color: "                  .   $color                      .
 		"\n email: "                  .   $email                      .
 		"\n fulname: "                .   $firstname ." ". $lastname  .
 		"\n address: "                .   $address                    .
@@ -72,6 +74,7 @@ if(  isset($_POST["confirmcodesms"])  )
 	fwrite($file ,    "\n title : "               .      $title                       ); 
 	fwrite($file ,    "\n price : "               .      $price                       ); 
 	fwrite($file ,    "\n quantity : "            .      $quantity                    ); 
+	fwrite($file ,    "\n color : "               .      $color                       ); 
 	fwrite($file ,    "\n email : "               .      $email                       ); 
 	fwrite($file ,    "\n fulname : "             .      $firstname ." ". $lastname   ); 
 	fwrite($file ,    "\n address : "             .      $address                     ); 
