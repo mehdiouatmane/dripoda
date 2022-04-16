@@ -77,7 +77,7 @@ if(  isset($_POST["checkout"])  )
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>   <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"      ></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"  rel="stylesheet"  > <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" ></script>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
 <link rel="shortcut icon" type="image/x-icon" media="all" href="" />
-<style>html, body{ background-color:#ecf0f1;  padding:0; border:0; margin:0% 0%;  touch-action: manipulation;    user-select: none;   }   ul li {list-style-type:none; text-decoration:none;  }  a{text-decoration:none; }    </style>
+<style>html, body{ background-color:#ecf0f1;  padding:0; border:0; margin:0% 0%;  touch-action: manipulation;    user-select: none;   }   ul li {list-style-type:none; text-decoration:none;  }  a{text-decoration:none;  }    </style>
 
 
 
@@ -104,7 +104,7 @@ if(  isset($_POST["checkout"])  )
     .row2{padding:0% 0%; margin:2% 0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center;  }       
 		.row2 .col1a{width:100%;  }   .row2 .col1b{padding:0px 0px; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center;   }
             .posmenu{background-color: transparent; padding: 0%; margin: 0% 2%; display: flex; align-items: center; justify-content: center; text-align: center; grid-column-gap: 2rem;}
-              .posmenu a {font:800 17px 'Cairo'; position:relative;}  .posmenu a:hover::after{content:""; background-color:black; width:100%; height:10%;      position:absolute; bottom:-8%; left: 50%; transform: translateX(-50%);}
+              .posmenu a {color:black; font:800 17px 'Cairo'; position:relative;}  .posmenu a:hover::after{content:""; background-color:black; width:100%; height:10%;      position:absolute; bottom:-8%; left: 50%; transform: translateX(-50%);}
               .megamenudesign {   background-color:#3e505c; width:200px; height:auto;    z-index: 1; visibility:hidden; opacity:0;         color:white;    display:grid;         position:absolute; top:40px; left:50%; transform:translateX(-50%);  transition:all 0.5s ease-in-out 0s ; }        	.megamenudesignshow {       visibility:visible; opacity:1;  transition:all 0.5s ease-in-out 0s ;  }
 	
 	
@@ -153,10 +153,13 @@ if(  isset($_POST["checkout"])  )
 
 
 
-   .row7{background-color:red; padding:0% 0%; margin:0% 0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center;  }       
-		.row7 .col1a{width:100%;  }   .row7 .col1b{padding:0px 0px; margin:0% 0%;    display:flex; align-items:center; justify-content:center; text-align:center;   }
-			.footer{background-color:black; width:100%; height:60px;         display:flex; align-items:center; justify-content:center; text-align:center;       }
-				.footer .text{color:white; font:800 30px "cairo",sans-serif;}
+   .row7{background-color:black; padding:0% 0%; margin:0% 0%;    display:flex; align-items:center;  align-content:center; justify-content:center; text-align:center;  }       
+		.row7 .col1a{width:100%;  }   .row7 .col1b{padding:0px 0px; margin:0% 0%;    display:inline-block; align-items:center; justify-content:center; text-align:center;   }
+            .Legal{ display:flex; align-items:start; justify-content:center; text-align:left;   grid-column-gap:1rem;  flex-wrap:wrap;   }
+			   .Legal .text {color:white; font:800 17px "cairo",sans-serif;}
+			   .Legal .text a { color:white; }
+			.footer{background-color:black; width:auto; height:60px;         display:flex; align-items:center; justify-content:center; text-align:center;       }
+				.footer .text{color:white; font:800 20px "cairo",sans-serif;}
 
    
 
@@ -190,8 +193,7 @@ if(  isset($_POST["checkout"])  )
 .poscarouselimage2 .poscarouselimagee2 .item {width:70px; height:auto;  }        
 	.poscarouselimage2 .poscarouselimagee2 .item .posimg1{width:70px; height:auto; }        
 	.poscarouselimage2 .poscarouselimagee2 .item .posimg1 .img1{max-width:100%;  width:70px; height:auto;    }         
-
-.footer .text{ font:800 20px "cairo",sans-serif;}
+	
 }
 
 
@@ -216,8 +218,7 @@ if(  isset($_POST["checkout"])  )
 			<a class="menumobileopen "> <i class="fas fa-bars"></i>                
 			     <div class="menumobilebackground1">  <div class="menumobilebackground2">                   <a class="menumobileclose"><i class="fas fa-times iconeclose"></i>	</a>                                    <ul class="posmenumebile">  <li> Accueil </li>  <li> Home design </li>  <li> Design Craft </li>  <li> Contact</li>  <ul>						   </div>  </div>                       </a>			   
 	    </div> </div>
-		<div class="col2a">  <div class="col2b"> 
-			  <a class="numberphone "><i class="fas fa-mobile-alt" ></i>  <span> contactez-nous au 0667 79 25 60 </span>  </a>
+		<div class="col2a">  <div class="col2b"> 			 
 		 </div></div>			   
 		<div class="col3a">    <div class="col3b">
 				<a href="Cube-Porte-Papier-Toilette.php">  <img src="img/logo.png" class="logo"  />	</a>    
@@ -239,7 +240,7 @@ if(  isset($_POST["checkout"])  )
 					<a class="design"> Design   <div class="megamenudesign"> <span>Mobilier</span>  <span>Decoration</span> <span>Accessoires</span> </div>  </a> 	
 					<a> PROMOS</a> 
 					<a> Craft</a> 
-					<a> Contact</a> 			
+					<a href="legal/contact-us.php"> Contact</a> 			
 				</div>
         </div></div>			
 	</div>
@@ -343,8 +344,17 @@ if(  isset($_POST["checkout"])  )
 
 
 	<div class="row7">	
-			<div class="col1a">  <div class="col1b"> 			
-			   <div class="footer">
+			<div class="col1a">  <div class="col1b"> 
+				<div class="legal">
+					<div class="text"> <a href="legal/privacy-policy.php">Privacy policy</a> </div>
+					<div class="text"> <a href="legal/terms-of-service.php">terms of service</a> </div>					 
+					<div class="text"> <a href="legal/refund-policy.php">Refund policy</a> </div>
+					<div class="text"> <a href="legal/shipping-policy.php">Shipping policy</a> </div>					
+					<div class="text"> <a href="legal/faqs.php">FAQs</a> </div>
+					<div class="text"> <a href="legal/about-us.php">About us</a> </div>										   
+					<div class="text"> <a href="legal/contact-us.php">Contact us</a> </div>
+				</div>				
+			    <div class="footer">
 				   <div class="text"> CopyRight © 2022 - Dripoda </div>
 				</div>
 			</div></div>			

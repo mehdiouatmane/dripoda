@@ -135,17 +135,18 @@ if(  isset($_POST["clear"])  )
 			<a class="menumobileopen "> <i class="fas fa-bars"></i>                
 			     <div class="menumobilebackground1">  <div class="menumobilebackground2">                   <a class="menumobileclose"><i class="fas fa-times iconeclose"></i>	</a>                                    <ul class="posmenumebile">  <li> Accueil </li>  <li> Home design </li>  <li> Design Craft </li>  <li> Contact</li>  <ul>						   </div>  </div>                       </a>			   
 	    </div> </div>
-		<div class="col2a">  <div class="col2b"> 
-			  <a class="numberphone "><i class="fas fa-mobile-alt" ></i>  <span> contactez-nous au 0667 79 25 60 </span>  </a>
+		<div class="col2a">  <div class="col2b"> 			 
 		 </div></div>			   
 		<div class="col3a">    <div class="col3b">
-				<a href="Cube-Porte-Papier-Toilette.php">  <img src="img/logo.png" class="logo"  />	</a>    	   
+				<a href="Cube-Porte-Papier-Toilette.php">  <img src="img/logo.png" class="logo"  />	</a>    
 		</div></div> 		  
 		<div class="col4a">    <div class="col4b">
 				  <a class="search">   <i class="fas fa-search ">  </i> </a> 
-				  <a href="addtocart.php" class="shoppcart">  <i class="fas fa-shopping-cart"></i> <span class="outputtotalitems"></span> </a>	   
+				  <a href="addtocart.php"  class="shoppcart"> <i class="fas fa-shopping-cart"></i> <span class="outputtotalitems"></span>	 </a>	     	
+				  
 		</div></div>
 	</div>
+
 
   
 
