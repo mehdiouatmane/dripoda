@@ -2,3 +2,69 @@
 #EXTINF:-1 tvg-id="2MInternational.ma" tvg-logo="https://i.imgur.com/MvpntzA.png" group-title="General",2M Monde (360p)
 https://cdnamd-hls-globecast.akamaized.net/live/ramdisk/2m_monde/hls_video_ts_tuhawxpiemz257adfc/2m_monde.m3u8
 
+
+#EXTINF:0 type="stream" channelId="-1" name="MA| 2M MAROC HD" group="AR | MOROCCO" logo="https://lo1.in/mor/2m.png", MA| 2M MAROC HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/347
+#EXTINF:0 type="stream" channelId="-1" name="MA| AL AOULA INTER HD" group="AR | MOROCCO" logo="https://lo1.in/mor/alaoula.png", MA| AL AOULA INTER HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/343
+#EXTINF:0 type="stream" channelId="-1" name="MA| ARRYADIA HD" group="AR | MOROCCO" logo="https://lo1.in/ars/arriyadia.png", MA| ARRYADIA HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/349
+#EXTINF:0 type="stream" channelId="-1" name="MA| ATHAQAFIA HD" group="AR | MOROCCO" logo="https://lo1.in/mor/attakafia.png", MA| ATHAQAFIA HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/352
+#EXTINF:0 type="stream" channelId="-1" name="MA| AL MAGHRIBIA HD" group="AR | MOROCCO" logo="https://lo1.in/mor/maghribia.png", MA| AL MAGHRIBIA HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/354
+#EXTINF:0 type="stream" channelId="-1" name="MA| ASSADISSA HD" group="AR | MOROCCO" logo="https://lo1.in/mor/assadissa.png", MA| ASSADISSA HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/356
+#EXTINF:0 type="stream" channelId="-1" name="MA| ASSABIAA AFLAM HD" group="AR | MOROCCO" logo="https://lo1.in/mor/aflamtv.png", MA| ASSABIAA AFLAM HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/358
+#EXTINF:0 type="stream" channelId="-1" name="MA| TAMAZIGHT HD" group="AR | MOROCCO" logo="https://lo1.in/mor/tamazight.png", MA| TAMAZIGHT HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/359
+#EXTINF:0 type="stream" channelId="-1" name="MA| MEDI1TV ARABIC HD" group="AR | MOROCCO" logo="https://lo1.in/mor/medi1tv.png", MA| MEDI1TV ARABIC HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/361
+#EXTINF:0 type="stream" channelId="-1" name="MA| TELE MAROC HD" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TELE MAROC HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39755
+#EXTINF:0 type="stream" channelId="-1" name="MA| CHADA TV HD" group="AR | MOROCCO" logo="https://lo1.in/mor/chadatv.png", MA| CHADA TV HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/367
+#EXTINF:0 type="stream" channelId="-1" name="MA| M24 MAROC HD" group="AR | MOROCCO" logo="https://lo1.in/mor/m24tv.png", MA| M24 MAROC HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/369
+#EXTINF:0 type="stream" channelId="-1" name="MA| MBC 5 HD" group="AR | MOROCCO" logo="https://lo1.in/mbc/mbc5.png", MA| MBC 5 HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/365
+#EXTINF:0 type="stream" channelId="-1" name="MA| AL ONS TV" group="AR | MOROCCO" logo="https://lo1.in/mor/ons.png", MA| AL ONS TV
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/370
+#EXTINF:0 type="stream" channelId="-1" name="MA| CANAL ATLAS HD" group="AR | MOROCCO" logo="https://lo1.in/mor/canalatlas.png", MA| CANAL ATLAS HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/400198471
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT AL OULA" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT AL OULA
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39754
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT 2M MAROC" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT 2M MAROC
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39751
+#EXTINF:0 type="stream" channelId="-1" name="MA| ARRYADIA TNT HD" group="AR | MOROCCO" logo="https://lo1.in/ars/arriyadia.png", MA| ARRYADIA TNT HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/351
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT ARRABIAA" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT ARRABIAA
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39750
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT AL MAGHRIBIA" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT AL MAGHRIBIA
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39749
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT ASSADISSA HD" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT ASSADISSA HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39748
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT AFLAM 7 HD" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT AFLAM 7 HD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39747
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT TAMAZIGHT" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT TAMAZIGHT
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39746
+#EXTINF:0 type="stream" channelId="-1" name="MA| TNT MEDI 1 TV" group="AR | MOROCCO" logo="https://lo1.in/mor/flg.png", MA| TNT MEDI 1 TV
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/39745
+#EXTINF:0 type="stream" channelId="-1" name="MA| 2M MAROC SD" group="AR | MOROCCO" logo="https://lo1.in/mor/2m.png", MA| 2M MAROC SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/348
+#EXTINF:0 type="stream" channelId="-1" name="MA| AL AOULA INTER SD" group="AR | MOROCCO" logo="https://lo1.in/mor/alaoula.png", MA| AL AOULA INTER SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/344
+#EXTINF:0 type="stream" channelId="-1" name="MA| ARRYADIA SD" group="AR | MOROCCO" logo="https://lo1.in/ars/arriyadia.png", MA| ARRYADIA SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/350
+#EXTINF:0 type="stream" channelId="-1" name="MA| ATHAQAFIA SD" group="AR | MOROCCO" logo="https://lo1.in/mor/attakafia.png", MA| ATHAQAFIA SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/353
+#EXTINF:0 type="stream" channelId="-1" name="MA| AL MAGHRIBIA SD" group="AR | MOROCCO" logo="https://lo1.in/mor/maghribia.png", MA| AL MAGHRIBIA SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/355
+#EXTINF:0 type="stream" channelId="-1" name="MA| ASSADISSA SD" group="AR | MOROCCO" logo="https://lo1.in/mor/assadissa.png", MA| ASSADISSA SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/357
+#EXTINF:0 type="stream" channelId="-1" name="MA| TAMAZIGHT SD" group="AR | MOROCCO" logo="https://lo1.in/mor/tamazight.png", MA| TAMAZIGHT SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/360
+#EXTINF:0 type="stream" channelId="-1" name="MA| MBC 5 SD" group="AR | MOROCCO" logo="https://lo1.in/mbc/mbc5.png", MA| MBC 5 SD
+http://kadmpet.mexamo.xyz:80/5915193499/8312904097/366
+
