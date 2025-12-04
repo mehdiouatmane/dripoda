@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Delivery - Driver Fix</title>
+    <title>Smart Delivery - Final System</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -27,12 +27,13 @@
 
     <script type="text/babel">
         
+        // 1. البيانات (أضفنا product لكل طلب)
         const initialOrders = [
-            { id: 101, customer: "أحمد بناني", phone: "0661123456", address: "حي السلام، سلا", price: 150, status: "pending", driver: "", lat: 34.0506, lng: -6.7894, problem: null },
-            { id: 102, customer: "سارة العلمي", phone: "0661987654", address: "أكدال، الرباط", price: 300, status: "pending", driver: "", lat: 34.0084, lng: -6.8530, problem: null },
-            { id: 103, customer: "كريم التازي", phone: "0661000000", address: "حي الرياض، الرباط", price: 120, status: "delivered", driver: "عمر", lat: 33.9716, lng: -6.8498, problem: null },
-            { id: 104, customer: "منى الشاوي", phone: "0661112233", address: "تابريكت، سلا", price: 200, status: "pending", driver: "", lat: 34.0350, lng: -6.8100, problem: null },
-            { id: 105, customer: "يوسف العمراني", phone: "0661445566", address: "المحيط، الرباط", price: 450, status: "pending", driver: "", lat: 34.0200, lng: -6.8600, problem: null },
+            { id: 101, customer: "أحمد بناني", product: "ساعة ذكية Ultra", phone: "0661123456", address: "حي السلام، سلا", price: 150, status: "pending", driver: "", lat: 34.0506, lng: -6.7894, problem: null },
+            { id: 102, customer: "سارة العلمي", product: "عطر فاخر 100ml", phone: "0661987654", address: "أكدال، الرباط", price: 300, status: "pending", driver: "", lat: 34.0084, lng: -6.8530, problem: null },
+            { id: 103, customer: "كريم التازي", product: "حذاء رياضي Nike", phone: "0661000000", address: "حي الرياض، الرباط", price: 120, status: "delivered", driver: "عمر", lat: 33.9716, lng: -6.8498, problem: null },
+            { id: 104, customer: "منى الشاوي", product: "حقيبة يد جلدية", phone: "0661112233", address: "تابريكت، سلا", price: 200, status: "pending", driver: "", lat: 34.0350, lng: -6.8100, problem: null },
+            { id: 105, customer: "يوسف العمراني", product: "سماعات بلوتوث", phone: "0661445566", address: "المحيط، الرباط", price: 450, status: "pending", driver: "", lat: 34.0200, lng: -6.8600, problem: null },
         ];
 
         const driversList = ["عمر", "خالد", "ياسين"];
@@ -44,9 +45,11 @@
             const [view, setView] = React.useState('admin'); 
             const [currentDriver, setCurrentDriver] = React.useState('عمر');
 
+            // --- صناديق النوافذ ---
             const [showOtpModal, setShowOtpModal] = React.useState(false);
             const [showContactModal, setShowContactModal] = React.useState(false);
             const [showProblemModal, setShowProblemModal] = React.useState(false); 
+            const [showAddOrderModal, setShowAddOrderModal] = React.useState(false); // نافذة إضافة طلب جديد
 
             const [selectedOrder, setSelectedOrder] = React.useState(null);
             const [otpInput, setOtpInput] = React.useState("");
@@ -55,9 +58,16 @@
             const [problemType, setProblemType] = React.useState("delay"); 
             const [problemNote, setProblemNote] = React.useState("");
 
+            // --- صندوق الطلب الجديد ---
+            const [newOrder, setNewOrder] = React.useState({
+                customer: '', phone: '', address: '', product: '', price: ''
+            });
+
+            // --- إحصائيات مالية ---
             const driverEarnings = orders.filter(o => o.driver === currentDriver && o.status === 'delivered').length * DELIVERY_FEE;
             const adminRevenue = orders.filter(o => o.status === 'delivered').reduce((acc, curr) => acc + curr.price, 0);
 
+            // --- دوال مساعدة ---
             const calculateDistance = (lat1, lon1, lat2, lon2) => {
                 const R = 6371; 
                 const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -79,6 +89,7 @@
                 alert("📍 تم ترتيب الزبائن حسب الأقرب لموقعك الحالي!");
             };
 
+            // --- دوال الإدارة ---
             const handleAssignDriver = (orderId, driverName) => {
                 setOrders(orders.map(order => 
                     order.id === orderId ? { ...order, driver: driverName, status: driverName ? 'assigned' : 'pending', problem: null } : order
@@ -90,6 +101,27 @@
                 alert(`✅ تم حفظ التوزيع بنجاح!\nالطلبات الموزعة: ${count}`);
             };
 
+            // إضافة طلب جديد
+            const handleAddOrder = () => {
+                if(!newOrder.customer || !newOrder.product || !newOrder.price) {
+                    alert("المرجو ملء جميع البيانات"); return;
+                }
+                const orderToAdd = {
+                    id: Math.floor(Math.random() * 10000), // ID عشوائي
+                    ...newOrder,
+                    price: parseFloat(newOrder.price),
+                    status: 'pending',
+                    driver: '',
+                    lat: 34.0200, lng: -6.8300, // موقع افتراضي (وسط الرباط)
+                    problem: null
+                };
+                setOrders([orderToAdd, ...orders]); // إضافة للأول
+                setShowAddOrderModal(false);
+                setNewOrder({ customer: '', phone: '', address: '', product: '', price: '' }); // مسح الفورم
+                alert("✅ تمت إضافة الطلب بنجاح!");
+            };
+
+            // --- دوال الموزع ---
             const openContactModal = (order) => { setSelectedOrder(order); setShowContactModal(true); };
             const openMap = (lat, lng) => { window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank'); };
 
@@ -102,13 +134,9 @@
 
             const submitProblem = () => {
                 if (!problemNote) { alert("المرجو كتابة التفاصيل"); return; }
-                
                 setOrders(orders.map(o => o.id === selectedOrder.id ? { 
-                    ...o, 
-                    status: 'problem', 
-                    problem: { type: problemType, note: problemNote } 
+                    ...o, status: 'problem', problem: { type: problemType, note: problemNote } 
                 } : o));
-
                 setShowProblemModal(false);
                 alert("⚠️ تم تسجيل المشكلة.");
             };
@@ -163,6 +191,20 @@
                         {/* === ADMIN VIEW === */}
                         {view === 'admin' && (
                             <div className="p-4 md:p-8 max-w-7xl mx-auto w-full fade-in">
+                                
+                                {/* زر إضافة طلب جديد */}
+                                <div className="flex justify-between items-center mb-6">
+                                    <h2 className="text-2xl font-bold text-slate-800">توزيع المهام</h2>
+                                    <div className="flex gap-3">
+                                        <button onClick={() => setShowAddOrderModal(true)} className="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition flex items-center gap-2">
+                                            <i className="fa-solid fa-plus"></i> إضافة طلب
+                                        </button>
+                                        <button onClick={saveAssignments} className="bg-slate-900 text-white px-4 py-2 rounded-lg shadow hover:bg-slate-800 transition">
+                                            <i className="fa-solid fa-save"></i> حفظ التوزيع
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                                     <div className="bg-white p-4 rounded-xl shadow border-r-4 border-blue-500">
                                         <div className="text-gray-500 text-sm">الطلبات</div>
@@ -176,24 +218,16 @@
                                         <div className="text-gray-500 text-sm">مشاكل</div>
                                         <div className="text-2xl font-bold text-red-600">{orders.filter(o => o.status === 'problem').length}</div>
                                     </div>
-                                    <button onClick={saveAssignments} className="bg-slate-900 text-white rounded-xl shadow flex flex-col items-center justify-center hover:bg-slate-800">
-                                        <i className="fa-solid fa-save mb-1"></i> حفظ التوزيع
-                                    </button>
                                 </div>
 
                                 <div className="space-y-4">
                                     {orders.map(order => (
                                         <div key={order.id} className={`bg-white p-5 rounded-2xl shadow-sm border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50' : 'border-gray-100'}`}>
-                                            
-                                            {/* إظهار المشكلة للإدارة */}
                                             {order.status === 'problem' && (
                                                 <div className="bg-red-100 text-red-700 p-3 rounded-lg mb-4 text-sm font-bold flex items-start gap-2">
                                                     <i className="fa-solid fa-triangle-exclamation mt-1"></i>
                                                     <div>
-                                                        <span className="block underline">
-                                                            {order.problem.type === 'delay' ? 'تأخير استلام' : 
-                                                             order.problem.type === 'refuse' ? 'رفض الطلب' : 'تغيير عنوان'}
-                                                        </span>
+                                                        <span className="block underline">{order.problem.type === 'delay' ? 'تأخير' : order.problem.type === 'refuse' ? 'رفض' : 'عنوان'}</span>
                                                         <span className="font-normal">{order.problem.note}</span>
                                                     </div>
                                                 </div>
@@ -202,22 +236,23 @@
                                             <div className="flex justify-between items-start mb-2">
                                                 <div>
                                                     <h3 className="font-bold text-lg text-slate-800">{order.customer}</h3>
-                                                    <div className="text-lg font-bold text-green-600">{order.price} DH</div>
+                                                    {/* إظهار المنتج في الإدارة */}
+                                                    <div className="text-sm text-blue-600 font-bold mt-1"><i className="fa-solid fa-box-open"></i> {order.product}</div>
                                                 </div>
-                                                <span className={`px-2 py-1 rounded text-xs font-bold ${
-                                                    order.status === 'delivered' ? 'bg-green-100 text-green-700' : 
-                                                    order.status === 'problem' ? 'bg-red-100 text-red-700' :
-                                                    order.status === 'assigned' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'
-                                                }`}>
-                                                    {order.status === 'delivered' ? 'مكتمل' : 
-                                                     order.status === 'problem' ? 'مشكلة' :
-                                                     order.status === 'assigned' ? 'جاري التوصيل' : 'جديد'}
-                                                </span>
+                                                <div className="text-right">
+                                                    <div className="text-lg font-bold text-green-600">{order.price} DH</div>
+                                                    <span className={`px-2 py-1 rounded text-xs font-bold block mt-1 ${
+                                                        order.status === 'delivered' ? 'bg-green-100 text-green-700' : 
+                                                        order.status === 'problem' ? 'bg-red-100 text-red-700' :
+                                                        order.status === 'assigned' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'
+                                                    }`}>
+                                                        {order.status === 'delivered' ? 'مكتمل' : order.status === 'problem' ? 'مشكلة' : order.status === 'assigned' ? 'جاري التوصيل' : 'جديد'}
+                                                    </span>
+                                                </div>
                                             </div>
 
                                             <div className="text-gray-500 text-sm mb-4 flex items-center gap-2">
-                                                <i className="fa-solid fa-location-dot text-red-400"></i>
-                                                {order.address}
+                                                <i className="fa-solid fa-location-dot text-red-400"></i> {order.address}
                                             </div>
 
                                             <div className="pt-3 border-t border-gray-200/50">
@@ -233,8 +268,7 @@
                                                     </select>
                                                 ) : (
                                                     <div className="bg-green-50 text-green-700 p-2 rounded-lg text-center font-bold text-sm">
-                                                        <i className="fa-solid fa-check-circle ml-1"></i>
-                                                        تم بواسطة {order.driver}
+                                                        <i className="fa-solid fa-check-circle ml-1"></i> تم بواسطة {order.driver}
                                                     </div>
                                                 )}
                                             </div>
@@ -247,7 +281,6 @@
                         {/* === DRIVER VIEW === */}
                         {view === 'driver' && (
                             <div className="p-4 md:p-8 max-w-md mx-auto w-full fade-in">
-                                
                                 <div className="bg-slate-900 text-white p-5 rounded-2xl mb-6 shadow-lg relative overflow-hidden">
                                     <div className="flex justify-between items-center mb-4">
                                         <div>
@@ -277,49 +310,42 @@
 
                                 <div className="space-y-4 pb-20">
                                     {orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').map(order => (
-                                        <div key={order.id} className={`bg-white p-5 rounded-2xl shadow-md border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50 shadow-red-100' : 'border-gray-100'}`}>
-                                            
-                                            {/* إظهار المشكلة للموزع (التعديل الجديد) */}
+                                        <div key={order.id} className={`bg-white p-5 rounded-2xl shadow-md border relative ${order.status === 'problem' ? 'border-red-500' : 'border-gray-100'}`}>
                                             {order.status === 'problem' && (
                                                 <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4 border border-red-200">
-                                                    <p className="text-xs font-bold flex items-center gap-2 mb-1">
-                                                        <i className="fa-solid fa-triangle-exclamation"></i>
-                                                        {order.problem.type === 'delay' ? 'تأخير استلام' : 
-                                                         order.problem.type === 'refuse' ? 'رفض الطلب' : 'تغيير العنوان'}
-                                                    </p>
-                                                    <p className="text-sm font-normal bg-white/50 p-2 rounded text-gray-800">
-                                                        {order.problem.note}
-                                                    </p>
+                                                    <p className="text-xs font-bold flex items-center gap-2 mb-1"><i className="fa-solid fa-triangle-exclamation"></i> {order.problem.type}</p>
+                                                    <p className="text-sm">{order.problem.note}</p>
                                                 </div>
                                             )}
 
                                             <div className="flex justify-between items-start mb-4">
                                                 <div>
                                                     <h3 className="font-bold text-xl text-slate-800">{order.customer}</h3>
-                                                    <button onClick={() => openMap(order.lat, order.lng)} className="text-sm text-gray-500 mt-1 flex items-center gap-1 hover:text-blue-600 transition">
-                                                        <i className="fa-solid fa-map-location-dot text-red-500 text-lg"></i> 
-                                                        <span className="underline decoration-dotted">{order.address}</span>
+                                                    {/* إظهار المنتج للموزع */}
+                                                    <div className="text-sm text-blue-600 font-bold mt-1 bg-blue-50 px-2 py-1 rounded w-fit">
+                                                        <i className="fa-solid fa-cube"></i> {order.product}
+                                                    </div>
+                                                </div>
+                                                <div className="text-right">
+                                                    <div className="bg-slate-900 text-white px-3 py-1 rounded-lg font-bold shadow-md">{order.price} DH</div>
+                                                    <button onClick={() => openMap(order.lat, order.lng)} className="text-xs text-gray-500 mt-2 flex items-center justify-end gap-1 hover:text-blue-600 ml-auto">
+                                                        <i className="fa-solid fa-map-location-dot text-red-500"></i> خريطة
                                                     </button>
                                                 </div>
-                                                <div className="bg-slate-100 text-slate-800 px-3 py-1 rounded-lg font-bold shadow-sm border border-gray-200">
-                                                    {order.price} DH
-                                                </div>
                                             </div>
+                                            
+                                            <div className="text-gray-500 text-sm mb-4 border-b border-gray-100 pb-3">{order.address}</div>
 
-                                            <div className="grid grid-cols-2 gap-3 mt-6">
+                                            <div className="grid grid-cols-2 gap-3 mt-4">
                                                 <button onClick={() => openContactModal(order)} className="bg-blue-50 text-blue-700 py-3 rounded-xl font-bold border border-blue-100 flex items-center justify-center gap-2">
                                                     <i className="fa-solid fa-phone"></i>
                                                 </button>
-                                                
                                                 <button onClick={() => requestDelivery(order)} className="bg-green-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2">
                                                     تسليم <i className="fa-solid fa-check"></i>
                                                 </button>
                                             </div>
-
-                                            {/* زر تعديل المشكلة */}
                                             <button onClick={() => openProblemModal(order)} className={`w-full mt-3 text-sm font-bold flex items-center justify-center gap-1 py-2 rounded-lg transition ${order.status === 'problem' ? 'bg-red-200 text-red-800' : 'text-red-500 hover:bg-red-50'}`}>
-                                                <i className="fa-solid fa-pen-to-square"></i> 
-                                                {order.status === 'problem' ? 'تعديل المشكلة' : 'إبلاغ عن مشكلة'}
+                                                <i className="fa-solid fa-pen-to-square"></i> {order.status === 'problem' ? 'تعديل المشكلة' : 'إبلاغ عن مشكلة'}
                                             </button>
                                         </div>
                                     ))}
@@ -329,18 +355,36 @@
 
                     </main>
 
-                    {/* Modals remain the same... */}
+                    {/* === نافذة إضافة طلب جديد (Admin) === */}
+                    {showAddOrderModal && (
+                        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
+                            <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl">
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <i className="fa-solid fa-circle-plus text-green-600"></i> إضافة طلب جديد
+                                </h3>
+                                <div className="space-y-3">
+                                    <input type="text" placeholder="اسم الزبون" value={newOrder.customer} onChange={e => setNewOrder({...newOrder, customer: e.target.value})} className="w-full border p-3 rounded-xl bg-gray-50 focus:border-blue-500 outline-none" />
+                                    <input type="text" placeholder="رقم الهاتف" value={newOrder.phone} onChange={e => setNewOrder({...newOrder, phone: e.target.value})} className="w-full border p-3 rounded-xl bg-gray-50 focus:border-blue-500 outline-none" />
+                                    <input type="text" placeholder="اسم المنتج" value={newOrder.product} onChange={e => setNewOrder({...newOrder, product: e.target.value})} className="w-full border p-3 rounded-xl bg-gray-50 focus:border-blue-500 outline-none" />
+                                    <input type="number" placeholder="الثمن (DH)" value={newOrder.price} onChange={e => setNewOrder({...newOrder, price: e.target.value})} className="w-full border p-3 rounded-xl bg-gray-50 focus:border-blue-500 outline-none" />
+                                    <input type="text" placeholder="العنوان" value={newOrder.address} onChange={e => setNewOrder({...newOrder, address: e.target.value})} className="w-full border p-3 rounded-xl bg-gray-50 focus:border-blue-500 outline-none" />
+                                </div>
+                                <div className="grid grid-cols-2 gap-3 mt-6">
+                                    <button onClick={() => setShowAddOrderModal(false)} className="py-3 bg-gray-100 text-gray-600 rounded-xl font-bold">إلغاء</button>
+                                    <button onClick={handleAddOrder} className="py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-lg">حفظ الطلب</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Modals: Contact, Problem, OTP (نفس الكود السابق لا تغيير) */}
                     {showContactModal && selectedOrder && (
                         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
                             <div className="bg-white w-full max-w-sm rounded-3xl p-6 text-center">
                                 <h3 className="text-lg font-bold mb-4">تواصل مع {selectedOrder.customer}</h3>
                                 <div className="space-y-3">
-                                    <button onClick={() => window.open(`https://wa.me/212${selectedOrder.phone.substring(1)}`, '_blank')} className="w-full bg-green-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2">
-                                        <i className="fa-brands fa-whatsapp text-xl"></i> واتساب
-                                    </button>
-                                    <a href={`tel:${selectedOrder.phone}`} className="w-full bg-blue-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2 block">
-                                        <i className="fa-solid fa-phone text-xl"></i> هاتف
-                                    </a>
+                                    <button onClick={() => window.open(`https://wa.me/212${selectedOrder.phone.substring(1)}`, '_blank')} className="w-full bg-green-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2"><i className="fa-brands fa-whatsapp text-xl"></i> واتساب</button>
+                                    <a href={`tel:${selectedOrder.phone}`} className="w-full bg-blue-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2 block"><i className="fa-solid fa-phone text-xl"></i> هاتف</a>
                                 </div>
                                 <button onClick={() => setShowContactModal(false)} className="mt-4 text-gray-500 font-bold">إلغاء</button>
                             </div>
@@ -350,18 +394,12 @@
                     {showProblemModal && selectedOrder && (
                         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
                             <div className="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl">
-                                <h3 className="text-xl font-bold text-red-600 mb-4 flex items-center gap-2">
-                                    <i className="fa-solid fa-circle-exclamation"></i> تسجيل مشكلة
-                                </h3>
-                                <label className="text-sm font-bold text-gray-600 block mb-2">نوع المشكلة:</label>
+                                <h3 className="text-xl font-bold text-red-600 mb-4"><i className="fa-solid fa-circle-exclamation"></i> تسجيل مشكلة</h3>
                                 <select value={problemType} onChange={(e) => setProblemType(e.target.value)} className="w-full bg-gray-50 border p-3 rounded-xl mb-4 font-bold">
-                                    <option value="delay">⏰ تأخير / زبون مشغول</option>
-                                    <option value="refuse">❌ رفض الطلب</option>
-                                    <option value="address">📍 تغيير العنوان</option>
+                                    <option value="delay">⏰ تأخير</option><option value="refuse">❌ رفض</option><option value="address">📍 عنوان</option>
                                 </select>
-                                <label className="text-sm font-bold text-gray-600 block mb-2">تفاصيل:</label>
-                                <input type={problemType === 'delay' ? "time" : "text"} value={problemNote} onChange={(e) => setProblemNote(e.target.value)} placeholder="اكتب التفاصيل..." className="w-full border-2 border-gray-200 p-3 rounded-xl mb-6 focus:border-red-500 outline-none" />
-                                <button onClick={submitProblem} className="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700">تأكيد</button>
+                                <input type="text" value={problemNote} onChange={(e) => setProblemNote(e.target.value)} placeholder="التفاصيل..." className="w-full border-2 border-gray-200 p-3 rounded-xl mb-6 focus:border-red-500 outline-none" />
+                                <button onClick={submitProblem} className="w-full bg-red-600 text-white py-3 rounded-xl font-bold">تأكيد</button>
                                 <button onClick={() => setShowProblemModal(false)} className="w-full mt-3 text-gray-500 font-bold">إلغاء</button>
                             </div>
                         </div>
