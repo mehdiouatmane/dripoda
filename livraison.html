@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Delivery - النظام الآمن</title>
+    <title>Smart Delivery - GPS & Maps</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -15,7 +15,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
         body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; }
         .fade-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* تخصيص السكرول بار */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -24,29 +28,58 @@
 
     <script type="text/babel">
         
-        // 1. البيانات
+        // 1. البيانات (أضفنا الإحداثيات lat/lng لمحاكاة المواقع في الرباط/سلا)
         const initialOrders = [
-            { id: 101, customer: "أحمد بناني", phone: "0661123456", address: "حي السلام، سلا", price: 150, status: "pending", driver: "" },
-            { id: 102, customer: "سارة العلمي", phone: "0661987654", address: "أكدال، الرباط", price: 300, status: "pending", driver: "" },
-            { id: 103, customer: "كريم التازي", phone: "0661000000", address: "حي الرياض، الرباط", price: 120, status: "delivered", driver: "عمر" },
-            { id: 104, customer: "منى الشاوي", phone: "0661112233", address: "تابريكت، سلا", price: 200, status: "pending", driver: "" },
-            { id: 105, customer: "يوسف العمراني", phone: "0661445566", address: "المحيط، الرباط", price: 450, status: "pending", driver: "" },
+            { id: 101, customer: "أحمد بناني", phone: "0661123456", address: "حي السلام، سلا", price: 150, status: "pending", driver: "", lat: 34.0506, lng: -6.7894 },
+            { id: 102, customer: "سارة العلمي", phone: "0661987654", address: "أكدال، الرباط", price: 300, status: "pending", driver: "", lat: 34.0084, lng: -6.8530 },
+            { id: 103, customer: "كريم التازي", phone: "0661000000", address: "حي الرياض، الرباط", price: 120, status: "delivered", driver: "عمر", lat: 33.9716, lng: -6.8498 },
+            { id: 104, customer: "منى الشاوي", phone: "0661112233", address: "تابريكت، سلا", price: 200, status: "pending", driver: "", lat: 34.0350, lng: -6.8100 },
+            { id: 105, customer: "يوسف العمراني", phone: "0661445566", address: "المحيط، الرباط", price: 450, status: "pending", driver: "", lat: 34.0200, lng: -6.8600 },
         ];
 
         const driversList = ["عمر", "خالد", "ياسين"];
+
+        // موقع الموزع الافتراضي (مثلاً وسط المدينة)
+        const DRIVER_CURRENT_LOCATION = { lat: 34.0150, lng: -6.8300 };
 
         function SmartDeliveryApp() {
             const [orders, setOrders] = React.useState(initialOrders);
             const [view, setView] = React.useState('admin'); 
             const [currentDriver, setCurrentDriver] = React.useState('عمر');
 
-            // --- صناديق نظام الكود (OTP) ---
+            // --- صناديق النوافذ (Modals) ---
             const [showOtpModal, setShowOtpModal] = React.useState(false);
-            const [targetOrder, setTargetOrder] = React.useState(null);
+            const [showContactModal, setShowContactModal] = React.useState(false); // نافذة الاتصال الجديدة
+            
+            const [selectedOrder, setSelectedOrder] = React.useState(null); // الطلب المختار حالياً للعمليات
             const [otpInput, setOtpInput] = React.useState("");
             const [generatedCode, setGeneratedCode] = React.useState("");
 
-            // --- دوال الإدارة (Admin) ---
+            // --- دوال مساعدة ---
+            // حساب المسافة (Haversine Formula - مبسطة) للترتيب
+            const calculateDistance = (lat1, lon1, lat2, lon2) => {
+                const R = 6371; // نصف قطر الأرض كم
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+                const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                          Math.sin(dLon/2) * Math.sin(dLon/2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                return R * c; // المسافة بالكيلومتر
+            };
+
+            // --- فلترة حسب الأقرب (GPS Sorting) ---
+            const sortOrdersByLocation = () => {
+                const sorted = [...orders].sort((a, b) => {
+                    const distA = calculateDistance(DRIVER_CURRENT_LOCATION.lat, DRIVER_CURRENT_LOCATION.lng, a.lat, a.lng);
+                    const distB = calculateDistance(DRIVER_CURRENT_LOCATION.lat, DRIVER_CURRENT_LOCATION.lng, b.lat, b.lng);
+                    return distA - distB;
+                });
+                setOrders(sorted);
+                alert("📍 تم ترتيب الزبائن حسب الأقرب لموقعك الحالي! (توفير البنزين ✅)");
+            };
+
+            // --- دوال الإدارة ---
             const handleAssignDriver = (orderId, driverName) => {
                 setOrders(orders.map(order => 
                     order.id === orderId ? { ...order, driver: driverName, status: driverName ? 'assigned' : 'pending' } : order
@@ -55,86 +88,85 @@
 
             const saveAssignments = () => {
                 const count = orders.filter(o => o.status === 'assigned').length;
-                alert(`✅ تم حفظ التوزيع بنجاح!\nالطلبات النشطة: ${count}`);
+                alert(`✅ تم حفظ التوزيع بنجاح!\nالطلبات الموزعة: ${count}`);
             };
 
-            // --- دوال الموزع (Driver) ---
+            // --- دوال الموزع ---
             
-            // 1. الاتصال (هاتف أو واتساب)
-            const handleContact = (phone, name) => {
-                const action = confirm(`📞 الاتصال بـ ${name}؟\n\n[OK] = واتساب\n[Cancel] = هاتف`);
-                if (action) {
-                    window.open(`https://wa.me/212${phone.substring(1)}`, '_blank');
-                } else {
-                    window.location.href = `tel:${phone}`;
-                }
+            // 1. فتح نافذة الاتصال
+            const openContactModal = (order) => {
+                setSelectedOrder(order);
+                setShowContactModal(true);
             };
 
-            // 2. طلب التسليم (إرسال الكود)
+            // 2. فتح الخريطة (GPS)
+            const openMap = (lat, lng) => {
+                // فتح رابط جوجل مابس
+                window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+            };
+
+            // 3. طلب التسليم (OTP)
             const requestDelivery = (order) => {
-                // توليد كود عشوائي من 4 أرقام
                 const code = Math.floor(1000 + Math.random() * 9000);
                 setGeneratedCode(code);
-                setTargetOrder(order);
+                setSelectedOrder(order);
                 setShowOtpModal(true);
                 setOtpInput("");
                 
-                // محاكاة إرسال SMS
                 setTimeout(() => {
-                    alert(`📨 [نظام SMS المحاكى]:\nرسالة إلى الزبون (${order.customer}):\n"كود استلام طلبيتك هو: ${code}. لا تشاركه إلا مع الموزع عند الاستلام."`);
+                    alert(`📨 [SMS المحاكاة]:\nإلى: ${order.customer}\n"كود استلام طلبيتك هو: ${code}"`);
                 }, 500);
             };
 
-            // 3. التحقق من الكود
+            // 4. التحقق من الكود
             const verifyCode = () => {
                 if (parseInt(otpInput) === generatedCode) {
-                    // كود صحيح
-                    setOrders(orders.map(o => o.id === targetOrder.id ? { ...o, status: 'delivered' } : o));
+                    setOrders(orders.map(o => o.id === selectedOrder.id ? { ...o, status: 'delivered' } : o));
                     setShowOtpModal(false);
-                    alert("✅ كود صحيح! تم تأكيد التسليم بنجاح.");
+                    setShowContactModal(false); // إغلاق أي نافذة أخرى
+                    alert("✅ تم التسليم بنجاح!");
                 } else {
-                    alert("❌ كود خاطئ! تأكد من الزبون.");
+                    alert("❌ كود خاطئ!");
                 }
             };
 
             return (
                 <div className="flex h-screen overflow-hidden bg-gray-100">
                     
-                    {/* القائمة الجانبية */}
+                    {/* Sidebar */}
                     <aside className="w-64 bg-slate-900 text-white flex-col hidden md:flex shadow-2xl z-20">
                         <div className="p-6 text-2xl font-bold border-b border-gray-700 text-center">
-                            <i className="fa-solid fa-shield-halved text-green-400 ml-2"></i>
-                            توصيل <span className="text-green-400">Secure</span>
+                            توصيل <span className="text-yellow-400">Pro</span>
                         </div>
                         <nav className="flex-1 p-4 space-y-3">
-                            <button onClick={() => setView('admin')} className={`w-full text-right p-4 rounded-xl flex items-center gap-3 transition-all ${view === 'admin' ? 'bg-blue-600 shadow-lg' : 'hover:bg-slate-800'}`}>
+                            <button onClick={() => setView('admin')} className={`w-full text-right p-4 rounded-xl flex items-center gap-3 transition ${view === 'admin' ? 'bg-blue-600 shadow-lg' : 'hover:bg-slate-800'}`}>
                                 <i className="fa-solid fa-user-tie"></i> الإدارة
                             </button>
-                            <button onClick={() => setView('driver')} className={`w-full text-right p-4 rounded-xl flex items-center gap-3 transition-all ${view === 'driver' ? 'bg-green-600 shadow-lg' : 'hover:bg-slate-800'}`}>
+                            <button onClick={() => setView('driver')} className={`w-full text-right p-4 rounded-xl flex items-center gap-3 transition ${view === 'driver' ? 'bg-green-600 shadow-lg' : 'hover:bg-slate-800'}`}>
                                 <i className="fa-solid fa-motorcycle"></i> الموزع
                             </button>
                         </nav>
                     </aside>
 
-                    {/* المحتوى */}
+                    {/* Main Content */}
                     <main className="flex-1 flex flex-col h-screen overflow-y-auto">
                         
-                        {/* Header للموبايل */}
+                        {/* Mobile Header */}
                         <div className="md:hidden bg-white p-4 shadow flex justify-between items-center sticky top-0 z-30">
-                            <h1 className="font-bold text-lg">توصيل Secure</h1>
+                            <h1 className="font-bold text-lg">توصيل Pro</h1>
                             <div className="flex gap-2">
                                 <button onClick={() => setView('admin')} className="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm font-bold">إدارة</button>
                                 <button onClick={() => setView('driver')} className="px-3 py-1 bg-green-100 text-green-700 rounded text-sm font-bold">موزع</button>
                             </div>
                         </div>
 
-                        {/* === واجهة الإدارة (توزيع يدوي) === */}
+                        {/* === ADMIN VIEW === */}
                         {view === 'admin' && (
                             <div className="p-4 md:p-8 max-w-7xl mx-auto w-full fade-in">
                                 <div className="flex justify-between items-center mb-6">
                                     <h2 className="text-2xl font-bold text-slate-800">توزيع المهام</h2>
                                     <button onClick={saveAssignments} className="bg-slate-900 text-white px-6 py-2 rounded-lg shadow hover:bg-slate-800 transition">
-                                        <i className="fa-solid fa-save ml-2"></i> حفظ التغييرات
+                                        <i className="fa-solid fa-save ml-2"></i> حفظ التوزيع
                                     </button>
                                 </div>
 
@@ -146,7 +178,7 @@
                                                 <th className="p-4">العنوان</th>
                                                 <th className="p-4">المبلغ</th>
                                                 <th className="p-4">الحالة</th>
-                                                <th className="p-4 bg-blue-50 text-blue-800">الموزع المسؤول</th>
+                                                <th className="p-4 bg-blue-50 text-blue-800">تعيين الموزع</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100">
@@ -156,7 +188,7 @@
                                                     <td className="p-4 text-gray-500">{order.address}</td>
                                                     <td className="p-4 font-bold text-green-600">{order.price} DH</td>
                                                     <td className="p-4">
-                                                        <span className={`px-2 py-1 rounded text-xs ${order.status === 'delivered' ? 'bg-green-100 text-green-700' : order.status === 'assigned' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                                                        <span className={`px-2 py-1 rounded text-xs ${order.status === 'delivered' ? 'bg-green-100' : 'bg-yellow-100'}`}>
                                                             {order.status === 'delivered' ? 'مكتمل' : order.status === 'assigned' ? 'موزع' : 'جديد'}
                                                         </span>
                                                     </td>
@@ -180,7 +212,7 @@
                                     </table>
                                 </div>
                                 
-                                {/* Mobile Cards for Admin */}
+                                {/* Mobile Admin Cards */}
                                 <div className="md:hidden space-y-4">
                                     {orders.map(order => (
                                         <div key={order.id} className="bg-white p-4 rounded-xl shadow border border-gray-100">
@@ -188,62 +220,87 @@
                                                 <span>{order.customer}</span>
                                                 <span className="text-green-600">{order.price} DH</span>
                                             </div>
-                                            <div className="mb-3">
-                                                <label className="text-xs text-gray-500 block mb-1">تعيين موزع:</label>
-                                                <select 
-                                                    value={order.driver}
-                                                    disabled={order.status === 'delivered'}
-                                                    onChange={(e) => handleAssignDriver(order.id, e.target.value)}
-                                                    className="w-full bg-gray-50 border p-2 rounded"
-                                                >
-                                                    <option value="">-- اختر --</option>
-                                                    {driversList.map(d => <option key={d} value={d}>{d}</option>)}
-                                                </select>
-                                            </div>
+                                            <select 
+                                                value={order.driver}
+                                                disabled={order.status === 'delivered'}
+                                                onChange={(e) => handleAssignDriver(order.id, e.target.value)}
+                                                className="w-full bg-gray-50 border p-2 rounded"
+                                            >
+                                                <option value="">-- اختر موزع --</option>
+                                                {driversList.map(d => <option key={d} value={d}>{d}</option>)}
+                                            </select>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                         )}
 
-                        {/* === واجهة الموزع (مع الكود السري) === */}
+                        {/* === واجهة الموزع (Driver View) === */}
                         {view === 'driver' && (
                             <div className="p-4 md:p-8 max-w-md mx-auto w-full fade-in">
                                 
-                                {/* تبديل الحسابات */}
                                 <div className="bg-slate-800 text-white p-4 rounded-2xl mb-6 shadow-lg">
-                                    <p className="text-xs text-slate-400 mb-2 text-center">-- محاكاة الهاتف --</p>
+                                    <p className="text-xs text-slate-400 mb-2 text-center">-- محاكاة الموزع --</p>
                                     <div className="flex bg-slate-700 p-1 rounded-xl">
                                         {driversList.map(d => (
-                                            <button key={d} onClick={() => setCurrentDriver(d)} className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${currentDriver === d ? 'bg-white text-slate-900 shadow' : 'text-slate-300 hover:bg-slate-600'}`}>
+                                            <button key={d} onClick={() => setCurrentDriver(d)} className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${currentDriver === d ? 'bg-white text-slate-900' : 'text-slate-300'}`}>
                                                 {d}
                                             </button>
                                         ))}
                                     </div>
                                 </div>
 
-                                <h2 className="text-xl font-bold mb-4">طلبات {currentDriver}</h2>
+                                <div className="flex justify-between items-center mb-4">
+                                    <h2 className="text-xl font-bold text-gray-800">مهام: {currentDriver}</h2>
+                                    
+                                    {/* زر الفلترة GPS */}
+                                    <button 
+                                        onClick={sortOrdersByLocation}
+                                        className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-1 hover:bg-blue-200 transition"
+                                    >
+                                        <i className="fa-solid fa-location-arrow"></i> الأقرب إليّ
+                                    </button>
+                                </div>
 
-                                <div className="space-y-4">
+                                <div className="space-y-4 pb-20">
                                     {orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').length === 0 ? (
-                                        <div className="text-center py-10 text-gray-400 border-2 border-dashed rounded-xl">لا توجد طلبات جارية</div>
+                                        <div className="text-center py-10 text-gray-400 border-2 border-dashed rounded-xl">لا مهام جديدة</div>
                                     ) : (
                                         orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').map(order => (
-                                            <div key={order.id} className="bg-white p-5 rounded-2xl shadow-md border-r-4 border-green-500 relative">
+                                            <div key={order.id} className="bg-white p-5 rounded-3xl shadow-lg border border-gray-100 relative overflow-hidden">
+                                                
+                                                {/* معلومات الزبون */}
                                                 <div className="flex justify-between items-start mb-4">
                                                     <div>
-                                                        <h3 className="font-bold text-lg">{order.customer}</h3>
-                                                        <p className="text-sm text-gray-500"><i className="fa-solid fa-location-dot text-red-500"></i> {order.address}</p>
+                                                        <h3 className="font-bold text-xl text-slate-800">{order.customer}</h3>
+                                                        
+                                                        {/* زر العنوان والخريطة */}
+                                                        <button 
+                                                            onClick={() => openMap(order.lat, order.lng)}
+                                                            className="text-sm text-gray-500 mt-1 flex items-center gap-1 hover:text-blue-600 transition"
+                                                        >
+                                                            <i className="fa-solid fa-map-location-dot text-red-500 text-lg"></i> 
+                                                            <span className="underline decoration-dotted">{order.address}</span>
+                                                        </button>
                                                     </div>
-                                                    <div className="bg-blue-50 text-blue-600 px-2 py-1 rounded font-bold">{order.price} DH</div>
+                                                    <div className="bg-slate-900 text-white px-3 py-1 rounded-lg font-bold shadow-md">
+                                                        {order.price} DH
+                                                    </div>
                                                 </div>
 
-                                                <div className="grid grid-cols-2 gap-3">
-                                                    <button onClick={() => handleContact(order.phone, order.customer)} className="bg-gray-100 text-gray-800 py-3 rounded-xl font-bold hover:bg-gray-200 flex items-center justify-center gap-2">
-                                                        <i className="fa-solid fa-phone"></i> اتصال
+                                                {/* الأزرار */}
+                                                <div className="grid grid-cols-2 gap-3 mt-6">
+                                                    <button 
+                                                        onClick={() => openContactModal(order)} 
+                                                        className="bg-gray-100 text-slate-700 py-3 rounded-2xl font-bold hover:bg-gray-200 flex items-center justify-center gap-2 transition"
+                                                    >
+                                                        <i className="fa-solid fa-phone-volume"></i> اتصال
                                                     </button>
-                                                    <button onClick={() => requestDelivery(order)} className="bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 shadow-lg flex items-center justify-center gap-2">
-                                                        <i className="fa-solid fa-check"></i> تم التسليم
+                                                    <button 
+                                                        onClick={() => requestDelivery(order)} 
+                                                        className="bg-green-600 text-white py-3 rounded-2xl font-bold hover:bg-green-700 shadow-lg shadow-green-200 flex items-center justify-center gap-2 transition transform active:scale-95"
+                                                    >
+                                                        <i className="fa-solid fa-box-open"></i> تسليم
                                                     </button>
                                                 </div>
                                             </div>
@@ -255,35 +312,67 @@
 
                     </main>
 
-                    {/* === نافذة الكود السري (OTP Modal) === */}
-                    {showOtpModal && targetOrder && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 fade-in">
-                            <div className="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl text-center">
-                                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl animate-bounce">
-                                    <i className="fa-solid fa-lock"></i>
+                    {/* === 1. نافذة الاتصال (Contact Modal) === */}
+                    {showContactModal && selectedOrder && (
+                        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end md:items-center justify-center fade-in">
+                            <div className="bg-white w-full md:w-96 rounded-t-3xl md:rounded-3xl p-6 shadow-2xl">
+                                <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-6 md:hidden"></div>
+                                <h3 className="text-xl font-bold text-center mb-2">تواصل مع {selectedOrder.customer}</h3>
+                                <p className="text-center text-gray-500 text-sm mb-6">اختر وسيلة الاتصال المفضلة</p>
+                                
+                                <div className="space-y-3">
+                                    <button 
+                                        onClick={() => window.open(`https://wa.me/212${selectedOrder.phone.substring(1)}`, '_blank')}
+                                        className="w-full flex items-center justify-center gap-3 bg-green-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-600 shadow-lg shadow-green-200"
+                                    >
+                                        <i className="fa-brands fa-whatsapp text-2xl"></i> رسالة واتساب
+                                    </button>
+                                    
+                                    <a 
+                                        href={`tel:${selectedOrder.phone}`}
+                                        className="w-full flex items-center justify-center gap-3 bg-blue-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-600 shadow-lg shadow-blue-200"
+                                    >
+                                        <i className="fa-solid fa-phone text-xl"></i> اتصال هاتفي
+                                    </a>
                                 </div>
-                                <h3 className="text-xl font-bold mb-2">تأكيد التسليم الآمن</h3>
-                                <p className="text-gray-500 text-sm mb-6">
-                                    اطلب من الزبون <b>{targetOrder.customer}</b> الكود الذي توصل به الآن لإتمام العملية.
+
+                                <button onClick={() => setShowContactModal(false)} className="w-full mt-4 py-3 text-gray-500 font-bold hover:bg-gray-50 rounded-xl">
+                                    إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* === 2. نافذة الكود (OTP Modal) === */}
+                    {showOtpModal && selectedOrder && (
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 fade-in">
+                            <div className="bg-white w-full max-w-sm rounded-3xl p-8 shadow-2xl text-center relative overflow-hidden">
+                                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-green-500"></div>
+                                
+                                <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-inner">
+                                    <i className="fa-solid fa-shield-cat"></i>
+                                </div>
+                                
+                                <h3 className="text-2xl font-black text-slate-800 mb-2">تأكيد الاستلام</h3>
+                                <p className="text-gray-500 text-sm mb-8 px-4">
+                                    أدخل الكود الذي وصل إلى هاتف الزبون <br/> <span className="font-bold text-slate-900">{selectedOrder.customer}</span>
                                 </p>
                                 
                                 <input 
                                     type="number" 
                                     value={otpInput}
                                     onChange={(e) => setOtpInput(e.target.value)}
-                                    placeholder="####" 
-                                    className="w-full text-center text-4xl font-bold tracking-[10px] border-2 border-gray-200 rounded-xl p-4 mb-6 focus:border-blue-500 focus:outline-none"
+                                    placeholder="0000" 
+                                    className="w-full text-center text-5xl font-black tracking-[15px] text-slate-800 border-b-4 border-gray-200 focus:border-blue-500 outline-none pb-2 mb-8 placeholder-gray-200 transition-colors"
                                     autoFocus
                                 />
 
-                                <div className="grid grid-cols-2 gap-3">
+                                <div className="grid grid-cols-2 gap-4">
                                     <button onClick={() => setShowOtpModal(false)} className="py-3 rounded-xl font-bold text-gray-500 bg-gray-100 hover:bg-gray-200">إلغاء</button>
-                                    <button onClick={verifyCode} className="py-3 rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-700 shadow-lg">تحقق</button>
+                                    <button onClick={verifyCode} className="py-3 rounded-xl font-bold bg-slate-900 text-white hover:bg-black shadow-xl shadow-slate-300">تأكيد</button>
                                 </div>
                                 
-                                <div className="mt-4 text-xs text-gray-300 select-none">
-                                    (للتجربة: الكود هو {generatedCode})
-                                </div>
+                                <div className="mt-6 text-xs text-gray-300">الكود التجريبي: {generatedCode}</div>
                             </div>
                         </div>
                     )}
