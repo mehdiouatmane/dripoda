@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Delivery - 5 Issues</title>
+    <title>Smart Delivery - Full Stats</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -37,7 +37,6 @@
         const DELIVERY_FEE = 20; 
         const DRIVER_CURRENT_LOCATION = { lat: 34.0150, lng: -6.8300 };
 
-        // دالة ترجمة نوع المشكلة للعربية (للعرض في البطاقة)
         const getProblemLabel = (type) => {
             switch(type) {
                 case 'no_answer': return '📞 لا يجيب';
@@ -63,7 +62,6 @@
             const [otpInput, setOtpInput] = React.useState("");
             const [generatedCode, setGeneratedCode] = React.useState("");
 
-            // الحالة الافتراضية للمشكلة هي "لا يجيب"
             const [problemType, setProblemType] = React.useState("no_answer"); 
             const [problemNote, setProblemNote] = React.useState("");
 
@@ -71,9 +69,20 @@
                 customer: '', phone: '', address: '', product: '', quantity: 1, price: ''
             });
 
-            const driverEarnings = orders.filter(o => o.driver === currentDriver && o.status === 'delivered').length * DELIVERY_FEE;
-            const adminRevenue = orders.filter(o => o.status === 'delivered').reduce((acc, curr) => acc + curr.price, 0);
+            // --- إحصائيات الموزع (تفصيلية) ---
+            const myOrders = orders.filter(o => o.driver === currentDriver);
+            const myDeliveredCount = myOrders.filter(o => o.status === 'delivered').length;
+            const myEarnings = myDeliveredCount * DELIVERY_FEE;
+            const myProblemsCount = myOrders.filter(o => o.status === 'problem').length;
+            const myPendingCount = myOrders.filter(o => o.status === 'assigned').length;
 
+            // --- إحصائيات الإدارة ---
+            const adminTotalOrders = orders.length;
+            const adminDeliveredCount = orders.filter(o => o.status === 'delivered').length; // مبيعات ناجحة
+            const adminRevenue = orders.filter(o => o.status === 'delivered').reduce((acc, curr) => acc + curr.price, 0);
+            const adminProblems = orders.filter(o => o.status === 'problem').length;
+
+            // --- الدوال المساعدة ---
             const calculateDistance = (lat1, lon1, lat2, lon2) => {
                 const R = 6371; 
                 const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -135,12 +144,11 @@
             };
 
             const submitProblem = () => {
-                // نسمح بحفظ المشكلة حتى لو لم يكتب ملاحظة في بعض الحالات
                 setOrders(orders.map(o => o.id === selectedOrder.id ? { 
                     ...o, status: 'problem', problem: { type: problemType, note: problemNote } 
                 } : o));
                 setShowProblemModal(false);
-                alert("⚠️ تم تسجيل حالة المشكلة بنجاح.");
+                alert("⚠️ تم تسجيل حالة المشكلة.");
             };
 
             const requestDelivery = (order) => {
@@ -193,6 +201,7 @@
                         {/* === ADMIN VIEW === */}
                         {view === 'admin' && (
                             <div className="p-4 md:p-8 max-w-7xl mx-auto w-full fade-in">
+                                
                                 <div className="flex justify-between items-center mb-6">
                                     <h2 className="text-2xl font-bold text-slate-800">توزيع المهام</h2>
                                     <div className="flex gap-3">
@@ -205,34 +214,35 @@
                                     </div>
                                 </div>
 
+                                {/* إحصائيات الإدارة (المحدثة) */}
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                                     <div className="bg-white p-4 rounded-xl shadow border-r-4 border-blue-500">
-                                        <div className="text-gray-500 text-sm">الطلبات</div>
-                                        <div className="text-2xl font-bold">{orders.length}</div>
+                                        <div className="text-gray-500 text-sm">إجمالي الطلبات</div>
+                                        <div className="text-2xl font-bold">{adminTotalOrders}</div>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-xl shadow border-r-4 border-green-500">
+                                        <div className="text-gray-500 text-sm">مبيعات ناجحة</div>
+                                        <div className="text-2xl font-bold text-green-700">{adminDeliveredCount}</div>
                                     </div>
                                     <div className="bg-white p-4 rounded-xl shadow border-r-4 border-purple-500">
-                                        <div className="text-gray-500 text-sm">المبيعات</div>
+                                        <div className="text-gray-500 text-sm">مداخيل (صافي)</div>
                                         <div className="text-2xl font-bold text-purple-700">{adminRevenue} DH</div>
                                     </div>
                                     <div className="bg-white p-4 rounded-xl shadow border-r-4 border-red-500">
                                         <div className="text-gray-500 text-sm">مشاكل</div>
-                                        <div className="text-2xl font-bold text-red-600">{orders.filter(o => o.status === 'problem').length}</div>
+                                        <div className="text-2xl font-bold text-red-600">{adminProblems}</div>
                                     </div>
                                 </div>
 
                                 <div className="space-y-4">
                                     {orders.map(order => (
-                                        <div key={order.id} className={`bg-white p-5 rounded-2xl card-shadow border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50' : 'border-gray-100'}`}>
-                                            
-                                            {/* إظهار المشكلة للإدارة */}
+                                        <div key={order.id} className={`bg-white p-5 rounded-2xl shadow-sm border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50' : 'border-gray-100'}`}>
                                             {order.status === 'problem' && (
                                                 <div className="bg-red-100 text-red-700 p-3 rounded-lg mb-4 text-sm font-bold flex items-start gap-2">
                                                     <i className="fa-solid fa-triangle-exclamation mt-1"></i>
                                                     <div>
-                                                        <span className="block underline">
-                                                            {getProblemLabel(order.problem.type)}
-                                                        </span>
-                                                        {order.problem.note && <span className="font-normal block text-gray-600">{order.problem.note}</span>}
+                                                        <span className="block underline">{getProblemLabel(order.problem.type)}</span>
+                                                        <span className="font-normal">{order.problem.note}</span>
                                                     </div>
                                                 </div>
                                             )}
@@ -261,17 +271,9 @@
                                                 </div>
                                             </div>
 
-                                            <button 
-                                                onClick={() => openMap(order.lat, order.lng)}
-                                                className="w-full text-right bg-white hover:bg-gray-50 p-3 rounded-xl border border-gray-200 transition flex items-center justify-between group mb-4"
-                                            >
-                                                <span className="text-gray-600 text-sm font-bold truncate pl-2">
-                                                    <i className="fa-solid fa-location-dot text-red-500 ml-2"></i>
-                                                    {order.address}
-                                                </span>
-                                                <span className="text-blue-600 text-xs font-bold whitespace-nowrap flex items-center bg-blue-50 px-2 py-1 rounded shadow-sm group-hover:text-blue-700">
-                                                    خريطة <i className="fa-solid fa-map-location-dot mr-1"></i>
-                                                </span>
+                                            <button onClick={() => openMap(order.lat, order.lng)} className="w-full text-right bg-white hover:bg-gray-50 p-3 rounded-xl border border-gray-200 transition flex items-center justify-between group mb-4">
+                                                <span className="text-gray-600 text-sm font-bold truncate pl-2"><i className="fa-solid fa-location-dot text-red-500 ml-2"></i> {order.address}</span>
+                                                <span className="text-blue-600 text-xs font-bold whitespace-nowrap flex items-center bg-blue-50 px-2 py-1 rounded shadow-sm group-hover:text-blue-700">خريطة <i className="fa-solid fa-map-location-dot mr-1"></i></span>
                                             </button>
 
                                             <div className="pt-3 border-t border-gray-100">
@@ -300,23 +302,38 @@
                         {/* === DRIVER VIEW === */}
                         {view === 'driver' && (
                             <div className="p-4 md:p-8 max-w-md mx-auto w-full fade-in">
-                                <div className="bg-slate-900 text-white p-5 rounded-2xl mb-6 shadow-lg relative overflow-hidden">
-                                    <div className="flex justify-between items-center mb-4">
+                                
+                                {/* إحصائيات الموزع المفصلة (الجديدة) */}
+                                <div className="bg-slate-900 text-white rounded-3xl mb-6 shadow-xl relative overflow-hidden">
+                                    <div className="p-5 flex justify-between items-start border-b border-gray-700">
                                         <div>
-                                            <p className="text-slate-400 text-xs font-bold">محفظتي</p>
-                                            <h2 className="text-3xl font-bold text-green-400">{driverEarnings} DH</h2>
+                                            <p className="text-slate-400 text-xs font-bold">أرباحي (توصيل)</p>
+                                            <h2 className="text-4xl font-bold text-green-400 mt-1">{myEarnings} <span className="text-base text-gray-400">DH</span></h2>
                                         </div>
                                         <div className="text-right">
-                                            <p className="text-slate-400 text-xs">حساب:</p>
-                                            <p className="font-bold">{currentDriver}</p>
+                                            <p className="text-slate-400 text-xs mb-1">الحساب النشط</p>
+                                            <div className="flex bg-slate-800 p-1 rounded-lg">
+                                                {driversList.map(d => (
+                                                    <button key={d} onClick={() => setCurrentDriver(d)} className={`px-3 py-1 rounded-md text-xs font-bold transition ${currentDriver === d ? 'bg-white text-slate-900' : 'text-slate-400'}`}>
+                                                        {d}
+                                                    </button>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="flex bg-slate-800 p-1 rounded-xl">
-                                        {driversList.map(d => (
-                                            <button key={d} onClick={() => setCurrentDriver(d)} className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition ${currentDriver === d ? 'bg-white text-slate-900' : 'text-slate-300'}`}>
-                                                {d}
-                                            </button>
-                                        ))}
+                                    <div className="grid grid-cols-3 text-center py-4 bg-slate-800/50">
+                                        <div className="border-l border-gray-700">
+                                            <div className="text-xl font-bold text-white">{myDeliveredCount}</div>
+                                            <div className="text-[10px] text-gray-400 font-bold">تم التوصيل ✅</div>
+                                        </div>
+                                        <div className="border-l border-gray-700">
+                                            <div className="text-xl font-bold text-white">{myPendingCount}</div>
+                                            <div className="text-[10px] text-gray-400 font-bold">قيد التوصيل 🚀</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-xl font-bold text-red-400">{myProblemsCount}</div>
+                                            <div className="text-[10px] text-gray-400 font-bold">مشاكل ⚠️</div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -328,72 +345,55 @@
                                 </div>
 
                                 <div className="space-y-4 pb-20">
-                                    {orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').length === 0 ? (
-                                        <div className="text-center py-10 text-gray-400 border-2 border-dashed rounded-xl">لا مهام جديدة</div>
-                                    ) : (
-                                        orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').map(order => (
-                                            <div key={order.id} className={`bg-white p-5 rounded-2xl card-shadow border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50 shadow-red-100' : 'border-gray-100'}`}>
-                                                
-                                                {/* إظهار المشكلة للموزع (بالترجمة الجديدة) */}
-                                                {order.status === 'problem' && (
-                                                    <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4 border border-red-200">
-                                                        <p className="text-xs font-bold flex items-center gap-2 mb-1">
-                                                            <i className="fa-solid fa-triangle-exclamation"></i>
-                                                            {getProblemLabel(order.problem.type)}
-                                                        </p>
-                                                        {order.problem.note && <p className="text-sm bg-white/50 p-2 rounded text-gray-800">{order.problem.note}</p>}
-                                                    </div>
-                                                )}
+                                    {orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').map(order => (
+                                        <div key={order.id} className={`bg-white p-5 rounded-2xl card-shadow border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50 shadow-red-100' : 'border-gray-100'}`}>
+                                            {order.status === 'problem' && (
+                                                <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4 border border-red-200">
+                                                    <p className="text-xs font-bold flex items-center gap-2 mb-1">
+                                                        <i className="fa-solid fa-triangle-exclamation"></i>
+                                                        {getProblemLabel(order.problem.type)}
+                                                    </p>
+                                                    {order.problem.note && <p className="text-sm bg-white/50 p-2 rounded text-gray-800">{order.problem.note}</p>}
+                                                </div>
+                                            )}
 
-                                                <div className="flex justify-between items-start mb-2">
-                                                    <div className="flex-1">
-                                                        <h3 className="font-bold text-lg text-slate-800 leading-tight">{order.customer}</h3>
-                                                        <div className="flex items-center gap-2 mt-1">
-                                                            <span className="text-sm text-blue-600 font-bold bg-blue-50 px-2 py-0.5 rounded flex items-center gap-1">
-                                                                <i className="fa-solid fa-box-open"></i> {order.product}
-                                                            </span>
-                                                            <span className="text-xs font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border">x{order.quantity}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-lg font-bold text-green-600 bg-green-50 px-2 py-1 rounded shadow-sm whitespace-nowrap">
-                                                        {order.price} DH
+                                            <div className="flex justify-between items-start mb-4">
+                                                <div>
+                                                    <h3 className="font-bold text-xl text-slate-800">{order.customer}</h3>
+                                                    <div className="text-sm text-blue-600 font-bold mt-1 bg-blue-50 px-2 py-1 rounded w-fit">
+                                                        <i className="fa-solid fa-cube"></i> {order.product} <span className="text-slate-500 text-xs border-r pr-1 mr-1">x{order.quantity}</span>
                                                     </div>
                                                 </div>
+                                                <div className="text-right">
+                                                    <div className="bg-slate-900 text-white px-3 py-1 rounded-lg font-bold shadow-md">{order.price} DH</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <button onClick={() => openMap(order.lat, order.lng)} className="w-full text-right bg-white hover:bg-gray-50 p-3 rounded-xl border border-gray-200 transition flex items-center justify-between group mb-4">
+                                                <span className="text-gray-600 text-sm font-bold truncate pl-2"><i className="fa-solid fa-location-dot text-red-500 ml-2"></i> {order.address}</span>
+                                                <span className="text-blue-600 text-xs font-bold whitespace-nowrap flex items-center bg-blue-50 px-2 py-1 rounded shadow-sm group-hover:text-blue-700">خريطة <i className="fa-solid fa-map-location-dot mr-1"></i></span>
+                                            </button>
 
-                                                <button 
-                                                    onClick={() => openMap(order.lat, order.lng)}
-                                                    className="w-full text-right bg-white hover:bg-gray-50 p-3 rounded-xl border border-gray-200 transition flex items-center justify-between group mb-4"
-                                                >
-                                                    <span className="text-gray-600 text-sm font-bold truncate pl-2">
-                                                        <i className="fa-solid fa-location-dot text-red-500 ml-2"></i>
-                                                        {order.address}
-                                                    </span>
-                                                    <span className="text-blue-600 text-xs font-bold whitespace-nowrap flex items-center bg-blue-50 px-2 py-1 rounded shadow-sm group-hover:text-blue-700">
-                                                        خريطة <i className="fa-solid fa-map-location-dot mr-1"></i>
-                                                    </span>
+                                            <div className="grid grid-cols-2 gap-3 mt-4">
+                                                <button onClick={() => openContactModal(order)} className="bg-gray-100 text-slate-700 py-3 rounded-xl font-bold hover:bg-gray-200 flex items-center justify-center gap-2 transition">
+                                                    <i className="fa-solid fa-phone"></i> <span className="text-sm">اتصال</span>
                                                 </button>
-
-                                                <div className="grid grid-cols-2 gap-3 mt-4">
-                                                    <button onClick={() => openContactModal(order)} className="bg-gray-100 text-slate-700 py-3 rounded-xl font-bold hover:bg-gray-200 flex items-center justify-center gap-2 transition">
-                                                        <i className="fa-solid fa-phone"></i> <span className="text-sm">اتصال</span>
-                                                    </button>
-                                                    <button onClick={() => requestDelivery(order)} className="bg-green-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95">
-                                                        تسليم <i className="fa-solid fa-check"></i>
-                                                    </button>
-                                                </div>
-                                                <button onClick={() => openProblemModal(order)} className={`w-full mt-3 text-sm font-bold flex items-center justify-center gap-1 py-3 rounded-lg transition ${order.status === 'problem' ? 'bg-red-600 text-white' : 'bg-red-50 text-red-600 hover:bg-red-100'}`}>
-                                                    <i className="fa-solid fa-triangle-exclamation"></i> {order.status === 'problem' ? 'تعديل المشكلة' : 'إبلاغ عن مشكلة'}
+                                                <button onClick={() => requestDelivery(order)} className="bg-green-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95">
+                                                    تسليم <i className="fa-solid fa-check"></i>
                                                 </button>
                                             </div>
-                                        ))
-                                    )}
+                                            <button onClick={() => openProblemModal(order)} className={`w-full mt-3 text-sm font-bold flex items-center justify-center gap-1 py-3 rounded-lg transition ${order.status === 'problem' ? 'bg-red-200 text-red-800' : 'text-red-500 hover:bg-red-50'}`}>
+                                                <i className="fa-solid fa-triangle-exclamation"></i> {order.status === 'problem' ? 'تعديل المشكلة' : 'إبلاغ عن مشكلة'}
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         )}
 
                     </main>
 
-                    {/* Modals */}
+                    {/* Modals remain the same... */}
                     {showAddOrderModal && (
                         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
                             <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl">
@@ -420,6 +420,19 @@
                         </div>
                     )}
 
+                    {showContactModal && selectedOrder && (
+                        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
+                            <div className="bg-white w-full max-w-sm rounded-3xl p-6 text-center">
+                                <h3 className="text-lg font-bold mb-4">تواصل مع {selectedOrder.customer}</h3>
+                                <div className="space-y-3">
+                                    <button onClick={() => window.open(`https://wa.me/212${selectedOrder.phone.substring(1)}`, '_blank')} className="w-full bg-green-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2"><i className="fa-brands fa-whatsapp text-xl"></i> واتساب</button>
+                                    <a href={`tel:${selectedOrder.phone}`} className="w-full bg-blue-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2 block"><i className="fa-solid fa-phone text-xl"></i> هاتف</a>
+                                </div>
+                                <button onClick={() => setShowContactModal(false)} className="mt-4 text-gray-500 font-bold">إلغاء</button>
+                            </div>
+                        </div>
+                    )}
+
                     {showProblemModal && selectedOrder && (
                         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
                             <div className="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl">
@@ -431,33 +444,9 @@
                                     <option value="postpone">⏰ مشغول / تأجيل</option>
                                     <option value="address">📍 تغيير العنوان</option>
                                 </select>
-                                <input 
-                                    type="text" 
-                                    value={problemNote} 
-                                    onChange={(e) => setProblemNote(e.target.value)} 
-                                    placeholder={
-                                        problemType === 'postpone' ? 'متى سيكون متاحاً؟' : 
-                                        problemType === 'address' ? 'العنوان الجديد؟' : 
-                                        problemType === 'refuse' ? 'سبب الرفض؟' : 'ملاحظات إضافية...'
-                                    } 
-                                    className="w-full border-2 border-gray-200 p-3 rounded-xl mb-6 focus:border-red-500 outline-none" 
-                                />
+                                <input type="text" value={problemNote} onChange={(e) => setProblemNote(e.target.value)} placeholder="التفاصيل..." className="w-full border-2 border-gray-200 p-3 rounded-xl mb-6 focus:border-red-500 outline-none" />
                                 <button onClick={submitProblem} className="w-full bg-red-600 text-white py-3 rounded-xl font-bold">تأكيد</button>
                                 <button onClick={() => setShowProblemModal(false)} className="w-full mt-3 text-gray-500 font-bold">إلغاء</button>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Contact & OTP Modals remain the same */}
-                    {showContactModal && selectedOrder && (
-                        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
-                            <div className="bg-white w-full max-w-sm rounded-3xl p-6 text-center">
-                                <h3 className="text-lg font-bold mb-4">تواصل مع {selectedOrder.customer}</h3>
-                                <div className="space-y-3">
-                                    <button onClick={() => window.open(`https://wa.me/212${selectedOrder.phone.substring(1)}`, '_blank')} className="w-full bg-green-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2"><i className="fa-brands fa-whatsapp text-xl"></i> واتساب</button>
-                                    <a href={`tel:${selectedOrder.phone}`} className="w-full bg-blue-500 text-white py-3 rounded-xl font-bold flex justify-center gap-2 block"><i className="fa-solid fa-phone text-xl"></i> هاتف</a>
-                                </div>
-                                <button onClick={() => setShowContactModal(false)} className="mt-4 text-gray-500 font-bold">إلغاء</button>
                             </div>
                         </div>
                     )}
