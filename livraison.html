@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Delivery - Final Layout</title>
+    <title>Smart Delivery - Perfect Layout</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
         body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; }
         .fade-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
+        
+        /* تحسين مظهر البطاقات */
+        .card-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
@@ -219,7 +219,7 @@
 
                                 <div className="space-y-4">
                                     {orders.map(order => (
-                                        <div key={order.id} className={`bg-white p-5 rounded-2xl shadow-sm border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50' : 'border-gray-100'}`}>
+                                        <div key={order.id} className={`bg-white p-5 rounded-2xl card-shadow border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50' : 'border-gray-100'}`}>
                                             {order.status === 'problem' && (
                                                 <div className="bg-red-100 text-red-700 p-3 rounded-lg mb-4 text-sm font-bold flex items-start gap-2">
                                                     <i className="fa-solid fa-triangle-exclamation mt-1"></i>
@@ -230,14 +230,19 @@
                                                 </div>
                                             )}
 
+                                            {/* Header ثابت: الاسم والثمن */}
                                             <div className="flex justify-between items-start mb-2">
-                                                <div>
-                                                    <h3 className="font-bold text-lg text-slate-800">{order.customer}</h3>
+                                                <div className="flex-1">
+                                                    <h3 className="font-bold text-lg text-slate-800 leading-tight">{order.customer}</h3>
                                                     <div className="text-sm text-blue-600 font-bold mt-1"><i className="fa-solid fa-box-open"></i> {order.product}</div>
                                                 </div>
-                                                <div className="text-right">
-                                                    <div className="text-lg font-bold text-green-600">{order.price} DH</div>
-                                                    <span className={`px-2 py-1 rounded text-xs font-bold block mt-1 ${
+                                                
+                                                {/* الثمن ثابت هنا ولا يتحرك */}
+                                                <div className="flex flex-col items-end">
+                                                    <div className="text-lg font-bold text-green-600 bg-green-50 px-2 py-1 rounded shadow-sm whitespace-nowrap">
+                                                        {order.price} DH
+                                                    </div>
+                                                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold mt-1 ${
                                                         order.status === 'delivered' ? 'bg-green-100 text-green-700' : 
                                                         order.status === 'problem' ? 'bg-red-100 text-red-700' :
                                                         order.status === 'assigned' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'
@@ -247,23 +252,28 @@
                                                 </div>
                                             </div>
 
-                                            {/* زر الخريطة للإدارة (بجانب العنوان) */}
-                                            <div className="flex justify-between items-center mb-4 border-b border-gray-100 pb-3 mt-2">
-                                                <div className="text-gray-500 text-sm flex items-center gap-2">
-                                                    <i className="fa-solid fa-location-dot text-red-400"></i> {order.address}
-                                                </div>
-                                                <button onClick={() => openMap(order.lat, order.lng)} className="text-xs text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded font-bold flex items-center gap-1 transition">
-                                                    <i className="fa-solid fa-map-location-dot"></i> خريطة
-                                                </button>
-                                            </div>
+                                            {/* 📍 العنوان وزر الخريطة في سطر واحد (الإصلاح المطلوب) */}
+                                            <button 
+                                                onClick={() => openMap(order.lat, order.lng)}
+                                                className="w-full text-right bg-gray-50 hover:bg-gray-100 p-3 rounded-xl border border-gray-200 transition flex items-center justify-between group mb-4"
+                                            >
+                                                <span className="text-gray-600 text-sm font-bold truncate pl-2">
+                                                    <i className="fa-solid fa-location-dot text-red-500 ml-2"></i>
+                                                    {order.address}
+                                                </span>
+                                                <span className="text-blue-600 text-xs font-bold whitespace-nowrap flex items-center bg-white px-2 py-1 rounded shadow-sm group-hover:text-blue-700">
+                                                    خريطة <i className="fa-solid fa-map-location-dot mr-1"></i>
+                                                </span>
+                                            </button>
 
-                                            <div className="pt-3 border-t border-gray-200/50">
-                                                <label className="text-xs font-bold text-slate-500 block mb-2">تعيين موزع:</label>
+                                            {/* قسم التعيين (معزول في الأسفل لعدم تحريك الثمن) */}
+                                            <div className="pt-3 border-t border-gray-100">
+                                                <label className="text-xs font-bold text-slate-400 block mb-2">تعيين الموزع:</label>
                                                 {order.status !== 'delivered' ? (
                                                     <select 
                                                         value={order.driver}
                                                         onChange={(e) => handleAssignDriver(order.id, e.target.value)}
-                                                        className="w-full bg-white border border-gray-300 text-gray-800 rounded-xl p-2 focus:ring-2 focus:ring-blue-500 outline-none font-bold"
+                                                        className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl p-2.5 focus:ring-2 focus:ring-blue-500 outline-none font-bold"
                                                     >
                                                         <option value="">-- اختر موزع --</option>
                                                         {driversList.map(d => <option key={d} value={d}>{d}</option>)}
@@ -315,7 +325,7 @@
                                         <div className="text-center py-10 text-gray-400 border-2 border-dashed rounded-xl">لا مهام جديدة</div>
                                     ) : (
                                         orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').map(order => (
-                                            <div key={order.id} className={`bg-white p-5 rounded-2xl shadow-md border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50 shadow-red-100' : 'border-gray-100'}`}>
+                                            <div key={order.id} className={`bg-white p-5 rounded-2xl card-shadow border relative ${order.status === 'problem' ? 'border-red-500 bg-red-50 shadow-red-100' : 'border-gray-100'}`}>
                                                 {order.status === 'problem' && (
                                                     <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4 border border-red-200">
                                                         <p className="text-xs font-bold flex items-center gap-2 mb-1"><i className="fa-solid fa-triangle-exclamation"></i> {order.problem.type === 'delay' ? '⏰ تأخير استلام' : order.problem.type === 'refuse' ? '❌ رفض الطلب' : '📍 تغيير العنوان'}</p>
@@ -333,26 +343,29 @@
                                                     </div>
                                                 </div>
                                                 
-                                                {/* 📍 تعديل واجهة الموزع: العنوان وزر الخريطة في سطر واحد */}
-                                                <div className="flex justify-between items-center mb-4 border-b border-gray-100 pb-3">
-                                                    <div className="text-gray-500 text-sm flex items-center gap-2">
-                                                        <i className="fa-solid fa-location-dot text-red-400"></i>
+                                                {/* 📍 العنوان للموزع (نفس الستايل: زر واحد) */}
+                                                <button 
+                                                    onClick={() => openMap(order.lat, order.lng)}
+                                                    className="w-full text-right bg-gray-50 hover:bg-gray-100 p-3 rounded-xl border border-gray-200 transition flex items-center justify-between group mb-4"
+                                                >
+                                                    <span className="text-gray-600 text-sm font-bold truncate pl-2">
+                                                        <i className="fa-solid fa-location-dot text-red-500 ml-2"></i>
                                                         {order.address}
-                                                    </div>
-                                                    <button onClick={() => openMap(order.lat, order.lng)} className="text-xs text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 transition">
-                                                        <i className="fa-solid fa-map-location-dot"></i> خريطة
-                                                    </button>
-                                                </div>
+                                                    </span>
+                                                    <span className="text-blue-600 text-xs font-bold whitespace-nowrap flex items-center bg-white px-2 py-1 rounded shadow-sm group-hover:text-blue-700">
+                                                        خريطة <i className="fa-solid fa-map-location-dot mr-1"></i>
+                                                    </span>
+                                                </button>
 
                                                 <div className="grid grid-cols-2 gap-3 mt-4">
                                                     <button onClick={() => openContactModal(order)} className="bg-gray-100 text-slate-700 py-3 rounded-xl font-bold hover:bg-gray-200 flex items-center justify-center gap-2 transition">
-                                                        <i className="fa-solid fa-phone"></i> <span className="text-sm">اتصال</span>
+                                                        <i className="fa-solid fa-phone"></i> اتصال
                                                     </button>
                                                     <button onClick={() => requestDelivery(order)} className="bg-green-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95">
                                                         تسليم <i className="fa-solid fa-check"></i>
                                                     </button>
                                                 </div>
-                                                <button onClick={() => openProblemModal(order)} className={`w-full mt-3 text-sm font-bold flex items-center justify-center gap-1 py-3 rounded-lg transition ${order.status === 'problem' ? 'bg-red-600 text-white' : 'bg-red-50 text-red-600 hover:bg-red-100'}`}>
+                                                <button onClick={() => openProblemModal(order)} className={`w-full mt-3 text-sm font-bold flex items-center justify-center gap-1 py-3 rounded-lg transition ${order.status === 'problem' ? 'bg-red-200 text-red-800' : 'bg-red-50 text-red-500 hover:bg-red-100'}`}>
                                                     <i className="fa-solid fa-triangle-exclamation"></i> {order.status === 'problem' ? 'تعديل المشكلة' : 'إبلاغ عن مشكلة'}
                                                 </button>
                                             </div>
