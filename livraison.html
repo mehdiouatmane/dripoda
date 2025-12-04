@@ -1,1 +1,272 @@
-kll
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Delivery Pro - نظام التوصيل الذكي</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
+        body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        
+        // =================================================================
+        // 1. البيانات الوهمية (قاعدة البيانات في المتصفح)
+        // =================================================================
+        const initialOrders = [
+            { id: 101, customer: "أحمد بناني", address: "حي السلام، سلا", price: 150, status: "pending", driver: null },
+            { id: 102, customer: "سارة العلمي", address: "أكدال، الرباط", price: 300, status: "pending", driver: null },
+            { id: 103, customer: "كريم التازي", address: "حي الرياض، الرباط", price: 120, status: "delivered", driver: "عمر" },
+            { id: 104, customer: "منى الشاوي", address: "تابريكت، سلا", price: 200, status: "pending", driver: null },
+            { id: 105, customer: "يوسف العمراني", address: "المحيت، الرباط", price: 450, status: "assigned", driver: "خالد" },
+        ];
+
+        const driversList = [
+            { id: 1, name: "عمر (متاح)", available: true },
+            { id: 2, name: "خالد (مشغول)", available: false },
+            { id: 3, name: "ياسين (متاح)", available: true }
+        ];
+
+        // =================================================================
+        // 2. التطبيق الرئيسي (SmartDeliveryApp)
+        // =================================================================
+        function SmartDeliveryApp() {
+            
+            // --- الصناديق (State) ---
+            const [orders, setOrders] = React.useState(initialOrders);
+            const [view, setView] = React.useState('admin'); // 'admin' أو 'driver'
+            
+            // --- الإحصائيات (تحسب تلقائياً) ---
+            const stats = {
+                total: orders.length,
+                pending: orders.filter(o => o.status === 'pending').length,
+                delivered: orders.filter(o => o.status === 'delivered').length,
+                revenue: orders.filter(o => o.status === 'delivered').reduce((acc, curr) => acc + curr.price, 0)
+            };
+
+            // --- دالة التوزيع الذكي (AI Simulation) ---
+            // هادي هي اللي غتبهر بيهم اللجنة: كتوزع الطلبات على الموزعين المتاحين
+            const autoAssign = () => {
+                const newOrders = [...orders];
+                const availableDrivers = driversList.filter(d => d.available);
+                
+                let driverIndex = 0;
+                let assignedCount = 0;
+
+                newOrders.forEach(order => {
+                    if (order.status === 'pending' && availableDrivers.length > 0) {
+                        // خوارزمية التوزيع بالتناوب (Round Robin)
+                        order.driver = availableDrivers[driverIndex].name;
+                        order.status = 'assigned';
+                        driverIndex = (driverIndex + 1) % availableDrivers.length;
+                        assignedCount++;
+                    }
+                });
+
+                setOrders(newOrders);
+                if(assignedCount > 0) alert(`🤖 تم توزيع ${assignedCount} طلبات ذكياً على الموزعين المتاحين!`);
+                else alert("لا توجد طلبات جديدة أو موزعين متاحين.");
+            };
+
+            // --- دالة تغيير الحالة (للموزع) ---
+            const updateStatus = (id, newStatus) => {
+                setOrders(orders.map(o => o.id === id ? { ...o, status: newStatus } : o));
+            };
+
+            return (
+                <div className="flex h-screen overflow-hidden">
+                    
+                    {/* === القائمة الجانبية (Sidebar) === */}
+                    <aside className="w-64 bg-gray-900 text-white flex flex-col hidden md:flex">
+                        <div className="p-6 text-2xl font-bold text-center border-b border-gray-700">
+                            <i className="fa-solid fa-rocket text-blue-500 ml-2"></i>
+                            توصيل <span className="text-blue-400">برو</span>
+                        </div>
+                        <nav className="flex-1 p-4 space-y-2">
+                            <button onClick={() => setView('admin')} className={`w-full text-right p-3 rounded transition ${view === 'admin' ? 'bg-blue-600' : 'hover:bg-gray-800'}`}>
+                                <i className="fa-solid fa-chart-line ml-3 w-6"></i> لوحة التحكم
+                            </button>
+                            <button onClick={() => setView('driver')} className={`w-full text-right p-3 rounded transition ${view === 'driver' ? 'bg-green-600' : 'hover:bg-gray-800'}`}>
+                                <i className="fa-solid fa-motorcycle ml-3 w-6"></i> واجهة الموزع
+                            </button>
+                        </nav>
+                        <div className="p-4 text-xs text-gray-500 text-center">
+                            الإصدار التجريبي v1.0 (Demo)
+                        </div>
+                    </aside>
+
+                    {/* === المحتوى الرئيسي === */}
+                    <main className="flex-1 flex flex-col h-screen overflow-y-auto">
+                        
+                        {/* Header للموبايل */}
+                        <header className="bg-white p-4 shadow-sm flex justify-between items-center md:hidden">
+                            <div className="font-bold text-lg">توصيل برو</div>
+                            <div className="flex gap-2">
+                                <button onClick={() => setView('admin')} className="text-sm bg-gray-200 p-2 rounded">إدارة</button>
+                                <button onClick={() => setView('driver')} className="text-sm bg-gray-200 p-2 rounded">موزع</button>
+                            </div>
+                        </header>
+
+                        {/* === عرض الإدارة (Admin View) === */}
+                        {view === 'admin' && (
+                            <div className="p-6 md:p-10">
+                                <div className="flex justify-between items-center mb-8">
+                                    <h1 className="text-3xl font-bold text-gray-800">لوحة القيادة</h1>
+                                    <button onClick={autoAssign} className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-lg flex items-center transition transform hover:scale-105">
+                                        <i className="fa-solid fa-wand-magic-sparkles ml-2"></i> توزيع ذكي (AI)
+                                    </button>
+                                </div>
+
+                                {/* بطاقات الإحصائيات */}
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+                                    <StatCard title="إجمالي الطلبات" value={stats.total} icon="fa-box" color="blue" />
+                                    <StatCard title="قيد الانتظار" value={stats.pending} icon="fa-clock" color="yellow" />
+                                    <StatCard title="تم التوصيل" value={stats.delivered} icon="fa-check-circle" color="green" />
+                                    <StatCard title="الأرباح" value={stats.revenue + ' DH'} icon="fa-wallet" color="purple" />
+                                </div>
+
+                                {/* جدول الطلبات */}
+                                <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                                    <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+                                        <h3 className="font-bold text-lg">أحدث الطلبات</h3>
+                                        <span className="text-sm text-gray-500">تحديث مباشر</span>
+                                    </div>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-right">
+                                            <thead className="bg-gray-50 text-gray-600 text-sm uppercase">
+                                                <tr>
+                                                    <th className="p-4">رقم الطلب</th>
+                                                    <th className="p-4">الزبون</th>
+                                                    <th className="p-4">العنوان</th>
+                                                    <th className="p-4">المبلغ</th>
+                                                    <th className="p-4">الحالة</th>
+                                                    <th className="p-4">الموزع</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-100">
+                                                {orders.map(order => (
+                                                    <tr key={order.id} className="hover:bg-gray-50 transition">
+                                                        <td className="p-4 font-bold">#{order.id}</td>
+                                                        <td className="p-4">{order.customer}</td>
+                                                        <td className="p-4 text-gray-500">{order.address}</td>
+                                                        <td className="p-4 font-bold text-gray-800">{order.price} DH</td>
+                                                        <td className="p-4">
+                                                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                                                                order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+                                                                order.status === 'assigned' ? 'bg-blue-100 text-blue-700' :
+                                                                'bg-green-100 text-green-700'
+                                                            }`}>
+                                                                {order.status === 'pending' ? 'انتظار' : 
+                                                                 order.status === 'assigned' ? 'جاري التوصيل' : 'مكتمل'}
+                                                            </span>
+                                                        </td>
+                                                        <td className="p-4 text-sm">
+                                                            {order.driver ? (
+                                                                <span className="flex items-center text-gray-700">
+                                                                    <i className="fa-solid fa-helmet-safety ml-2 text-gray-400"></i> {order.driver}
+                                                                </span>
+                                                            ) : (
+                                                                <span className="text-gray-400 text-xs italic">-- غير معين --</span>
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* === عرض الموزع (Driver View) === */}
+                        {view === 'driver' && (
+                            <div className="p-6 md:p-10 max-w-2xl mx-auto w-full">
+                                <h2 className="text-2xl font-bold mb-6 flex items-center">
+                                    <i className="fa-solid fa-motorcycle ml-3 text-green-600"></i>
+                                    تطبيق الموزع (Live App)
+                                </h2>
+                                
+                                <div className="space-y-4">
+                                    {orders.filter(o => o.status === 'assigned').length === 0 && (
+                                        <div className="text-center p-10 bg-white rounded-xl shadow border border-dashed border-gray-300 text-gray-500">
+                                            لا توجد مهام جديدة حالياً 😴
+                                        </div>
+                                    )}
+
+                                    {orders.filter(o => o.status === 'assigned').map(order => (
+                                        <div key={order.id} className="bg-white p-6 rounded-xl shadow-lg border-r-4 border-blue-500 transform transition hover:scale-102">
+                                            <div className="flex justify-between items-start mb-4">
+                                                <div>
+                                                    <span className="text-xs font-bold text-gray-400 block mb-1">طلب #{order.id}</span>
+                                                    <h3 className="text-xl font-bold">{order.customer}</h3>
+                                                </div>
+                                                <div className="bg-blue-50 text-blue-600 px-3 py-1 rounded-lg font-bold">
+                                                    {order.price} DH
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="mb-6 flex items-center text-gray-600 bg-gray-50 p-3 rounded-lg">
+                                                <i className="fa-solid fa-location-dot ml-3 text-red-500 text-xl"></i>
+                                                {order.address}
+                                            </div>
+
+                                            <div className="flex gap-3">
+                                                <button className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-bold hover:bg-gray-300">
+                                                    <i className="fa-solid fa-phone"></i> اتصال
+                                                </button>
+                                                <button 
+                                                    onClick={() => {
+                                                        if(confirm('تأكيد تسليم الطلب واستلام المبلغ؟')) updateStatus(order.id, 'delivered');
+                                                    }}
+                                                    className="flex-1 bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 shadow-md transition"
+                                                >
+                                                    <i className="fa-solid fa-check"></i> تم التسليم
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                    </main>
+                </div>
+            );
+        }
+
+        // مكون بسيط للبطاقة (StatCard)
+        function StatCard({ title, value, icon, color }) {
+            const colors = {
+                blue: "bg-blue-500", yellow: "bg-yellow-500", green: "bg-green-500", purple: "bg-purple-600"
+            };
+            return (
+                <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white ${colors[color]} ml-4 shadow-md`}>
+                        <i className={`fa-solid ${icon}`}></i>
+                    </div>
+                    <div>
+                        <div className="text-gray-500 text-sm">{title}</div>
+                        <div className="text-2xl font-bold text-gray-800">{value}</div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<SmartDeliveryApp />);
+
+    </script>
+</body>
+</html>
