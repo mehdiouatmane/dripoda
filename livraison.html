@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Delivery Pro - التوصيل الآمن</title>
+    <title>Smart Delivery - الإدارة اليدوية</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -14,8 +14,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
         body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; }
-        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        /* تحسينات الموبايل */
+        .mobile-card { transition: all 0.3s ease; }
+        .mobile-card:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -24,235 +25,170 @@
 
     <script type="text/babel">
         
-        // بيانات وهمية
+        // 1. البيانات
         const initialOrders = [
-            { id: 101, customer: "أحمد بناني", phone: "0661123456", address: "حي السلام، سلا", price: 150, status: "pending", driver: null },
-            { id: 102, customer: "سارة العلمي", phone: "0661987654", address: "أكدال، الرباط", price: 300, status: "pending", driver: null },
+            { id: 101, customer: "أحمد بناني", phone: "0661123456", address: "حي السلام، سلا", price: 150, status: "pending", driver: "" },
+            { id: 102, customer: "سارة العلمي", phone: "0661987654", address: "أكدال، الرباط", price: 300, status: "pending", driver: "" },
             { id: 103, customer: "كريم التازي", phone: "0661000000", address: "حي الرياض، الرباط", price: 120, status: "delivered", driver: "عمر" },
-            { id: 104, customer: "منى الشاوي", phone: "0661112233", address: "تابريكت، سلا", price: 200, status: "pending", driver: null },
-            { id: 105, customer: "يوسف العمراني", phone: "0661445566", address: "المحيط، الرباط", price: 450, status: "assigned", driver: "خالد" },
+            { id: 104, customer: "منى الشاوي", phone: "0661112233", address: "تابريكت، سلا", price: 200, status: "pending", driver: "" },
+            { id: 105, customer: "يوسف العمراني", phone: "0661445566", address: "المحيط، الرباط", price: 450, status: "pending", driver: "" },
         ];
 
-        const driversList = [
-            { id: 1, name: "عمر (متاح)", available: true },
-            { id: 2, name: "خالد (مشغول)", available: false },
-            { id: 3, name: "ياسين (متاح)", available: true }
-        ];
+        const driversList = ["عمر", "خالد", "ياسين"];
 
         function SmartDeliveryApp() {
+            // State
             const [orders, setOrders] = React.useState(initialOrders);
             const [view, setView] = React.useState('admin'); 
-            
-            // --- صناديق التحقق (OTP) ---
-            const [showOtpModal, setShowOtpModal] = React.useState(false);
-            const [currentOrderId, setCurrentOrderId] = React.useState(null);
-            const [otpInput, setOtpInput] = React.useState("");
-            const [verificationCode, setVerificationCode] = React.useState(""); // الكود الصحيح
+            const [currentDriver, setCurrentDriver] = React.useState('عمر'); // الموزع الحالي (للتجربة)
 
-            // --- إحصائيات ---
-            const stats = {
-                total: orders.length,
-                pending: orders.filter(o => o.status === 'pending').length,
-                delivered: orders.filter(o => o.status === 'delivered').length,
-                revenue: orders.filter(o => o.status === 'delivered').reduce((acc, curr) => acc + curr.price, 0)
+            // --- دوال الإدارة ---
+            const handleAssignDriver = (orderId, driverName) => {
+                setOrders(orders.map(order => 
+                    order.id === orderId ? { ...order, driver: driverName, status: driverName ? 'assigned' : 'pending' } : order
+                ));
             };
 
-            // --- توزيع ذكي ---
-            const autoAssign = () => {
-                const newOrders = [...orders];
-                const availableDrivers = driversList.filter(d => d.available);
-                let driverIndex = 0, count = 0;
-                newOrders.forEach(order => {
-                    if (order.status === 'pending' && availableDrivers.length > 0) {
-                        order.driver = availableDrivers[driverIndex].name;
-                        order.status = 'assigned';
-                        driverIndex = (driverIndex + 1) % availableDrivers.length;
-                        count++;
-                    }
-                });
-                setOrders(newOrders);
-                alert(count > 0 ? `🤖 تم توزيع ${count} طلبات بنجاح!` : "لا توجد طلبات جديدة.");
+            const saveAssignments = () => {
+                const assignedCount = orders.filter(o => o.status === 'assigned').length;
+                alert(`✅ تم حفظ التوزيع بنجاح!\nعدد الطلبات الموزعة حالياً: ${assignedCount}`);
             };
 
-            // --- 1. وظيفة الاتصال (هاتف / واتساب) ---
-            const handleContact = (phone, name) => {
-                // محاكاة الخيار
-                const choice = confirm(`هل تريد الاتصال بـ ${name}؟\n\n[OK] = فتح واتساب\n[Cancel] = اتصال هاتفي`);
-                if (choice) {
-                    window.open(`https://wa.me/212${phone.substring(1)}`, '_blank');
-                } else {
-                    window.location.href = `tel:${phone}`;
-                }
-            };
-
-            // --- 2. بدء عملية التسليم (طلب الكود) ---
-            const initiateDelivery = (orderId) => {
-                // توليد كود عشوائي من 4 أرقام
-                const code = Math.floor(1000 + Math.random() * 9000).toString();
-                setVerificationCode(code);
-                setCurrentOrderId(orderId);
-                
-                // محاكاة إرسال SMS (هذا ما ستقوله للجنة)
-                alert(`📨 [نظام المحاكاة]:\nتم إرسال رسالة SMS للزبون بالكود: ${code}\n\n(الموزع سيطلب هذا الكود من الزبون الآن)`);
-                
-                setShowOtpModal(true);
-            };
-
-            // --- 3. التحقق من الكود ---
-            const verifyAndDeliver = () => {
-                if (otpInput === verificationCode) {
-                    // كود صحيح
-                    setOrders(orders.map(o => o.id === currentOrderId ? { ...o, status: 'delivered' } : o));
-                    setShowOtpModal(false);
-                    setOtpInput("");
-                    // صوت نجاح (اختياري)
-                    alert("✅ كود صحيح! تم تأكيد التسليم بنجاح.");
-                } else {
-                    alert("❌ كود خاطئ! المرجو الطلب من الزبون التحقق من الرسالة.");
+            // --- دوال الموزع ---
+            const updateOrderStatus = (id, newStatus) => {
+                if(confirm('تأكيد العملية؟')) {
+                    setOrders(orders.map(o => o.id === id ? { ...o, status: newStatus } : o));
                 }
             };
 
             return (
-                <div className="flex h-screen overflow-hidden bg-gray-50">
+                <div className="flex h-screen overflow-hidden bg-gray-100">
                     
-                    {/* Sidebar */}
-                    <aside className="w-64 bg-slate-900 text-white flex-col hidden md:flex">
+                    {/* القائمة الجانبية (Desktop) */}
+                    <aside className="w-64 bg-slate-900 text-white flex-col hidden md:flex shadow-2xl z-20">
                         <div className="p-6 text-2xl font-bold border-b border-gray-700 text-center">
-                            توصيل <span className="text-green-400">Secure</span>
+                            <i className="fa-solid fa-truck-fast text-yellow-400 ml-2"></i>
+                            توصيل <span className="text-yellow-400">Pro</span>
                         </div>
                         <nav className="flex-1 p-4 space-y-3">
-                            <button onClick={() => setView('admin')} className={`w-full text-right p-3 rounded-lg flex items-center gap-3 ${view === 'admin' ? 'bg-blue-600' : 'hover:bg-slate-800'}`}>
-                                <i className="fa-solid fa-chart-pie"></i> الإدارة المركزية
+                            <button onClick={() => setView('admin')} className={`w-full text-right p-4 rounded-xl flex items-center gap-3 transition-all ${view === 'admin' ? 'bg-blue-600 shadow-lg translate-x-1' : 'hover:bg-slate-800'}`}>
+                                <i className="fa-solid fa-user-tie text-xl"></i> الإدارة المركزية
                             </button>
-                            <button onClick={() => setView('driver')} className={`w-full text-right p-3 rounded-lg flex items-center gap-3 ${view === 'driver' ? 'bg-green-600' : 'hover:bg-slate-800'}`}>
-                                <i className="fa-solid fa-mobile-screen"></i> تطبيق الموزع
+                            <button onClick={() => setView('driver')} className={`w-full text-right p-4 rounded-xl flex items-center gap-3 transition-all ${view === 'driver' ? 'bg-green-600 shadow-lg translate-x-1' : 'hover:bg-slate-800'}`}>
+                                <i className="fa-solid fa-motorcycle text-xl"></i> تطبيق الموزع
                             </button>
                         </nav>
-                        <div className="p-4 text-xs text-gray-500 text-center">v2.0 Security Module</div>
                     </aside>
 
-                    {/* Main */}
+                    {/* المحتوى */}
                     <main className="flex-1 flex flex-col h-screen overflow-y-auto">
                         
-                        {/* Mobile Header */}
-                        <div className="md:hidden bg-white p-4 shadow flex justify-between items-center">
-                            <h1 className="font-bold text-lg">توصيل Secure</h1>
+                        {/* Header للموبايل */}
+                        <div className="md:hidden bg-white p-4 shadow-md flex justify-between items-center sticky top-0 z-30">
+                            <h1 className="font-bold text-lg text-slate-800">توصيل Pro</h1>
                             <div className="flex gap-2">
-                                <button onClick={() => setView('admin')} className="px-3 py-1 bg-gray-100 rounded text-sm">إدارة</button>
-                                <button onClick={() => setView('driver')} className="px-3 py-1 bg-green-100 text-green-700 rounded text-sm">موزع</button>
+                                <button onClick={() => setView('admin')} className={`px-4 py-2 rounded-lg text-sm font-bold ${view === 'admin' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>إدارة</button>
+                                <button onClick={() => setView('driver')} className={`px-4 py-2 rounded-lg text-sm font-bold ${view === 'driver' ? 'bg-green-600 text-white' : 'bg-gray-100'}`}>موزع</button>
                             </div>
                         </div>
 
-                        {/* === ADMIN VIEW === */}
+                        {/* ========================================================
+                           1. واجهة الإدارة (Admin View) - توزيع يدوي
+                           ======================================================== */}
                         {view === 'admin' && (
-                            <div className="p-8 animate-fade-in">
-                                <div className="flex justify-between items-center mb-8">
-                                    <h2 className="text-3xl font-bold text-gray-800">لوحة التحكم</h2>
-                                    <button onClick={autoAssign} className="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 shadow-lg flex items-center gap-2">
-                                        <i className="fa-solid fa-robot"></i> توزيع تلقائي
+                            <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
+                                
+                                <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                                    <div>
+                                        <h2 className="text-3xl font-black text-slate-800 mb-1">توزيع الطلبات</h2>
+                                        <p className="text-gray-500 text-sm">قم باختيار الموزع لكل زبون ثم اضغط حفظ</p>
+                                    </div>
+                                    <button onClick={saveAssignments} className="w-full md:w-auto bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95">
+                                        <i className="fa-solid fa-floppy-disk"></i> حفظ التوزيع
                                     </button>
                                 </div>
 
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                                    <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-blue-500">
-                                        <div className="text-gray-500 text-sm">الطلبات</div>
-                                        <div className="text-2xl font-bold">{stats.total}</div>
-                                    </div>
-                                    <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-yellow-500">
-                                        <div className="text-gray-500 text-sm">انتظار</div>
-                                        <div className="text-2xl font-bold">{stats.pending}</div>
-                                    </div>
-                                    <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-green-500">
-                                        <div className="text-gray-500 text-sm">مكتملة</div>
-                                        <div className="text-2xl font-bold">{stats.delivered}</div>
-                                    </div>
-                                    <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-purple-500">
-                                        <div className="text-gray-500 text-sm">المداخيل</div>
-                                        <div className="text-2xl font-bold">{stats.revenue} DH</div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-white rounded-xl shadow overflow-hidden">
+                                {/* جدول الحاسوب (Desktop Table) */}
+                                <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                                     <table className="w-full text-right">
-                                        <thead className="bg-gray-50 text-gray-600 text-sm">
+                                        <thead className="bg-gray-50 text-gray-600 text-sm uppercase font-bold border-b">
                                             <tr>
-                                                <th className="p-4">ID</th>
-                                                <th className="p-4">الزبون</th>
-                                                <th className="p-4">السعر</th>
-                                                <th className="p-4">الحالة</th>
-                                                <th className="p-4">الموزع</th>
+                                                <th className="p-5">الطلب</th>
+                                                <th className="p-5">الزبون</th>
+                                                <th className="p-5">العنوان</th>
+                                                <th className="p-5">المبلغ</th>
+                                                <th className="p-5">الحالة</th>
+                                                <th className="p-5 w-64 text-center bg-blue-50 text-blue-800">تعيين الموزع 🎯</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            {orders.map(o => (
-                                                <tr key={o.id} className="border-t hover:bg-gray-50">
-                                                    <td className="p-4 font-bold">#{o.id}</td>
-                                                    <td className="p-4">{o.customer}</td>
-                                                    <td className="p-4 font-bold">{o.price} DH</td>
-                                                    <td className="p-4">
-                                                        <span className={`px-2 py-1 rounded text-xs ${
-                                                            o.status === 'delivered' ? 'bg-green-100 text-green-700' :
-                                                            o.status === 'assigned' ? 'bg-blue-100 text-blue-700' :
-                                                            'bg-yellow-100 text-yellow-700'
+                                        <tbody className="divide-y divide-gray-100">
+                                            {orders.map(order => (
+                                                <tr key={order.id} className="hover:bg-gray-50 transition">
+                                                    <td className="p-5 font-bold text-gray-400">#{order.id}</td>
+                                                    <td className="p-5 font-bold text-gray-800">{order.customer}</td>
+                                                    <td className="p-5 text-gray-500 text-sm">{order.address}</td>
+                                                    <td className="p-5 font-bold text-green-600">{order.price} DH</td>
+                                                    <td className="p-5">
+                                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                                                            order.status === 'delivered' ? 'bg-green-100 text-green-700' :
+                                                            order.status === 'assigned' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'
                                                         }`}>
-                                                            {o.status === 'delivered' ? 'تم التسليم' : 
-                                                             o.status === 'assigned' ? 'في الطريق' : 'انتظار'}
+                                                            {order.status === 'delivered' ? 'مكتمل' : order.status === 'assigned' ? 'موزع' : 'جديد'}
                                                         </span>
                                                     </td>
-                                                    <td className="p-4 text-gray-500">{o.driver || '-'}</td>
+                                                    <td className="p-5 bg-blue-50/30">
+                                                        {order.status !== 'delivered' ? (
+                                                            <select 
+                                                                value={order.driver}
+                                                                onChange={(e) => handleAssignDriver(order.id, e.target.value)}
+                                                                className="w-full bg-white border-2 border-blue-200 text-gray-800 rounded-lg p-2 focus:border-blue-500 focus:outline-none cursor-pointer font-bold"
+                                                            >
+                                                                <option value="">-- اختر --</option>
+                                                                {driversList.map(d => <option key={d} value={d}>{d}</option>)}
+                                                            </select>
+                                                        ) : (
+                                                            <div className="text-center text-green-600 font-bold text-sm">
+                                                                <i className="fa-solid fa-check"></i> تم التسليم ({order.driver})
+                                                            </div>
+                                                        )}
+                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        )}
 
-                        {/* === DRIVER VIEW === */}
-                        {view === 'driver' && (
-                            <div className="p-6 max-w-md mx-auto w-full animate-fade-in">
-                                <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-2xl font-bold text-gray-800">مهامي اليوم</h2>
-                                    <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">متصل</span>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {orders.filter(o => o.status === 'assigned').length === 0 && (
-                                        <div className="text-center py-10 text-gray-400 border-2 border-dashed rounded-xl">
-                                            لا توجد طلبات جارية
-                                        </div>
-                                    )}
-
-                                    {orders.filter(o => o.status === 'assigned').map(order => (
-                                        <div key={order.id} className="bg-white rounded-2xl shadow-lg p-5 border border-gray-100 relative overflow-hidden">
-                                            <div className="absolute top-0 left-0 w-2 h-full bg-blue-500"></div>
+                                {/* بطاقات الموبايل (Mobile Cards) */}
+                                <div className="md:hidden space-y-4">
+                                    {orders.map(order => (
+                                        <div key={order.id} className="mobile-card bg-white p-5 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden">
+                                            {/* شريط جانبي ملون */}
+                                            <div className={`absolute top-0 right-0 w-1.5 h-full ${order.status === 'delivered' ? 'bg-green-500' : order.driver ? 'bg-blue-500' : 'bg-yellow-400'}`}></div>
                                             
-                                            <div className="flex justify-between items-start mb-4 pl-2">
+                                            <div className="flex justify-between items-start mb-3 mr-3">
                                                 <div>
-                                                    <h3 className="font-bold text-lg">{order.customer}</h3>
-                                                    <p className="text-gray-500 text-sm flex items-center gap-1">
-                                                        <i className="fa-solid fa-location-dot text-red-500"></i> {order.address}
-                                                    </p>
+                                                    <h3 className="font-bold text-lg text-slate-800">{order.customer}</h3>
+                                                    <p className="text-gray-400 text-xs">#{order.id} • {order.address}</p>
                                                 </div>
-                                                <div className="text-xl font-bold text-blue-600">{order.price} DH</div>
+                                                <div className="text-lg font-bold text-slate-800">{order.price} DH</div>
                                             </div>
 
-                                            <div className="grid grid-cols-2 gap-3 mt-4">
-                                                {/* زر الاتصال */}
-                                                <button 
-                                                    onClick={() => handleContact(order.phone, order.customer)}
-                                                    className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-xl font-bold transition"
-                                                >
-                                                    <i className="fa-solid fa-phone"></i> اتصال
-                                                </button>
-
-                                                {/* زر التسليم الآمن */}
-                                                <button 
-                                                    onClick={() => initiateDelivery(order.id)}
-                                                    className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold shadow-lg transition transform active:scale-95"
-                                                >
-                                                    <i className="fa-solid fa-check-double"></i> تسليم
-                                                </button>
+                                            <div className="mr-3 mt-4">
+                                                <label className="text-xs font-bold text-blue-600 mb-2 block">تعيين الموزع:</label>
+                                                {order.status !== 'delivered' ? (
+                                                    <select 
+                                                        value={order.driver}
+                                                        onChange={(e) => handleAssignDriver(order.id, e.target.value)}
+                                                        className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none font-bold"
+                                                    >
+                                                        <option value="">-- بدون موزع --</option>
+                                                        {driversList.map(d => <option key={d} value={d}>{d}</option>)}
+                                                    </select>
+                                                ) : (
+                                                    <div className="bg-green-50 text-green-700 p-2 rounded-lg text-center font-bold text-sm">
+                                                        تم التسليم بواسطة {order.driver}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     ))}
@@ -260,46 +196,77 @@
                             </div>
                         )}
 
-                    </main>
-
-                    {/* === نافذة التحقق (OTP Modal) === */}
-                    {showOtpModal && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                            <div className="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl animate-fade-in text-center">
-                                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                                    <i className="fa-solid fa-shield-halved"></i>
-                                </div>
-                                <h3 className="text-xl font-bold mb-2">تأكيد الاستلام الآمن</h3>
-                                <p className="text-gray-500 text-sm mb-6">
-                                    المرجو إدخال الكود (4 أرقام) الذي توصل به الزبون عبر SMS لتأكيد العملية.
-                                </p>
+                        {/* ========================================================
+                           2. تطبيق الموزع (Driver App) - محاكاة
+                           ======================================================== */}
+                        {view === 'driver' && (
+                            <div className="p-4 md:p-8 max-w-md mx-auto w-full">
                                 
-                                <input 
-                                    type="number" 
-                                    value={otpInput}
-                                    onChange={(e) => setOtpInput(e.target.value)}
-                                    placeholder="####" 
-                                    className="w-full text-center text-3xl font-bold tracking-widest border-2 border-gray-200 rounded-xl p-3 mb-6 focus:border-blue-500 focus:outline-none"
-                                    autoFocus
-                                />
-
-                                <div className="grid grid-cols-2 gap-3">
-                                    <button onClick={() => setShowOtpModal(false)} className="py-3 rounded-xl font-bold text-gray-500 hover:bg-gray-100">
-                                        إلغاء
-                                    </button>
-                                    <button onClick={verifyAndDeliver} className="py-3 rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-700 shadow-lg">
-                                        تأكيد الكود
-                                    </button>
+                                {/* 🔴 محاكاة تسجيل الدخول (Switch Accounts) */}
+                                <div className="bg-slate-800 text-white p-4 rounded-2xl mb-6 shadow-lg">
+                                    <p className="text-xs text-slate-400 mb-2 text-center">-- محاكاة الهاتف --</p>
+                                    <label className="text-sm font-bold block mb-2">تسجيل الدخول بصفتك:</label>
+                                    <div className="flex bg-slate-700 p-1 rounded-xl">
+                                        {driversList.map(d => (
+                                            <button 
+                                                key={d}
+                                                onClick={() => setCurrentDriver(d)}
+                                                className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${currentDriver === d ? 'bg-white text-slate-900 shadow' : 'text-slate-300 hover:bg-slate-600'}`}
+                                            >
+                                                {d}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
-                                
-                                {/* تذكير للكود من أجل التجربة */}
-                                <div className="mt-4 text-xs text-gray-300">
-                                    (للتجربة الكود هو: {verificationCode})
+
+                                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                                    <span>مرحباً، {currentDriver} 👋</span>
+                                </h2>
+
+                                <div className="space-y-4">
+                                    {/* تصفية الطلبات: إظهار فقط طلبات الموزع الحالي */}
+                                    {orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').length === 0 ? (
+                                        <div className="text-center py-12 bg-white rounded-2xl border-2 border-dashed border-gray-200">
+                                            <i className="fa-solid fa-mug-hot text-4xl text-gray-300 mb-3 block"></i>
+                                            <p className="text-gray-500">لا توجد مهام جديدة لك يا {currentDriver}</p>
+                                        </div>
+                                    ) : (
+                                        orders.filter(o => o.driver === currentDriver && o.status !== 'delivered').map(order => (
+                                            <div key={order.id} className="bg-white p-6 rounded-2xl shadow-md border-r-4 border-green-500 animate-fade-in transform transition hover:-translate-y-1">
+                                                <div className="flex justify-between items-start mb-4">
+                                                    <div>
+                                                        <span className="bg-gray-100 text-gray-500 px-2 py-0.5 rounded text-xs font-bold">#{order.id}</span>
+                                                        <h3 className="text-xl font-bold mt-1">{order.customer}</h3>
+                                                    </div>
+                                                    <div className="bg-green-50 text-green-700 px-3 py-1 rounded-lg font-bold text-lg">
+                                                        {order.price} DH
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="bg-gray-50 p-3 rounded-xl mb-5 flex items-center gap-3 text-gray-600">
+                                                    <i className="fa-solid fa-location-dot text-red-500 text-xl"></i>
+                                                    <span className="font-medium text-sm">{order.address}</span>
+                                                </div>
+
+                                                <div className="flex gap-3">
+                                                    <a href={`tel:${order.phone}`} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition">
+                                                        <i className="fa-solid fa-phone"></i> اتصال
+                                                    </a>
+                                                    <button 
+                                                        onClick={() => updateOrderStatus(order.id, 'delivered')}
+                                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-green-200 transition"
+                                                    >
+                                                        <i className="fa-solid fa-check"></i> تم التسليم
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        )}
 
+                    </main>
                 </div>
             );
         }
