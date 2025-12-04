@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Delivery - Maps System</title>
+    <title>Smart Delivery - Final Design</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -121,11 +121,7 @@
 
             // --- دوال الموزع ---
             const openContactModal = (order) => { setSelectedOrder(order); setShowContactModal(true); };
-            
-            // دالة فتح الخريطة (Google Maps)
-            const openMap = (lat, lng) => { 
-                window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank'); 
-            };
+            const openMap = (lat, lng) => { window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank'); };
 
             const openProblemModal = (order) => {
                 setSelectedOrder(order);
@@ -252,12 +248,8 @@
                                             </div>
 
                                             {/* زر الخريطة للإدارة */}
-                                            <button 
-                                                onClick={() => openMap(order.lat, order.lng)}
-                                                className="text-gray-500 text-sm mb-4 flex items-center gap-2 hover:text-blue-600 hover:underline w-fit"
-                                            >
-                                                <i className="fa-solid fa-map-location-dot text-red-500 text-lg"></i> 
-                                                {order.address}
+                                            <button onClick={() => openMap(order.lat, order.lng)} className="text-gray-500 text-sm mb-4 flex items-center gap-2 hover:text-blue-600 hover:underline w-fit">
+                                                <i className="fa-solid fa-map-location-dot text-red-500 text-lg"></i> {order.address}
                                             </button>
 
                                             <div className="pt-3 border-t border-gray-200/50">
@@ -338,11 +330,8 @@
                                                     <div className="text-right">
                                                         <div className="bg-slate-900 text-white px-3 py-1 rounded-lg font-bold shadow-md">{order.price} DH</div>
                                                         
-                                                        {/* زر الخريطة للموزع */}
-                                                        <button 
-                                                            onClick={() => openMap(order.lat, order.lng)} 
-                                                            className="text-xs text-gray-500 mt-2 flex items-center justify-end gap-1 hover:text-blue-600 ml-auto bg-gray-100 px-2 py-1 rounded"
-                                                        >
+                                                        {/* 📍 زر الخريطة الجديد بجانب العنوان */}
+                                                        <button onClick={() => openMap(order.lat, order.lng)} className="text-xs text-gray-500 mt-2 flex items-center justify-end gap-1 hover:text-blue-600 ml-auto bg-gray-100 px-2 py-1 rounded">
                                                             <i className="fa-solid fa-map-location-dot text-red-500"></i> خريطة
                                                         </button>
                                                     </div>
@@ -350,17 +339,22 @@
                                                 
                                                 <div className="text-gray-500 text-sm mb-4 border-b border-gray-100 pb-3">{order.address}</div>
 
+                                                {/* الأزرار الثلاثة المتناسقة */}
                                                 <div className="grid grid-cols-2 gap-3 mt-4">
-                                                    <button onClick={() => openContactModal(order)} className="bg-blue-50 text-blue-700 py-3 rounded-xl font-bold border border-blue-100 flex items-center justify-center gap-2">
-                                                        <i className="fa-solid fa-phone"></i>
+                                                    <button onClick={() => openContactModal(order)} className="bg-gray-100 text-slate-700 py-3 rounded-xl font-bold hover:bg-gray-200 flex items-center justify-center gap-2 transition">
+                                                        <i className="fa-solid fa-phone"></i> اتصال
                                                     </button>
-                                                    <button onClick={() => requestDelivery(order)} className="bg-green-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2">
-                                                        تسليم <i className="fa-solid fa-check"></i>
+                                                    <button onClick={() => requestDelivery(order)} className="bg-green-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95">
+                                                        <i className="fa-solid fa-check"></i> تسليم
                                                     </button>
                                                 </div>
-                                                <button onClick={() => openProblemModal(order)} className={`w-full mt-3 text-sm font-bold flex items-center justify-center gap-1 py-2 rounded-lg transition ${order.status === 'problem' ? 'bg-red-200 text-red-800' : 'text-red-500 hover:bg-red-50'}`}>
-                                                    <i className="fa-solid fa-pen-to-square"></i> {order.status === 'problem' ? 'تعديل المشكلة' : 'إبلاغ عن مشكلة'}
+                                                
+                                                {/* 🔴 زر المشكلة الجديد (أحمر فاتح وواضح) */}
+                                                <button onClick={() => openProblemModal(order)} className={`w-full mt-3 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition ${order.status === 'problem' ? 'bg-red-600 text-white' : 'bg-red-50 text-red-600 hover:bg-red-100'}`}>
+                                                    <i className="fa-solid fa-triangle-exclamation"></i>
+                                                    {order.status === 'problem' ? 'تعديل المشكلة' : 'إبلاغ عن مشكلة'}
                                                 </button>
+
                                             </div>
                                         ))
                                     )}
@@ -370,7 +364,7 @@
 
                     </main>
 
-                    {/* Modals remain same (Contact, Problem, OTP) */}
+                    {/* Modals remain the same... */}
                     {showAddOrderModal && (
                         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center fade-in p-4">
                             <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl">
